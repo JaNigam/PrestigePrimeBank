@@ -1,43 +1,47 @@
 package com.wellsfargo.training.ppb.model;
 
-import org.hibernate.validator.constraints.Length;
+//import org.hibernate.validator.constraints.Length;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
+//import jakarta.validation.constraints.Email;
 
 @Entity
 public class Customer {
+	
 	@Id
-	@Column(nullable = false)
-	private String userId;
+	@Column(nullable=false)
+	private Long userId;
 
 	@Column(nullable = false)
 	private String name;
 
 	@Column(nullable = false)
-	@Length(min = 8, max = 20, message = "Password must be between 8 to 20 characters")
 	private String password;
 
-	@Column(nullable = false)
+	@Column(nullable = false, unique=true)
 	private long mobile;
 
-	@Email(message = "email must be valid")
-	@Column(nullable = false)
+//	@Email(message = "email must be valid")
+	@Column(nullable = false, unique=true)
 	private String email;
 
-	@Column(nullable = false)
+	@Column(nullable = false, unique=true)
 	private String aadhar;
 
 	@Column(nullable = false)
 	private String dob;
 
+	@Column(nullable=false)
 	private String currentAddress;
-
+	
+	@Column(nullable=false)
 	private String permanentAddress;
 
 	private String fathername;
 
 	private String mothername;
+	
+	
 
 	public String getDob() {
 		return dob;
@@ -79,11 +83,17 @@ public class Customer {
 		this.mothername = mothername;
 	}
 
-	public String getUserId() {
+	public Long getUserId() {
 		return userId;
 	}
 
-	public void setUserId(String userId) {
+	/*
+	 * on creation of a new user automatically generate a new UID
+	 * UID: 6 digit unique alpha numeric string
+	 * should be mailed to the user
+	 * */
+	public void setUserId(Long userId) {
+		
 		this.userId = userId;
 	}
 
