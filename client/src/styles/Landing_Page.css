@@ -1,0 +1,21 @@
+.primary-btn {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  .secondary-btn {
+    background-color: #fff;
+    color: #007bff;
+    border: 2px solid #007bff;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 0 10px;
+    font-size: 18px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
