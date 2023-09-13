@@ -43,6 +43,10 @@ public class CustomerService {
 		return userId;
 	}
 	
+	public Optional<Customer> loginCustomer(Long userId) {
+		return custrepo.findById(userId);
+	}
+	
 	
 	
 
