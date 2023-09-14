@@ -2,13 +2,13 @@ import logo from './logo.svg';
 import './App.css';
 import Landing_Page from './components/Landing_Page';
 import Login from './components/Login';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+// import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import NavBar from './components/NavBar';
 function App() {
   return (
     <div className="App">
 
-      <header>
+      {/* <header>
         <div style={{
           // backgroundImage: "url(/images/back.webp)",
           backgroundSize: 'cover',
@@ -19,8 +19,9 @@ function App() {
             <NavBar></NavBar>
           </Router>
         </div>
-      </header>
+      </header> */}
       <section>
+      
 
 
 
@@ -28,15 +29,22 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
         <Landing_Page/>
       </header> */}
+      <Landing_Page/>
 
-      <Login />
+      {/* <Login /> */}
 
 
       </section>
-      <footer className="footer">
+      {/* <footer className="footer">
         <p>&copy; All Rights Reserved To Wells Fargo.</p>
-      </footer>
-    </div>
+      </footer> */}
+    </div> 
+    // <div className="App">
+    //   <header className="App-header">
+    //     <img src={logo} className="App-logo" alt="logo" />
+        // <Landing_Page/>
+    //   </header>
+    // </div>
   );
 }
 

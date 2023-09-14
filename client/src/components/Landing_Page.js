@@ -1,4 +1,6 @@
 import React from 'react'
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import '.././styles/Landing_Page.css'
 import {Route,Routes,Router} from 'react-router-dom'
 import Login from './Login'
@@ -6,22 +8,30 @@ import { Link} from 'react-router-dom';
 
 export default function Landing_Page() {
   return (
-    <div>
-        
-        <h1>Prestige Prime Bank</h1>
-        <h3> Elevating Excellence in Banking</h3>
-        <div className="cta-buttons">
-          {/* <Router>
-            <Route path="/login" className="btn primary-btn" exact component={Login} /> 
-            </Router> */}
-            
-            <a href="/login" className="btn primary-btn"> 
-            Log In
-            </a> 
-            <a href="/signup" className="btn secondary-btn">
-            Sign Up
-            </a>
-        </div>
+    <div className='page-wrapper'>
+      <div className='header'>
+        <img className="logo" src = "../images/logo.png" alt="bank-logo"/>
+      </div>
+    
+    <Row>
+      <Col>
+        <div className='content'>
+          <h1 style={{color:"white"}}>Prestige Prime Bank</h1>
+          <h3 style={{color:"#ff7a01"}}> Elevating Excellence in Banking</h3>
+          <div className="cta-buttons" >
+              <a href="/login" className="btn primary-btn" style={{color:"beige"}}>
+              Log In
+              </a>
+              <a href="/signup" className="btn secondary-btn">
+              Sign Up
+              </a>
+          </div>
+        </div>`
+      </Col>
+      <Col className='image-wrapper'> 
+        <img className= "landing-image" src='../images/content-img.png' style={{"visibility": "visible", "animation-duration": "1500ms", "animation-delay": "0ms", "animation-name": "float-bob"}}></img>
+      </Col> 
+    </Row>
     </div>
   )
 }
