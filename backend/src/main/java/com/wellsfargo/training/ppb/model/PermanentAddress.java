@@ -18,25 +18,34 @@ public class PermanentAddress {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long addressId;
-	private @NonNull String street;
+	private @NonNull String addressLine1;
+	private @NonNull String addressLine2;
+	private @NonNull String pincode;
 	private @NonNull String city;
 	private @NonNull String state;
-	private int pincode;
+	private String Landmark;
+	
 	
 	//foreign key
 	@OneToOne
 	@JoinColumn(name="user_id")
 	private Customer userId;
 
-	public PermanentAddress(Long addressId, @NonNull String street, @NonNull String city, @NonNull String state,
-			int pincode) {
+
+	public PermanentAddress(Long addressId, @NonNull String addressLine1, @NonNull String addressLine2,
+			@NonNull String pincode, @NonNull String city, @NonNull String state, String landmark, Customer userId) {
 		super();
 		this.addressId = addressId;
-		this.street = street;
+		this.addressLine1 = addressLine1;
+		this.addressLine2 = addressLine2;
+		this.pincode = pincode;
 		this.city = city;
 		this.state = state;
-		this.pincode = pincode;
+		Landmark = landmark;
+		this.userId = userId;
 	}
+
+	
 	
 	
 
