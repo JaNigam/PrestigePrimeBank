@@ -37,6 +37,17 @@ public class Customer {
 	@JsonFormat(pattern="yyyy-MM-dd")
 	@Column(nullable = false)
 	private String dob;
+	
+	@Column(nullable=false)
+	private String occType;
+	
+	@Column(nullable=false)
+	private String incomeSource;
+	
+	@Column(nullable=false)
+	private Long grossAnnualIncome;
+	
+	private boolean optForNetBanking;
 
 	/*
 	 * mappedby value should be same as foreign key mentioned in the other table*/
@@ -45,10 +56,9 @@ public class Customer {
 	
 	@OneToOne(mappedBy = "userId", cascade=CascadeType.ALL)
 	private PermanentAddress permanentAddress;
-
 	private String fathername;
-
 	private String mothername;
+	
 
 	public Customer() {
 		// TODO Auto-generated constructor stub
@@ -56,7 +66,7 @@ public class Customer {
 
 	//constructor only for customer
 	public Customer(Long userId, String name, String password, long mobile, String email, String aadhar, String dob,
-			String fathername, String mothername) {
+			String fathername, String mothername, String occType, String incomeSource, boolean optForNetBanking) {
 		super();
 		this.userId = userId;
 		this.name = name;
@@ -67,11 +77,14 @@ public class Customer {
 		this.dob = dob;
 		this.fathername = fathername;
 		this.mothername = mothername;
+		this.occType = occType;
+		this.incomeSource = incomeSource;
+		this.optForNetBanking = optForNetBanking;
 	}
 	
 	//constructor for permanent and current address
 	public Customer(Long userId, String name, String password, long mobile, String email, String aadhar, String dob,
-			CurrentAddress currentAddress, PermanentAddress permanentAddress, String fathername, String mothername) {
+			CurrentAddress currentAddress, PermanentAddress permanentAddress, String fathername, String mothername, String occType, String incomeSource, boolean optForNetBanking) {
 		super();
 		this.userId = userId;
 		this.name = name;
@@ -84,6 +97,9 @@ public class Customer {
 		this.permanentAddress = permanentAddress;
 		this.fathername = fathername;
 		this.mothername = mothername;
+		this.occType = occType;
+		this.incomeSource = incomeSource;
+		this.optForNetBanking = optForNetBanking;
 	}
 
 	
@@ -180,6 +196,40 @@ public class Customer {
 	public void setMothername(String mothername) {
 		this.mothername = mothername;
 	}
+
+	public String getOccType() {
+		return occType;
+	}
+
+	public void setOccType(String occType) {
+		this.occType = occType;
+	}
+
+	public String getIncomeSource() {
+		return incomeSource;
+	}
+
+	public void setIncomeSource(String incomeSource) {
+		this.incomeSource = incomeSource;
+	}
+
+	public Long getGrossAnnualIncome() {
+		return grossAnnualIncome;
+	}
+
+	public void setGrossAnnualIncome(Long grossAnnualIncome) {
+		this.grossAnnualIncome = grossAnnualIncome;
+	}
+
+	public boolean isOptForNetBanking() {
+		return optForNetBanking;
+	}
+
+	public void setOptForNetBanking(boolean optForNetBanking) {
+		this.optForNetBanking = optForNetBanking;
+	}
+	
+	
 	
 	
 	

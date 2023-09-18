@@ -21,18 +21,19 @@ public class CustomerService {
 	public String saveCustomer(Customer cust) {
 		
 		String result = "";
-//		Optional<Customer> customer = custrepo.findById(cust.getUserId());
-//		if(customer.isPresent())
-//		{
-//			result = "Customer Already Exists";
-//		}
-//		else {
+		Optional<Customer> existingCustomer = custrepo.findByEmail(cust.getEmail());
+		
+		if(existingCustomer.isPresent())
+		{
+			result = "Customer Already Exists";
+		}
+		else {
 			
 			Long userId = generateUniqueCustId();
 			cust.setUserId(userId);
 			custrepo.save(cust);
 			result = "New Customer Created Successfully";
-//		}
+		}
 		return result;
 	}
 	
