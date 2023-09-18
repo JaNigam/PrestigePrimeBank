@@ -5,12 +5,17 @@ import java.util.Optional;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.wellsfargo.training.ppb.model.Account;
 import com.wellsfargo.training.ppb.model.Customer;
 import com.wellsfargo.training.ppb.repository.AccountRepository;
 import com.wellsfargo.training.ppb.repository.CustomerRepository;
 
+import jakarta.transaction.Transactional;
+
+@Service
+@Transactional
 public class AccountService {
 	@Autowired
 	private AccountRepository accrepo;
@@ -18,7 +23,7 @@ public class AccountService {
 	@Autowired
 	private CustomerRepository custrepo;
 	
-	public Account createAccount(Long userId, Account account) {
+	public Optional<Account> createAccount(Long userId, Account account) {
 		Long newaccountNo = generateUniqueAccountNo();
 		account.setAccountNo(newaccountNo);
 		
@@ -29,7 +34,8 @@ public class AccountService {
 		account.setIfsc(newifsc);
 		account.setCustomer(c);
 				
-		return accrepo.save(account);
+		Account savedAccount= accrepo.save(account);
+		return Optional.ofNullable(savedAccount);
 	}
 	
 	public Long generateUniqueAccountNo() {

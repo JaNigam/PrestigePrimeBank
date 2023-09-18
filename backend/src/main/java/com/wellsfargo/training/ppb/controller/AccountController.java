@@ -3,6 +3,7 @@ package com.wellsfargo.training.ppb.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -35,7 +36,6 @@ public class AccountController {
 	ResourceNotFoundException{
 		Account newaccount = accservice.createAccount(userId, account).orElseThrow(()-> new 
 				ResourceNotFoundException("Account can not be created for the user : " +userId));
-		
 		return ResponseEntity.ok().body(newaccount);
 		
 	}
@@ -65,7 +65,7 @@ public class AccountController {
 	
 	
 	@PutMapping("/accounts/{id}")
-	public ResponseEntity<Account> updateAccount(@PathVariable(value="id")Long userId,
+	public ResponseEntity<Optional<Account>> updateAccount(@PathVariable(value="id")Long userId,
 			@Validated @RequestBody Account a) throws
 	ResourceNotFoundException {
 		Account account=accservice.getSingleAccount(userId).orElseThrow(()-> new 
@@ -73,14 +73,14 @@ public class AccountController {
 	//update the product with new values
 		account.setBranch(a.getBranch());
 			
-		final Account updatedAccount = accservice.createAccount(account);
+		final Optional<Account> updatedAccount = accservice.createAccount(userId,account);
 		return ResponseEntity.ok().body(updatedAccount);
 	}
 	
 	
 	
 	@DeleteMapping("/accounts/{id}")
-	public ResponseEntity<Map<String,Boolean>> deleteAcountt(@PathVariable(value="id")Long userId) throws
+	public ResponseEntity<Map<String,Boolean>> deleteAcount(@PathVariable(value="id")Long userId) throws
 	ResourceNotFoundException {
 		
 		accservice.getSingleAccount(userId).orElseThrow(()-> new 
