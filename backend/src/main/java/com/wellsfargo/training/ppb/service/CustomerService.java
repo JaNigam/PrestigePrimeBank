@@ -37,6 +37,16 @@ public class CustomerService {
 		return result;
 	}
 	
+public String updateCustomer(Customer cust) {
+		
+		String result = "";
+		custrepo.save(cust);
+		result = "Customer Details Updated Successfully";
+		
+		return result;
+	}
+	
+	
 	public Long generateUniqueCustId() {
 		Long userId;
 		do {
@@ -47,6 +57,10 @@ public class CustomerService {
 	
 	public Optional<Customer> loginCustomer(Long userId) {
 		return custrepo.findById(userId);
+	}
+	
+	public Optional<Customer> getSingleCustomer(long id){
+		return custrepo.findById(id); // invokes predefined method of JPA Repository
 	}
 	
 	

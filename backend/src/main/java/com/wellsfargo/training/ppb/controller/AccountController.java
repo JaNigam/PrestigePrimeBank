@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.wellsfargo.training.ppb.exception.ResourceNotFoundException;
 import com.wellsfargo.training.ppb.model.Account;
+import com.wellsfargo.training.ppb.model.Customer;
 import com.wellsfargo.training.ppb.service.AccountService;
 
 @CrossOrigin(origins="http://localhost:3000")
@@ -53,45 +54,48 @@ public class AccountController {
 		}
 	}
 	
-	
 		
 	@GetMapping("/accounts/{id}")
-	public ResponseEntity<Account> getAccountById(@PathVariable(value="id")Long userId) throws
+	public ResponseEntity<Account> getAccountById(@PathVariable(value="id")Long accountNo) throws
 	ResourceNotFoundException {
-		Account a=accservice.getSingleAccount(userId).orElseThrow(()-> new 
-				ResourceNotFoundException("Product not Found for this ID : " +userId));
+		Account a=accservice.getSingleAccount(accountNo).orElseThrow(()-> new 
+				ResourceNotFoundException("Product not Found for this ID : " + accountNo));
 		return ResponseEntity.ok().body(a);
 	}
 	
 	
 	@PutMapping("/accounts/{id}")
-	public ResponseEntity<Optional<Account>> updateAccount(@PathVariable(value="id")Long userId,
+	public ResponseEntity<String> updateAccount(@PathVariable(value="id")Long accountNo,
 			@Validated @RequestBody Account a) throws
 	ResourceNotFoundException {
-		Account account=accservice.getSingleAccount(userId).orElseThrow(()-> new 
-				ResourceNotFoundException("Account not Found for this ID : " +userId));
-	//update the product with new values
-		account.setBranch(a.getBranch());
+		
+			Account account = accservice.getSingleAccount(accountNo).orElseThrow(()-> new 
+					ResourceNotFoundException("Customer not Found for this ID : " +accountNo));
 			
-		final Optional<Account> updatedAccount = accservice.createAccount(userId,account);
-		return ResponseEntity.ok().body(updatedAccount);
+			account.setBranch(a.getBranch());
+			String result = accservice.updateAccount(account);
+			
+			return ResponseEntity.ok().body(result);
+			
+		
 	}
 	
 	
-	
 	@DeleteMapping("/accounts/{id}")
-	public ResponseEntity<Map<String,Boolean>> deleteAcount(@PathVariable(value="id")Long userId) throws
+	public ResponseEntity<Map<String,Boolean>> deleteAcount(@PathVariable(value="id")Long accountNo) throws
 	ResourceNotFoundException {
 		
-		accservice.getSingleAccount(userId).orElseThrow(()-> new 
-				ResourceNotFoundException("Product not Found for this ID : " +userId));
+		accservice.getSingleAccount(accountNo).orElseThrow(()-> new 
+				ResourceNotFoundException("Account not Found for this User : " + accountNo));
 		
-		accservice.deleteAccount(userId);
+		accservice.deleteAccount(accountNo);
 		Map<String, Boolean> response=new HashMap<String, Boolean>();
 		response.put("deleted", Boolean.TRUE);
 		
 		return ResponseEntity.ok().body(response);
 	}
+	
+	
 	
 	
 	
