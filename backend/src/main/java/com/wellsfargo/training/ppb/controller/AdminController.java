@@ -9,6 +9,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,6 +27,7 @@ public class AdminController {
 	@Autowired
 	AdminService adminservice;
 	
+	
 	@PostMapping("/create-admin")
 	public String createAdmin(@RequestBody Admin admin) {
 		return adminservice.saveAdmin(admin);
@@ -33,7 +35,6 @@ public class AdminController {
 	
 	@PostMapping("/login")
 	public Boolean loginAdmin(@Validated @RequestBody Admin admin)throws ResourceNotFoundException{
-		Boolean isLoggedIn = false;
 		Long userId = admin.getUserId();
 		String password = admin.getPassword();
 		
@@ -41,23 +42,33 @@ public class AdminController {
 		new ResourceNotFoundException("Admin Doesn't Exist!"));
 		
 		if(userId.equals(a.getUserId()) && password.equals(a.getPassword())) {
-			isLoggedIn = true;
+			admin.setIsLoggedIn(true);
 		}
 		
-		return isLoggedIn;
+		return admin.getIsLoggedIn();
 	}
 	
 	@GetMapping("/accounts")
 	public ResponseEntity<List<Account>> getAllAccounts(){
 		try {
+			if(admin.getIsLoggedIn()) {
 			List<Account> accounts = adminservice.listAllAccounts();
 					return ResponseEntity.ok(accounts);
+		}
 		}
 		catch(Exception e) {
 			e.printStackTrace();
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
 		}
 	}
+	
+	@PutMapping("/logout")
+	public Boolean logoutAdmin(@Validated @RequestBody Admin admin){
+		if(admin.getIsLoggedIn())
+		admin.setIsLoggedIn(false);
+		return admin.getIsLoggedIn();
+	} 
+	
 	
 	
 }

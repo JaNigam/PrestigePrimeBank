@@ -45,6 +45,7 @@ public class AccountController {
 	@GetMapping("/accounts")
 	public ResponseEntity<List<Account>> getAllAccounts(){
 		try {
+			
 			List<Account> accounts = accservice.listAll();
 					return ResponseEntity.ok(accounts);
 		}
@@ -68,7 +69,6 @@ public class AccountController {
 	public ResponseEntity<String> updateAccount(@PathVariable(value="id")Long accountNo,
 			@Validated @RequestBody Account a) throws
 	ResourceNotFoundException {
-		
 			Account account = accservice.getSingleAccount(accountNo).orElseThrow(()-> new 
 					ResourceNotFoundException("Customer not Found for this ID : " +accountNo));
 			

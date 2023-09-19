@@ -8,7 +8,14 @@ public class Admin {
 	@Id
 	private Long userId;
 	private String password;
-
+	private Boolean isLoggedIn=false;
+	
+	public Boolean getIsLoggedIn() {
+		return isLoggedIn;
+	}
+	public void setIsLoggedIn(Boolean isLoggedIn) {
+		this.isLoggedIn = isLoggedIn;
+	}
 	public Long getUserId() {
 		return userId;
 	}

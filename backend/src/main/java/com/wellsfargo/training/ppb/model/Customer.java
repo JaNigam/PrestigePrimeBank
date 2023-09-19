@@ -3,8 +3,6 @@ package com.wellsfargo.training.ppb.model;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
-import org.springframework.beans.factory.annotation.Value;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 //import org.hibernate.validator.constraints.Length;
@@ -31,6 +29,9 @@ public class Customer {
 	
 	@Column(columnDefinition = "boolean default false")
 	private boolean validCustomer;
+	
+	@Column(columnDefinition = "boolean default false")
+	private boolean rights;
 
 	@Column(unique=true)
 	private long mobile;
@@ -73,7 +74,7 @@ public class Customer {
 	}
 
 	//constructor only for customer
-	public Customer(Long userId, String name, String password, boolean isAdmin, boolean validCustomer, long mobile,
+	public Customer(Long userId, String name, String password, boolean isAdmin, boolean validCustomer, boolean rights, long mobile,
 			String email, String aadhar, String dob, String occType, String incomeSource, Long grossAnnualIncome,
 			boolean optForNetBanking, String fathername, String mothername) {
 		this.userId = userId;
@@ -81,6 +82,7 @@ public class Customer {
 		this.password = password;
 		this.isAdmin = isAdmin;
 		this.validCustomer = validCustomer;
+		this.rights = rights;
 		this.mobile = mobile;
 		this.email = email;
 		this.aadhar = aadhar;
@@ -95,7 +97,7 @@ public class Customer {
 
 	
 	//constructor for permanent and current address
-	public Customer(Long userId, String name, String password, boolean isAdmin, boolean validCustomer, long mobile,
+	public Customer(Long userId, String name, String password, boolean isAdmin, boolean validCustomer, boolean rights, long mobile,
 			String email, String aadhar, String dob, String occType, String incomeSource, Long grossAnnualIncome,
 			boolean optForNetBanking, CurrentAddress currentAddress, PermanentAddress permanentAddress,
 			String fathername, String mothername) {
@@ -104,6 +106,7 @@ public class Customer {
 		this.password = password;
 		this.isAdmin = isAdmin;
 		this.validCustomer = validCustomer;
+		this.rights = rights;
 		this.mobile = mobile;
 		this.email = email;
 		this.aadhar = aadhar;
@@ -132,9 +135,13 @@ public class Customer {
 		return userId;
 	}
 
-	
+	public boolean isRights() {
+		return rights;
+	}
 
-	
+	public void setRights(boolean rights) {
+		this.rights = rights;
+	}
 
 	public void setUserId(Long userId) {
 		this.userId = userId;
