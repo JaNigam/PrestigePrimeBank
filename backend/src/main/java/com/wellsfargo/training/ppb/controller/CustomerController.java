@@ -1,9 +1,13 @@
 package com.wellsfargo.training.ppb.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -69,6 +73,32 @@ public class CustomerController {
 		
 			return ResponseEntity.ok().body(result);
 		}
+		
+//		@DeleteMapping("/{id}")
+//		public ResponseEntity<Map<String,Boolean>> deleteCustomer(@PathVariable(value="id")Long userId) throws
+//		ResourceNotFoundException {
+//			
+//			custservice.getSingleCustomer(userId).orElseThrow(()-> new 
+//					ResourceNotFoundException("User not Found for this Id : " + userId));
+//			
+//			custservice.deleteCustomer(userId);
+//			Map<String, Boolean> response=new HashMap<String, Boolean>();
+//			response.put("deleted", Boolean.TRUE);
+//			
+//			return ResponseEntity.ok().body(response);
+//		}
+		
+		@DeleteMapping("/{id}")
+		public ResponseEntity<String> deleteCustomerAndAccounts(@PathVariable(value = "id") Long userId){
+			try {
+				custservice.deleteCustomerAndAccountByUserId(userId);
+				return ResponseEntity.ok("Customer and Account Deleted Successfully");
+			}catch(Exception e) {
+				return ResponseEntity.badRequest().body("Error deleting customer and account: " + e.getMessage());
+			}
+		}
+		
+		
 	
 
 	

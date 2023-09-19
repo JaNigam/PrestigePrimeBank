@@ -5,8 +5,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.wellsfargo.training.ppb.model.Account;
 import com.wellsfargo.training.ppb.model.Customer;
+import com.wellsfargo.training.ppb.repository.AccountRepository;
 import com.wellsfargo.training.ppb.repository.CustomerRepository;
 
 import jakarta.transaction.Transactional;
@@ -17,6 +17,7 @@ public class CustomerService {
 	
 	@Autowired
 	private CustomerRepository custrepo;
+	private AccountRepository accrepo;
 	
 	public String saveCustomer(Customer cust) {
 		
@@ -63,6 +64,14 @@ public String updateCustomer(Customer cust) {
 		return custrepo.findById(id); // invokes predefined method of JPA Repository
 	}
 	
+	@Transactional
+	public void deleteCustomerAndAccountByUserId(Long id) {
+		Customer cust = custrepo.findById(id).orElse(null);
+		if(cust != null) {
+			accrepo.deleteByUserId(id);
+			custrepo.delete(cust);
+		}
+	}
 	
 	
 
