@@ -24,7 +24,7 @@ public class CustomerController {
 	@Autowired
 	CustomerService custservice;
 	@PostMapping("/create-customer")
-	public String createCustomer(@RequestBody Customer cust) {
+	public String createCustomer(@RequestBody @Validated Customer cust) {
 		return custservice.saveCustomer(cust);
 		
 	}
