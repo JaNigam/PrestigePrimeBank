@@ -8,20 +8,18 @@ import org.springframework.stereotype.Service;
 
 import com.wellsfargo.training.ppb.model.Account;
 import com.wellsfargo.training.ppb.model.Admin;
+import com.wellsfargo.training.ppb.model.Customer;
 import com.wellsfargo.training.ppb.repository.AccountRepository;
 import com.wellsfargo.training.ppb.repository.AdminRepository;
 import com.wellsfargo.training.ppb.repository.CustomerRepository;
 
-import jakarta.transaction.Transactional;
-
 @Service
-@Transactional
 public class AdminService {
 	@Autowired
 	private AccountRepository accrepo;
 	
-//	@Autowired
-//	private CustomerRepository custrepo;
+	@Autowired
+	private CustomerRepository custrepo;
 	
 	@Autowired
 	private AdminRepository adminrepo;
@@ -36,30 +34,27 @@ public class AdminService {
 			result = "Admin Already Exists";
 		}
 		else {
-			
-			Long userId = generateUniqueAdminId();
-			admin.setUserId(userId);
 			adminrepo.save(admin);
 			result = "New Admin Created Successfully";
 		}
 		return result;
 	}
 	
-	public Long generateUniqueAdminId() {
-		Long userId;
-		do {
-			userId = (long)(Math.random()*900000+1000000);
-		}while(adminrepo.existsById(userId));
-		return userId;
-	}
-	
 	public Optional<Admin> loginAdmin(Long userId) {
 		return adminrepo.findById(userId);
+	}
+	
+	public Boolean logoutAdmin() {
+		return logoutAdmin();
 	}
 	
 	public List<Account> listAllAccounts(){
 		return accrepo.findAll();
 	}
+	
+//	public Boolean LoginStatus(Long userId){
+//		
+//	}
 	
 //	public List<Customer> listAllCustomers(){
 //		return custrepo.findAll();
