@@ -26,8 +26,11 @@ public class Customer {
 	@Column(nullable = false)
 	private String password;
 	
-	@Column(nullable=false, columnDefinition = "boolean default false")
+	@Column(columnDefinition = "boolean default false")
 	private boolean isAdmin;
+	
+	@Column(columnDefinition = "boolean default false")
+	private boolean validCustomer;
 
 	@Column(unique=true)
 	private long mobile;
@@ -70,48 +73,68 @@ public class Customer {
 	}
 
 	//constructor only for customer
-	public Customer(Long userId, String name, String password, long mobile, String email, String aadhar, String dob,
-			String fathername, String mothername, String occType, String incomeSource, boolean optForNetBanking) {
-		super();
+	public Customer(Long userId, String name, String password, boolean isAdmin, boolean validCustomer, long mobile,
+			String email, String aadhar, String dob, String occType, String incomeSource, Long grossAnnualIncome,
+			boolean optForNetBanking, String fathername, String mothername) {
 		this.userId = userId;
 		this.name = name;
 		this.password = password;
+		this.isAdmin = isAdmin;
+		this.validCustomer = validCustomer;
 		this.mobile = mobile;
 		this.email = email;
 		this.aadhar = aadhar;
 		this.dob = dob;
-		this.fathername = fathername;
-		this.mothername = mothername;
 		this.occType = occType;
 		this.incomeSource = incomeSource;
+		this.grossAnnualIncome = grossAnnualIncome;
 		this.optForNetBanking = optForNetBanking;
+		this.fathername = fathername;
+		this.mothername = mothername;
 	}
+
 	
 	//constructor for permanent and current address
-	public Customer(Long userId, String name, String password, long mobile, String email, String aadhar, String dob,
-			CurrentAddress currentAddress, PermanentAddress permanentAddress, String fathername, String mothername, String occType, String incomeSource, boolean optForNetBanking) {
-		super();
+	public Customer(Long userId, String name, String password, boolean isAdmin, boolean validCustomer, long mobile,
+			String email, String aadhar, String dob, String occType, String incomeSource, Long grossAnnualIncome,
+			boolean optForNetBanking, CurrentAddress currentAddress, PermanentAddress permanentAddress,
+			String fathername, String mothername) {
 		this.userId = userId;
 		this.name = name;
 		this.password = password;
+		this.isAdmin = isAdmin;
+		this.validCustomer = validCustomer;
 		this.mobile = mobile;
 		this.email = email;
 		this.aadhar = aadhar;
 		this.dob = dob;
+		this.occType = occType;
+		this.incomeSource = incomeSource;
+		this.grossAnnualIncome = grossAnnualIncome;
+		this.optForNetBanking = optForNetBanking;
 		this.currentAddress = currentAddress;
 		this.permanentAddress = permanentAddress;
 		this.fathername = fathername;
 		this.mothername = mothername;
-		this.occType = occType;
-		this.incomeSource = incomeSource;
-		this.optForNetBanking = optForNetBanking;
 	}
 
 	
 
+	public boolean isAdmin() {
+		return isAdmin;
+	}
+
+	public void setAdmin(boolean isAdmin) {
+		this.isAdmin = isAdmin;
+	}
+
 	public Long getUserId() {
 		return userId;
 	}
+
+	
+
+	
 
 	public void setUserId(Long userId) {
 		this.userId = userId;
@@ -233,10 +256,13 @@ public class Customer {
 	public void setOptForNetBanking(boolean optForNetBanking) {
 		this.optForNetBanking = optForNetBanking;
 	}
-	
-	
-	
-	
-	
+
+	public boolean isValidCustomer() {
+		return validCustomer;
+	}
+
+	public void setValidCustomer(boolean validCustomer) {
+		this.validCustomer = validCustomer;
+	}
 
 }
