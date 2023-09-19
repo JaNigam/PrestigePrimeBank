@@ -64,14 +64,24 @@ public String updateCustomer(Customer cust) {
 		return custrepo.findById(id); // invokes predefined method of JPA Repository
 	}
 	
-	@Transactional
-	public void deleteCustomerAndAccountByUserId(Long id) {
-		Customer cust = custrepo.findById(id).orElse(null);
-		if(cust != null) {
-			accrepo.deleteByUserId(id);
-			custrepo.delete(cust);
-		}
-	}
+	
+//	public void deleteCustomerAndAccountByUserId(Long id) {
+//		Customer cust = custrepo.findById(id).orElse(null);
+//		if(cust != null) {
+//			accrepo.deleteByUserId(id);
+//			custrepo.delete(cust);
+//		}
+//	}
+	
+	 public void deleteCustomer(Long id) {
+	        Customer customer = custrepo.findById(id).orElse(null);
+	        if (customer != null) {
+	            // Delete associated accounts
+	            accrepo.deleteByCustomer(customer);
+	            // Delete the customer
+	            custrepo.delete(customer);
+	        }
+	    }
 	
 	
 

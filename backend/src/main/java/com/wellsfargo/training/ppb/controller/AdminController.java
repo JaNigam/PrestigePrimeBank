@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -42,19 +43,27 @@ public class AdminController {
 		new ResourceNotFoundException("Admin Doesn't Exist!"));
 		
 		if(userId.equals(a.getUserId()) && password.equals(a.getPassword())) {
-			admin.setIsLoggedIn(true);
+			adminservice.setLoginStatus(userId, true);
 		}
 		
-		return admin.getIsLoggedIn();
+		return adminservice.getLoginStatus(userId);
 	}
 	
-	@GetMapping("/accounts")
-	public ResponseEntity<List<Account>> getAllAccounts(){
+	@GetMapping("{id}/accounts")
+	public ResponseEntity<List<Account>> getAllAccounts(@PathVariable(value="id") Long adminId){
 		try {
-			if(admin.getIsLoggedIn()) {
-			List<Account> accounts = adminservice.listAllAccounts();
-					return ResponseEntity.ok(accounts);
-		}
+			
+			adminservice.loginAdmin(adminId).orElseThrow(() -> new 
+					ResourceNotFoundException("Admin Does Not Exist For the Given Id: "+adminId));
+			
+			if(adminservice.getLoginStatus(adminId))
+			{
+				List<Account> accounts = adminservice.listAllAccounts();
+				return ResponseEntity.ok(accounts);
+			}else {
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);}
+			
+		
 		}
 		catch(Exception e) {
 			e.printStackTrace();
@@ -62,11 +71,10 @@ public class AdminController {
 		}
 	}
 	
-	@PutMapping("/logout")
-	public Boolean logoutAdmin(@Validated @RequestBody Admin admin){
-		if(admin.getIsLoggedIn())
-		admin.setIsLoggedIn(false);
-		return admin.getIsLoggedIn();
+	@PostMapping("{id}/logout")
+	public Boolean logoutAdmin(@PathVariable(value="id") Long adminId){
+		adminservice.setLoginStatus(adminId, false);
+		return adminservice.getLoginStatus(adminId);
 	} 
 	
 	

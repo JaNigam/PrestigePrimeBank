@@ -10,6 +10,7 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
 	
 //	public Optional<Customer>findById(Long userId);
 	public Optional<Customer>findByEmail(String email);
+//	void deleteByCustomer(Customer customer);
 	
 
 }

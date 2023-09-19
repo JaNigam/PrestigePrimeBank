@@ -91,7 +91,7 @@ public class CustomerController {
 		@DeleteMapping("/{id}")
 		public ResponseEntity<String> deleteCustomerAndAccounts(@PathVariable(value = "id") Long userId){
 			try {
-				custservice.deleteCustomerAndAccountByUserId(userId);
+				custservice.deleteCustomer(userId);
 				return ResponseEntity.ok("Customer and Account Deleted Successfully");
 			}catch(Exception e) {
 				return ResponseEntity.badRequest().body("Error deleting customer and account: " + e.getMessage());

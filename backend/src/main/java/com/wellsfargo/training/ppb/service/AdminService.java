@@ -13,7 +13,10 @@ import com.wellsfargo.training.ppb.repository.AccountRepository;
 import com.wellsfargo.training.ppb.repository.AdminRepository;
 import com.wellsfargo.training.ppb.repository.CustomerRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
+@Transactional
 public class AdminService {
 	@Autowired
 	private AccountRepository accrepo;
@@ -40,13 +43,21 @@ public class AdminService {
 		return result;
 	}
 	
+	
+	public void setLoginStatus(Long userId, Boolean Status) {
+		adminrepo.updateStatus(userId, Status);
+		
+	}
+	
+	public Boolean getLoginStatus(Long userId) {
+		return adminrepo.getLoginStatusById(userId);
+	}
+	
 	public Optional<Admin> loginAdmin(Long userId) {
 		return adminrepo.findById(userId);
 	}
 	
-	public Boolean logoutAdmin() {
-		return logoutAdmin();
-	}
+
 	
 	public List<Account> listAllAccounts(){
 		return accrepo.findAll();
