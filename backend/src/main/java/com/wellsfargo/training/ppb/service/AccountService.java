@@ -49,13 +49,22 @@ public class AccountService {
 	public List<Account> listAll(){
 		return accrepo.findAll();
 	}
-	
+		
 	//Optional - Handles NullPointer Exception
-	public Optional<Account> getSingleAccount(long id){
+	public Optional<Account> getSingleAccount(Long id){
 		return accrepo.findById(id); // invokes predefined method of JPA Repository
 	}
 	
-	public void deleteAccount(long id) {
+	public void deleteAccount(Long id) {
 		accrepo.deleteById(id); 
+	}
+	
+	public String updateAccount(Account updatedacc) {
+		
+		String result = "";
+		accrepo.save(updatedacc);
+		result = "Account Details Updated Successfully";
+		
+		return result;
 	}
 }
