@@ -3,6 +3,8 @@ package com.wellsfargo.training.ppb.model;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
+import org.springframework.beans.factory.annotation.Value;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 //import org.hibernate.validator.constraints.Length;
@@ -23,6 +25,9 @@ public class Customer {
 
 	@Column(nullable = false)
 	private String password;
+	
+	@Column(nullable=false, columnDefinition = "boolean default false")
+	private boolean isAdmin;
 
 	@Column(unique=true)
 	private long mobile;
