@@ -40,9 +40,9 @@ function App() {
       </section>   */}
 
       
-      <footer className="footer">
+      {/* <footer className="footer">
         <p>&copy; All Rights Reserved To Wells Fargo.</p>
-      </footer>
+      </footer> */}
 
 
     </div> 

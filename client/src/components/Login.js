@@ -2,113 +2,41 @@ import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import { useNavigate } from "react-router-dom";
 import '.././styles/Login.css'
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import NavBar from "./NavBar";
 import AuthenticationService from '../services/AuthenticationService'
 
 function Login() {
   // React States
-  // const [errorMessages, setErrorMessages] = useState({});
-  // const [isSubmitted, setIsSubmitted] = useState(false);
 
     // ************//***************** */
     const history = useNavigate();   //PROGRAMMATICALLY NAVIGATE TI ANOTHER COMPONENT
     // defining state  for email and passwordwith initial value
-    const [email,setEmail] = useState('');
+    const [user_id,setUserId] = useState();
     const [password,setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
     // ************//***************** */
-  // // User Login info
-  // const database = [
-  //   {
-  //     username: "user1",
-  //     password: "pass1"
-  //   },
-  //   {
-  //     username: "user2",
-  //     password: "pass2"
-  //   }
-  // ];
-
-  // const errors = {
-  //   uname: "invalid username",
-  //   pass: "invalid password"
-  // };
-
-  // const handleSubmit = (event) => {
-  //   //Prevent page reload
-  //   event.preventDefault();
-
-  //   var { uname, pass } = document.forms[0];
-
-  //   // Find user login info
-  //   const userData = database.find((user) => user.username === uname.value);
-
-  //   // Compare user info
-  //   if (userData) {
-  //     if (userData.password !== pass.value) {
-  //       // Invalid password
-  //       setErrorMessages({ name: "pass", message: errors.pass });
-  //     } else {
-  //       setIsSubmitted(true);
-  //     }
-  //   } else {
-  //     // Username not found
-  //     setErrorMessages({ name: "uname", message: errors.uname });
-  //   }
-  // };
-
-  // // Generate JSX code for error message
-  // const renderErrorMessage = (name) =>
-  //   name === errorMessages.name && (
-  //     <div className="error">{errorMessages.message}</div>
-  //   );
-
-  // // JSX code for login form
-  // const renderForm = (
-  //   <div className="form">
-  //     <form onSubmit={handleSubmit}>
-  //       <div className="input-container">
-  //         <label>Username </label>
-  //         <input type="text" name="uname" required />
-  //         {renderErrorMessage("uname")}
-  //       </div>
-  //       <div className="input-container">
-  //         <label>Password </label>
-  //         <input type="password" name="pass" required />
-  //         {renderErrorMessage("pass")}
-  //       </div>
-  //       <div className="button-container">
-  //         <input type="submit" />
-  //       </div>
-  //     </form>
-  //   </div>
-  // );
-
-
-
-
-
-
-
 
 
   // method to handle login 
   const handleLogin = async () =>{
-    if(!email || !password){
+    if(!user_id || !password){
         setErrorMessage('Please enter both email or password');
         return;
     }
-    const dealer = {email,password};
+    // const emailed = Number(email)
+    // const num= 
+    const dealer = {user_id,password};
 
     try{
+      console.log('before login const')
         const loginSuccess = await AuthenticationService.login(dealer);    //invoke service method
         console.log('API response: ',loginSuccess);
         if(loginSuccess){
             setSuccessMessage('Login Successful. Redirecting.....');
             setTimeout(() => {
-                history('/product');
+                history('/about');
             }, 3000);
             
         }
@@ -120,7 +48,10 @@ function Login() {
         console.error('Login error: ',error);
         setErrorMessage('Error occurred while login');
     }
+
+    
 }
+
 
 
 
@@ -132,8 +63,8 @@ function Login() {
       <div className='login-form form'>
                 <h2 className="title">Login to your Account</h2>
                 <div className='input-container'>
-                    <label>Email:</label>
-                    <input type='email' value={email} onChange={(e) => setEmail(e.target.value)} />
+                    <label>user id:</label>
+                    <input type='number' value={user_id} onChange={(e) => setUserId(e.target.value)} />
                 </div>
                 <div className='input-container'>
                     <label>Password:</label>

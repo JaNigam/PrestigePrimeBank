@@ -2,13 +2,18 @@ import axios from 'axios'
 
 //This service class interacts with rest api - spring boot
 class AuthenticationService {
-    static async login(dealer) {
+    static async login(customer) {
         try {
-            const response = await axios.post('http://localhost:8085/ims/api/loginDealer', dealer);
-            if (response.data === true) {
+            console.log(customer);
+            const resp = await axios.post('http://localhost:8083/ppb/customer/login', customer);
+            console.log(2)
+            console.log("response",resp)
+            if (resp.data === true) {
+                console.log("true")
                 return true;
             }
             else {
+                console.log("false")
                 return false;
             }
         }
@@ -17,9 +22,9 @@ class AuthenticationService {
         }
     }
 
-    static async registerDealer(dealer) {
+    static async registerDealer(customer) {
         try {
-            const response = await axios.post('http://localhost:8085/ims/api/register', dealer);
+            const response = await axios.post('http://localhost:8083/ppb/customer/create-customer', customer);
             return response.data;
         }
         catch (error) {

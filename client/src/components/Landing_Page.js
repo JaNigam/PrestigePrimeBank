@@ -19,7 +19,7 @@ export default function Landing_Page() {
           <div className='content'>
             <h1 style={{ color: "white" }}>Prestige Prime Bank</h1>
             <h3 style={{ color: "#ff7a01" }}> Elevating Excellence in Banking</h3>
-            <div className="cta-buttons" >
+            {/* <div className="cta-buttons" > */}
             <Link to="/login" className="btn primary-btn" style={{ color: "beige" }}>
               Log In
             </Link>
@@ -27,7 +27,7 @@ export default function Landing_Page() {
               Sign Up
             </Link>
 
-            </div>
+            {/* </div> */}
 
           </div>`
         </Col>
