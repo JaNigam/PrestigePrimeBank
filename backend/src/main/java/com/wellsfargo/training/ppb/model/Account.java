@@ -14,7 +14,9 @@ public class Account {
 	private String openingDate;
 	private String ifsc;
 	private String branch;
+	private Double balance; 
 	
+
 	@ManyToOne
 	@JoinColumn(name="userId")
 	private Customer customer;
@@ -65,6 +67,14 @@ public class Account {
 
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
+	}
+	
+	public Double getBalance() {
+		return balance;
+	}
+
+	public void setBalance(Double balance) {
+		this.balance = balance;
 	}
 	
 	

@@ -17,4 +17,5 @@ public interface AccountRepository extends JpaRepository<Account, Long>{
 //    @Query("DELETE Account a WHERE a.customer.userId = :userId")
 //    void deleteByUserId(@Param("userId") Long userId);
 	void deleteByCustomer(Customer customer);
+	Account findByAccountNo(Long accountNo);
 }

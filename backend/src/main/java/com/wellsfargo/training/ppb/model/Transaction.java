@@ -1,6 +1,8 @@
 package com.wellsfargo.training.ppb.model;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,7 +21,9 @@ public class Transaction {
 	private Long senderAccNo;
 	private Long recieverAccNo;
 	private String timeStamp;
+	private String status;
 	
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "accno")
 	private Account account;
@@ -78,6 +82,14 @@ public class Transaction {
 
 	public void setAccount(Account account) {
 		this.account = account;
+	}
+	
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 	
 	
