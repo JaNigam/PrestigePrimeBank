@@ -1,3 +1,4 @@
+import NavBar from "./NavBar"
 import useFormContext from "./useFormContext"
 
 const OptIn = () => {
@@ -5,7 +6,7 @@ const OptIn = () => {
 
     const content = (
         <>
-        
+            {/* <NavBar/> */}
                 <div className="flex-col">
                     <label htmlFor="occType">Occupation</label>
                     <input

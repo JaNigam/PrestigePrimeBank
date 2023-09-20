@@ -1,3 +1,4 @@
+import NavBar from "./NavBar"
 import useFormContext from "./useFormContext"
 
 const Shipping = () => {
@@ -7,7 +8,7 @@ const Shipping = () => {
     const content = (
         <>
             
-
+            {/* <NavBar/> */}
             <div className="split-container">
                 <div className="flex-col">
                     <label htmlFor="mothername">Mother Name</label>

@@ -1,11 +1,15 @@
 import useFormContext from "./useFormContext"
 import AuthenticationService from "../services/AuthenticationService"
+import NavBar from "./NavBar"
 
 const Billing = () => {
 
     const { data, handleChange } = useFormContext()
 
-    const content = (        <div className="flex-col">
+    const content = (        
+    <>
+    {/* <NavBar/> */}
+    <div className="flex-col">
             <div className="split-container">
                 <div className="flex-col">
                     <label htmlFor="name">Name</label>
@@ -200,6 +204,7 @@ const Billing = () => {
                 onChange={handleChange}
             />
         </div>
+        </>
     )
 
     return content

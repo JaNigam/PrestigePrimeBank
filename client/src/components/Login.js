@@ -12,7 +12,7 @@ function Login() {
     // ************//***************** */
     const history = useNavigate();   //PROGRAMMATICALLY NAVIGATE TI ANOTHER COMPONENT
     // defining state  for email and passwordwith initial value
-    const [user_id,setUserId] = useState();
+    const [userId,setUserId] = useState();
     const [password,setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
@@ -21,13 +21,13 @@ function Login() {
 
   // method to handle login 
   const handleLogin = async () =>{
-    if(!user_id || !password){
+    if(!userId || !password){
         setErrorMessage('Please enter both email or password');
         return;
     }
     // const emailed = Number(email)
     // const num= 
-    const dealer = {user_id,password};
+    const dealer = {userId,password};
 
     try{
       console.log('before login const')
@@ -64,7 +64,7 @@ function Login() {
                 <h2 className="title">Login to your Account</h2>
                 <div className='input-container'>
                     <label>user id:</label>
-                    <input type='number' value={user_id} onChange={(e) => setUserId(e.target.value)} />
+                    <input type='number' value={userId} onChange={(e) => setUserId(e.target.value)} />
                 </div>
                 <div className='input-container'>
                     <label>Password:</label>
