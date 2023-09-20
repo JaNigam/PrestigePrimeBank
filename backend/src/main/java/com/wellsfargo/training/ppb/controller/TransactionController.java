@@ -18,21 +18,21 @@ public class TransactionController {
 	@Autowired
 	TransactionService transservice;
 	
-	@PostMapping("/transact")
-	public String Transact(@RequestBody Transaction transaction) {
-		String result = "";
-		
-		Transaction trans = transservice.fundTransfer(transaction);
-		
-		if(trans == null || "fail".equals(trans.getStatus())) {
-			result = "Transaction failed!";
-		}
-		else {
-			result = "Transaction Success!";
-		}
-		
-		return result;
-	}
+//	@PostMapping("/transact")
+//	public String Transact(@RequestBody Transaction transaction) {
+//		String result = "";
+//		
+//		Transaction trans = transservice.fundTransfer(transaction);
+//		
+//		if(trans == null || "fail".equals(trans.getStatus())) {
+//			result = "Transaction failed!";
+//		}
+//		else {
+//			result = "Transaction Success!";
+//		}
+//		
+//		return result;
+//	}
 
 }
 

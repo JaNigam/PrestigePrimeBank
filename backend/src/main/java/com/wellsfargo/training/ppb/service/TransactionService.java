@@ -24,13 +24,21 @@ public class TransactionService {
 	
 	public Transaction fundTransfer(Transaction trans) {
 		
+		//extracting sender's & Recvs acc no from the trans json object
 		Long senderAccNo = trans.getSenderAccNo();
 		Long receiverAccNo = trans.getRecieverAccNo();
-		Account senderAcc = accrepo.findByAccountNo(senderAccNo);
-				//findById(senderAccNo).get();
+		
+		
+		
+		//fetching senders's acc by the given acc no
+		Account senderAcc = accrepo.findById(senderAccNo).get();
+		
+		//get the balance of the sender
 		Double balanceSender = senderAcc.getBalance();
+		
+		//get the transaction amount
 		Double amount = trans.getAmount();
-		Account receiverAcc = accrepo.findByAccountNo(receiverAccNo);
+		
 		//findById(receiverAccNo)
 		// || accrepo.findByAccountNo(receiverAccNo).isEmpty()
 		if(amount > balanceSender || accrepo.findById(receiverAccNo) == null) {
@@ -39,16 +47,27 @@ public class TransactionService {
 		else {
 			
 					//findById(receiverAccNo).get();
+			//fetch the receiver acc details
+			Account receiverAcc = accrepo.findById(receiverAccNo).get();
 			trans.setStatus("success");
+			
+			//adjust acc balance of the sender
 			balanceSender-=amount;
+			senderAcc.setBalance(balanceSender);
+			accrepo.save(senderAcc);
+			
+			
+			//adjust acc balance of the receiver 
 			Double balanceReceiver = receiverAcc.getBalance();
 			balanceReceiver+=amount;
 			receiverAcc.setBalance(balanceReceiver);
+			
 			accrepo.save(receiverAcc);
-			senderAcc.setBalance(balanceSender);
-			accrepo.save(senderAcc);
+			
+			
+			
 		}
-		trans.setAccount(senderAcc);
+//		trans.setAccount(senderAcc);
 		String timeStamp = new SimpleDateFormat("yyyy.mm.dd.HH.mm.ss").format(new java.util.Date());
 		trans.setTimeStamp(timeStamp);
 		return transrepo.save(trans);

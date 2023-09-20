@@ -32,16 +32,8 @@ public class AccountController {
 	@Autowired
 	private AccountService accservice;
 	
-	@PostMapping("/accounts/{id}")
-	public ResponseEntity<Account> createAccount(@PathVariable("id") Long userId, @RequestBody Account account) throws 
-	ResourceNotFoundException{
-		Account newaccount = accservice.createAccount(userId, account).orElseThrow(()-> new 
-				ResourceNotFoundException("Account can not be created for the user : " +userId));
-		return ResponseEntity.ok().body(newaccount);
-		
-	}
 	
-	
+	//list all the accounts
 	@GetMapping("/accounts")
 	public ResponseEntity<List<Account>> getAllAccounts(){
 		try {
@@ -56,6 +48,7 @@ public class AccountController {
 	}
 	
 		
+	//get account details fo the given userid
 	@GetMapping("/accounts/{id}")
 	public ResponseEntity<Account> getAccountById(@PathVariable(value="id")Long accountNo) throws
 	ResourceNotFoundException {
@@ -65,22 +58,7 @@ public class AccountController {
 	}
 	
 	
-	@PutMapping("/accounts/{id}")
-	public ResponseEntity<String> updateAccount(@PathVariable(value="id")Long accountNo,
-			@Validated @RequestBody Account a) throws
-	ResourceNotFoundException {
-			Account account = accservice.getSingleAccount(accountNo).orElseThrow(()-> new 
-					ResourceNotFoundException("Customer not Found for this ID : " +accountNo));
-			
-			account.setBranch(a.getBranch());
-			String result = accservice.updateAccount(account);
-			
-			return ResponseEntity.ok().body(result);
-			
-		
-	}
-	
-	
+	//delete account with the given userid
 	@DeleteMapping("/accounts/{id}")
 	public ResponseEntity<Map<String,Boolean>> deleteAcount(@PathVariable(value="id")Long accountNo) throws
 	ResourceNotFoundException {

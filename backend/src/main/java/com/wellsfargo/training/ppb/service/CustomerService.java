@@ -17,6 +17,8 @@ public class CustomerService {
 	
 	@Autowired
 	private CustomerRepository custrepo;
+	
+	@Autowired
 	private AccountRepository accrepo;
 	
 	public String saveCustomer(Customer cust) {
@@ -73,14 +75,16 @@ public String updateCustomer(Customer cust) {
 //		}
 //	}
 	
-	 public void deleteCustomer(Long id) {
+	 public Boolean deleteCustomer(Long id) {
 	        Customer customer = custrepo.findById(id).orElse(null);
 	        if (customer != null) {
 	            // Delete associated accounts
 	            accrepo.deleteByCustomer(customer);
 	            // Delete the customer
 	            custrepo.delete(customer);
+	            return true;
 	        }
+	        return false;
 	    }
 	
 	

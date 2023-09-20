@@ -9,13 +9,16 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.SequenceGenerator;
 
 @Entity
 public class Transaction {
 	
+//	@SequenceGenerator(name="product_seq", initialValue = 1000, allocationSize = 1)
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long transactionId;
+	
 	private String transactionType;
 	private Double amount;
 	private Long senderAccNo;
@@ -25,7 +28,7 @@ public class Transaction {
 	
 	@JsonBackReference
 	@ManyToOne
-	@JoinColumn(name = "accno")
+	@JoinColumn(name = "accountNo")
 	private Account account;
 
 	public Long getTransactionId() {

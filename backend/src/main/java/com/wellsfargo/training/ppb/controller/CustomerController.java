@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.wellsfargo.training.ppb.exception.ResourceNotFoundException;
 import com.wellsfargo.training.ppb.model.Customer;
+import com.wellsfargo.training.ppb.model.Transaction;
 import com.wellsfargo.training.ppb.service.CustomerService;
+import com.wellsfargo.training.ppb.service.TransactionService;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
@@ -27,6 +29,10 @@ public class CustomerController {
 	
 	@Autowired
 	CustomerService custservice;
+	
+	@Autowired
+	TransactionService transservice;
+	
 	@PostMapping("/create-customer")
 	public String createCustomer(@RequestBody @Validated Customer cust) {
 		return custservice.saveCustomer(cust);
@@ -74,29 +80,28 @@ public class CustomerController {
 			return ResponseEntity.ok().body(result);
 		}
 		
-//		@DeleteMapping("/{id}")
-//		public ResponseEntity<Map<String,Boolean>> deleteCustomer(@PathVariable(value="id")Long userId) throws
-//		ResourceNotFoundException {
-//			
-//			custservice.getSingleCustomer(userId).orElseThrow(()-> new 
-//					ResourceNotFoundException("User not Found for this Id : " + userId));
-//			
-//			custservice.deleteCustomer(userId);
-//			Map<String, Boolean> response=new HashMap<String, Boolean>();
-//			response.put("deleted", Boolean.TRUE);
-//			
-//			return ResponseEntity.ok().body(response);
-//		}
 		
-		@DeleteMapping("/{id}")
-		public ResponseEntity<String> deleteCustomerAndAccounts(@PathVariable(value = "id") Long userId){
-			try {
-				custservice.deleteCustomer(userId);
-				return ResponseEntity.ok("Customer and Account Deleted Successfully");
-			}catch(Exception e) {
-				return ResponseEntity.badRequest().body("Error deleting customer and account: " + e.getMessage());
+		//transaction
+		@PostMapping("/transact")
+		public String Transact(@RequestBody @Validated Transaction transaction) {
+			String result = "";
+			
+			System.out.println(transaction.getSenderAccNo());
+			System.out.println(transaction.getSenderAccNo());
+			Transaction trans = transservice.fundTransfer(transaction);
+			
+			
+			
+			if(trans == null || "fail".equals(trans.getStatus())) {
+				result = "Transaction failed!";
 			}
+			else {
+				result = "Transaction Success!";
+			}
+			
+			return result;
 		}
+
 		
 		
 	

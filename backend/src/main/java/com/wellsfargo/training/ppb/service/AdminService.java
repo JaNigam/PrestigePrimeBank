@@ -62,30 +62,4 @@ public class AdminService {
 	public List<Account> listAllAccounts(){
 		return accrepo.findAll();
 	}
-	
-//	public Boolean LoginStatus(Long userId){
-//		
-//	}
-	
-//	public List<Customer> listAllCustomers(){
-//		return custrepo.findAll();
-//	}
-	
-	/*For now keeping single admin*/
-//	Optional - Handles NullPointer Exception
-//	public Optional<Account> getAccount(long accountId){
-//		return accrepo.findById(accountId); // invokes predefined method of JPA Repository
-//	}
-//	
-//	public void deleteAccount(long accountId) {
-//		accrepo.deleteById(accountId); 
-//	}
-//	
-//	public Optional<Customer> getCustomer(long userId){
-//		return custrepo.findById(userId); // invokes predefined method of JPA Repository
-//	}
-//	
-//	public void deleteCustomer(long userId) {
-//		accrepo.deleteById(userId); 
-//	}
 }

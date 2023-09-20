@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,7 +19,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.wellsfargo.training.ppb.exception.ResourceNotFoundException;
 import com.wellsfargo.training.ppb.model.Account;
 import com.wellsfargo.training.ppb.model.Admin;
+import com.wellsfargo.training.ppb.model.Customer;
+import com.wellsfargo.training.ppb.service.AccountService;
 import com.wellsfargo.training.ppb.service.AdminService;
+import com.wellsfargo.training.ppb.service.CustomerService;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
@@ -28,6 +32,11 @@ public class AdminController {
 	@Autowired
 	AdminService adminservice;
 	
+	@Autowired
+	CustomerService custservice;
+	
+	@Autowired
+	private AccountService accservice;
 	
 	@PostMapping("/create-admin")
 	public String createAdmin(@RequestBody Admin admin) {
@@ -76,6 +85,71 @@ public class AdminController {
 		adminservice.setLoginStatus(adminId, false);
 		return adminservice.getLoginStatus(adminId);
 	} 
+	
+	
+	
+	@DeleteMapping("{aid}/deletecustomer/{cid}")
+	public ResponseEntity<String> deleteCustomerAndAccounts(@PathVariable(value = "aid") Long adminId, @PathVariable(value="cid") Long custId ){
+		
+		if(adminservice.getLoginStatus(adminId))
+		{
+		
+			try {
+				if(custservice.deleteCustomer(custId)) {
+				return ResponseEntity.ok("Customer and Account Deleted Successfully");
+				}
+				else {
+					return ResponseEntity.ok("Customer does not exist");
+				}
+			}catch(Exception e) {
+				return ResponseEntity.badRequest().body("Error deleting customer and account: " + e.getMessage());
+			}
+		}
+		else {
+			return ResponseEntity.badRequest().body("Admin not authenticated");
+		}
+	}
+	
+		//create account with the given userid
+		@PostMapping("{aid}/accounts/{cid}")
+		public ResponseEntity<String> createAccount(@PathVariable(value = "aid") Long adminId, @PathVariable(value="cid") Long custId,  @RequestBody Account account) throws 
+		ResourceNotFoundException{
+
+			if(adminservice.getLoginStatus(adminId))
+			{
+			accservice.createAccount(custId, account).orElseThrow(()-> new 
+					ResourceNotFoundException("Account can not be created for the user : " +custId));
+			return ResponseEntity.ok().body("Account Created Successfully!");
+			}
+			else {
+				return ResponseEntity.badRequest().body("Admin not authenticated");
+			}
+		}
+	
+		
+	//update customer
+		//update the account with the given userid
+		@PutMapping("{aid}/accounts/{accid}")
+		public ResponseEntity<String> updateAccount(@PathVariable(value="aid")Long adminId, @PathVariable(value="accid")Long accountNo,
+				@Validated @RequestBody Account a) throws
+		ResourceNotFoundException {
+			
+			if(adminservice.getLoginStatus(adminId))
+			{
+				Account account = accservice.getSingleAccount(accountNo).orElseThrow(()-> new 
+						ResourceNotFoundException("Customer not Found for this ID : " +accountNo));
+				
+				account.setBranch(a.getBranch());
+				String result = accservice.updateAccount(account);
+				
+				return ResponseEntity.ok().body(result);
+			}else
+			{
+				return ResponseEntity.badRequest().body("Admin not authenticated");
+			}
+				
+			
+		}
 	
 	
 	
