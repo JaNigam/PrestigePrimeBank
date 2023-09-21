@@ -5,6 +5,7 @@ import '.././styles/Login.css'
 // import { Link } from "react-router-dom";
 import NavBar from "./NavBar";
 import AuthenticationService from '../services/AuthenticationService'
+import {Link} from 'react-router-dom'
 
 function Login() {
   // React States
@@ -58,47 +59,34 @@ function Login() {
   return (
   <div className="app"   >
       <NavBar></NavBar>
-      <br></br>
+      {/* <br></br> */}
 
       <div className='login-form form'>
-                <h2 className="title">Login to your Account</h2>
-                <div className='input-container'>
-                    <label>user id:</label>
-                    <input type='number' value={userId} onChange={(e) => setUserId(e.target.value)} />
-                </div>
-                <div className='input-container'>
-                    <label>Password:</label>
-                    <input type='password' value={password} onChange={(e) => setPassword(e.target.value)} />
-                </div>
-                <button className='btn btn-primary button-container' onClick={handleLogin}>Login</button>
-                {errorMessage && <p className='error-message'>{errorMessage}</p>}
-                {successMessage && <p className='success-message'>{successMessage}</p>}
-                <div className="button-container1">
-                <p>First Time User?</p>
-            </div>
-            <div className="button-container1">
-                <p>Forget UserID?</p>
-             </div>
-           <div className="button-container1">
-              <p>Forgot Password?</p>
-           </div>
+        <h2 className="title">Login to your Account</h2>
+          <div className='input-container'>
+            <label>User Id</label>
+              <input type='number' value={userId} onChange={(e) => setUserId(e.target.value)} />
+          </div>
+          <div className='input-container'>
+            <label>Password</label>
+              <input type='password' value={password} onChange={(e) => setPassword(e.target.value)} />
+          </div>
+          <button className='btn btn-primary button-container' onClick={handleLogin}>Login</button>
+          {errorMessage && <p className='error-message'>{errorMessage}</p>}
+          {successMessage && <p className='success-message'>{successMessage}</p>}
+          <div className="button-container1">
+            {/* <p>First Time User?</p> */}
+            <Link to="/register">First Time User?</Link>
+          </div>
+          <div className="button-container1">
+            {/* <p>Forget UserID?</p> */}
+            <Link to="/register">Forget UserID?</Link>
+          </div>
+          <div className="button-container1">
+            {/* <p>Forgot Password?</p> */}
+            <Link to="/register">Forgot Password?</Link>
+          </div>
       </div>
-      {/* </div> */}
-
-
-      {/* <div className="login-form">
-        <div className="title">Login to your Account</div>
-        {isSubmitted ? <div>User is successfully logged in</div> : renderForm}
-        <div className="button-container1">
-                <p>First Time User?</p>
-            </div>
-            <div className="button-container1">
-                <p>Forget UserID?</p>
-             </div>
-           <div className="button-container1">
-              <p>Forgot Password?</p>
-           </div>
-      </div> */}
     </div>
   );
 }

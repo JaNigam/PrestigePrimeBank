@@ -1,0 +1,41 @@
+/* Style for the logout container */
+.logout-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f5f5f5; /* Light background color */
+    /* background-color: black; */
+  flex-direction: column;
+    background-size: cover;
+    background-image: url("../../public/images/background-img.jpg") ;
+  }
+  
+  /* Style for the logout box */
+  .logout-box {
+    text-align: center;
+    padding: 20px;
+    border-radius: 8px;
+    /* margin: 10px; */
+    background-color: #fff; /* White background color */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Box shadow for elevation */
+  }
+  
+  /* Style for the logout button */
+  .logout-button {
+    padding: 10px 20px;
+    background-color: #007bff; /* Blue button color */
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .logout-button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+  }
+  
+  /* Additional styles can be added for further customization */
+  
