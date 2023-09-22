@@ -35,8 +35,7 @@ public class CustomerController {
 	
 	@PostMapping("/create-customer")
 	public String createCustomer(@RequestBody @Validated Customer cust) {
-		return custservice.saveCustomer(cust);
-		
+		return custservice.saveCustomer(cust);	
 	}
 	
 	@GetMapping("/welcome")

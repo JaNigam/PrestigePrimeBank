@@ -58,6 +58,12 @@ public class AdminController {
 		return adminservice.getLoginStatus(userId);
 	}
 	
+//	@PostMapping("{aid}/approve-customer/{cid}")
+//    public ResponseEntity<Customer> approveCustomer(@PathVariable(value = "aid") Long adminId, @PathVariable(value="cid") Long custId) {
+//        Customer approvedCustomer = custservice.approveCustomer(custId);
+//        return new ResponseEntity<>(approvedCustomer, HttpStatus.OK);
+//    }
+	
 	@GetMapping("{id}/accounts")
 	public ResponseEntity<List<Account>> getAllAccounts(@PathVariable(value="id") Long adminId){
 		try {
@@ -114,10 +120,10 @@ public class AdminController {
 		@PostMapping("{aid}/accounts/{cid}")
 		public ResponseEntity<String> createAccount(@PathVariable(value = "aid") Long adminId, @PathVariable(value="cid") Long custId,  @RequestBody Account account) throws 
 		ResourceNotFoundException{
-
+			
 			if(adminservice.getLoginStatus(adminId))
 			{
-			accservice.createAccount(custId, account).orElseThrow(()-> new 
+			adminservice.createAccount(custId, account).orElseThrow(()-> new 
 					ResourceNotFoundException("Account can not be created for the user : " +custId));
 			return ResponseEntity.ok().body("Account Created Successfully!");
 			}
@@ -140,6 +146,9 @@ public class AdminController {
 						ResourceNotFoundException("Customer not Found for this ID : " +accountNo));
 				
 				account.setBranch(a.getBranch());
+				String newBranch = a.getBranch();
+				String newifsc = newBranch.substring(0,3)+(int)(newBranch.charAt(newBranch.length()-1))+(int)(newBranch.charAt(newBranch.length()-2));
+				account.setIfsc(newifsc);
 				String result = accservice.updateAccount(account);
 				
 				return ResponseEntity.ok().body(result);
@@ -148,7 +157,6 @@ public class AdminController {
 				return ResponseEntity.badRequest().body("Admin not authenticated");
 			}
 				
-			
 		}
 	
 	

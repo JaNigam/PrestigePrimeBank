@@ -57,7 +57,32 @@ public class AdminService {
 		return adminrepo.findById(userId);
 	}
 	
-
+	public Optional<Account> createAccount(Long userId, Account account) {
+		Customer c = custrepo.findById(userId).get();
+		
+		if (c!=null && c.isValidCustomer()) {
+        	  Long newaccountNo = generateUniqueAccountNo();
+      		account.setAccountNo(newaccountNo);
+      		
+      		String branch = account.getBranch();
+      		String newifsc = branch.substring(0,3)+(int)(branch.charAt(branch.length()-1))+(int)(branch.charAt(branch.length()-2));
+      		account.setIfsc(newifsc);
+      		account.setCustomer(c);
+      				
+      		Account savedAccount= accrepo.save(account);
+      		return Optional.ofNullable(savedAccount);
+          }
+		return Optional.empty();
+	}
+	
+	
+	public Long generateUniqueAccountNo() {
+		Long accountNo;
+		do {
+			accountNo = (long)(Math.random()*900000+1000000);
+		}while(accrepo.existsById(accountNo));
+		return accountNo;
+	}
 	
 	public List<Account> listAllAccounts(){
 		return accrepo.findAll();
