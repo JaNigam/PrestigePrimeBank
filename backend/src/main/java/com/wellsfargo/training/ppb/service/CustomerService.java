@@ -1,6 +1,9 @@
 package com.wellsfargo.training.ppb.service;
 
+import java.security.SecureRandom;
+import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -86,7 +89,42 @@ public String updateCustomer(Customer cust) {
 	        }
 	        return false;
 	    }
-	
-	
+	 
+
+	 Map<String, String> otpMap = new ConcurrentHashMap<>();
+
+	 public String generateOtp(String email) {
+	     Long otp = (long)(Math.random() * 900000 + 1000000);
+	     String finalOtp = otp.toString();
+	     
+	     System.out.println("otp: " + finalOtp);
+	     
+	     // Trim and store the email
+	     String trimmedEmail = email.trim();
+	     otpMap.put(trimmedEmail, finalOtp);
+	     
+	     String testotp = otpMap.get(trimmedEmail);
+	     System.out.println("test email: " + trimmedEmail);
+	     System.out.println("testotp: " + testotp);
+	     
+	     return finalOtp;
+	 }
+
+	 public boolean verifyOtp(String email, String inputOtp) {
+	     System.out.println("input email: " + email);
+	     
+	     // Trim the email for consistency
+	     String trimmedEmail = email.trim();
+	     
+	     String storedOtp = otpMap.get(trimmedEmail);
+	     System.out.println("stored otp: " + storedOtp);
+	     
+	     if (inputOtp.equals(storedOtp)) {
+	         return true;
+	     } else {
+	         return false;
+	     }
+	 }
+
 
 }

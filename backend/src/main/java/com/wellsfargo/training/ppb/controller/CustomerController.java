@@ -2,8 +2,11 @@ package com.wellsfargo.training.ppb.controller;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -14,13 +17,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.wellsfargo.training.ppb.exception.ResourceNotFoundException;
 import com.wellsfargo.training.ppb.model.Beneficiary;
 import com.wellsfargo.training.ppb.model.Customer;
+import com.wellsfargo.training.ppb.model.PasswordChangeBody;
 import com.wellsfargo.training.ppb.model.Transaction;
+<<<<<<< Updated upstream
 import com.wellsfargo.training.ppb.service.BeneficiaryService;
+=======
+import com.wellsfargo.training.ppb.repository.CustomerRepository;
+>>>>>>> Stashed changes
 import com.wellsfargo.training.ppb.service.CustomerService;
 import com.wellsfargo.training.ppb.service.TransactionService;
 
@@ -36,7 +45,11 @@ public class CustomerController {
 	TransactionService transservice;
 	
 	@Autowired
+<<<<<<< Updated upstream
 	BeneficiaryService bservice;
+=======
+	CustomerRepository custrepo;
+>>>>>>> Stashed changes
 	
 	@PostMapping("/create-customer")
 	public String createCustomer(@RequestBody @Validated Customer cust) {
@@ -87,6 +100,49 @@ public class CustomerController {
 			
 			if(transservice.fundTransfer(transDetails)) {return "Transaction Successfull!";}
 			return "Transaction Failed";
+			
+		}
+		
+		//String email
+		
+		@PostMapping("/requestchangepass")
+		public ResponseEntity<String> RequestChangePassword(@RequestBody @Validated com.wellsfargo.training.ppb.model.RequestChangePassword repss) {
+			String email = repss.getEmail();
+			Optional<Customer> cust = custrepo.findByEmail(email);
+			if(!cust.isPresent()) {
+				return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Email not found!");
+			}
+			else {
+				String otp = custservice.generateOtp(email);
+				
+				return ResponseEntity.ok(otp);
+			}
+		}
+		
+		
+		@PostMapping("/changepassword")
+		public ResponseEntity<String> ChangePassword(@RequestBody @Validated PasswordChangeBody psb) {
+			String email = psb.getEmail();
+			String inputotp = psb.getOtp();
+			String newPassword = psb.getPassword();
+			Optional<Customer> customer = custrepo.findByEmail(email);
+			Customer cust = customer.get();
+			if(!customer.isPresent()) {
+				return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Email not found!");
+			}
+			else {
+				if(custservice.verifyOtp(email, inputotp)) {
+					cust.setPassword(newPassword);
+					custrepo.save(cust);
+					return ResponseEntity.ok("Password updated Successfully!");
+					
+					
+				}
+				else {
+					return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid OTP!");
+				}
+				
+			}
 			
 		}
 
