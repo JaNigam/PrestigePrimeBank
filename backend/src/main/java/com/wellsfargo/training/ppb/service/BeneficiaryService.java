@@ -9,6 +9,7 @@ import com.wellsfargo.training.ppb.model.Beneficiary;
 import com.wellsfargo.training.ppb.model.Customer;
 import com.wellsfargo.training.ppb.repository.AccountRepository;
 import com.wellsfargo.training.ppb.repository.BeneficiaryRepository;
+import com.wellsfargo.training.ppb.repository.CustomerRepository;
 
 import jakarta.transaction.Transactional;
 
@@ -22,12 +23,21 @@ public class BeneficiaryService {
 	@Autowired
 	private AccountRepository accrepo;
 	
+	@Autowired
+	private CustomerRepository custrepo;
+	
 	//while adding beneficiary check if the the account exists in the bank
 	public String addBeneficiary(Beneficiary beneficiary, Long userId)
 	{
 		
+		//verify the customer first
+		Customer c = custrepo.findById(userId).get();
+		if(c!=null  && c.isValidCustomer())
+		{
+		
+			//fetch if there's any existing beneficiary
 		Optional<Beneficiary> existingBeneficiary = brepo.findByBeneficiaryNameAndCustomerUserId(beneficiary.getBeneficiaryName(), userId);
-//		System.out.println(existingBeneficiary);
+
 		if(existingBeneficiary.isPresent()) {return "Beneficiary Already Exists";}
 		
 		//check if the beneficiary accNo exists in Accounts table
@@ -35,14 +45,13 @@ public class BeneficiaryService {
 			return "Beneficary Bank Account Does Not Exist!";
 			
 		}else {
-			Beneficiary b = new Beneficiary();
-			b.setBeneficiaryAccNo(beneficiary.getBeneficiaryAccNo());
-			b.setBeneficiaryName(beneficiary.getBeneficiaryName());
-			b.setBeneficiaryNickName(beneficiary.getBeneficiaryNickName());
-			
+			beneficiary.setCustomer(c);
 		
-			brepo.save(b);
+			brepo.save(beneficiary);
 			return "Beneficiary Added Successfully!";
+		}
+		}else {
+			return "Not a Valid Customer!";
 		}
 		
 	}

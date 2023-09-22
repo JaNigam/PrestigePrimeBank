@@ -29,6 +29,10 @@ public class Beneficiary {
 	private String beneficiaryName;
 	private String beneficiaryNickName;
 	
+	/*
+	 * Many to One relationship with Customer table
+	 * Since a customer can have many beneficiaries
+	 * */
 	@ManyToOne
 	@JoinColumn(name="userId")
 	private Customer customer;
