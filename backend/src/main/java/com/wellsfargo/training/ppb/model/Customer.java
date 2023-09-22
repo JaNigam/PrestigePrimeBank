@@ -2,6 +2,8 @@ package com.wellsfargo.training.ppb.model;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -67,6 +69,9 @@ public class Customer {
 	private PermanentAddress permanentAddress;
 	private String fathername;
 	private String mothername;
+	
+	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Beneficiary> beneficiaries = new HashSet<>();
 	
 
 	public Customer() {

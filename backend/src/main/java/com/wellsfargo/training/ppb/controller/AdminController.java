@@ -158,6 +158,28 @@ public class AdminController {
 			}
 				
 		}
+		
+		@PutMapping("{aid}/addmoney/{accid}")
+		public ResponseEntity<String> addMoney(@PathVariable(value="aid")Long adminId, @PathVariable(value="accid")Long accountNo,
+				 @RequestBody Double moneyToAdd)throws
+		ResourceNotFoundException{
+			if(adminservice.getLoginStatus(adminId))
+			{
+				
+				System.out.println(moneyToAdd);
+				Account account = accservice.getSingleAccount(accountNo).orElseThrow(()-> new 
+						ResourceNotFoundException("Account not Found for this ID : " +accountNo));
+				
+				String status = accservice.addMoney(account, (double)moneyToAdd);
+				
+				return ResponseEntity.ok().body(status);
+			}else
+			{
+				return ResponseEntity.badRequest().body("error occured");
+			}
+			
+			
+		}
 	
 	
 	

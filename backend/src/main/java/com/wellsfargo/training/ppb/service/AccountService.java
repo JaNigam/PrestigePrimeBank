@@ -45,4 +45,13 @@ public class AccountService {
 		
 		return result;
 	}
+	
+	public String addMoney(Account acc, Double moneyToAdd)
+	{
+		Double currentBalance = acc.getBalance();
+		Double newBalance = currentBalance+moneyToAdd;
+		acc.setBalance(newBalance);
+		accrepo.save(acc);
+		return "Money added!";
+	}
 }

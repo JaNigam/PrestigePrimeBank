@@ -17,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.wellsfargo.training.ppb.exception.ResourceNotFoundException;
+import com.wellsfargo.training.ppb.model.Beneficiary;
 import com.wellsfargo.training.ppb.model.Customer;
 import com.wellsfargo.training.ppb.model.Transaction;
+import com.wellsfargo.training.ppb.service.BeneficiaryService;
 import com.wellsfargo.training.ppb.service.CustomerService;
 import com.wellsfargo.training.ppb.service.TransactionService;
 
@@ -32,6 +34,9 @@ public class CustomerController {
 	
 	@Autowired
 	TransactionService transservice;
+	
+	@Autowired
+	BeneficiaryService bservice;
 	
 	@PostMapping("/create-customer")
 	public String createCustomer(@RequestBody @Validated Customer cust) {
@@ -85,6 +90,14 @@ public class CustomerController {
 			
 		}
 
+		//add beneficiary or payee
+		@PostMapping("/add-beneficiary/{id}")
+		public String addBeneficiary(@PathVariable(value="id")Long userId, @RequestBody @Validated Beneficiary beneficiaryDetails) {
+			
+			return bservice.addBeneficiary(beneficiaryDetails, userId);
+			
+		}
+		
 		
 		
 	
