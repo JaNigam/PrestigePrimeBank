@@ -48,7 +48,7 @@ public class AccountController {
 	}
 	
 		
-	//get account details fo the given userid
+	//get account details of the given userid
 	@GetMapping("/accounts/{id}")
 	public ResponseEntity<Account> getAccountById(@PathVariable(value="id")Long accountNo) throws
 	ResourceNotFoundException {

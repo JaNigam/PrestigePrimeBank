@@ -38,10 +38,6 @@ public class CustomerController {
 		return custservice.saveCustomer(cust);	
 	}
 	
-	@GetMapping("/welcome")
-	public String welcome() {
-		return "welcome to customer";
-	}
 	
 	@PostMapping("/login")
 	public Boolean loginCustomer(@Validated @RequestBody Customer customer)throws ResourceNotFoundException{
@@ -59,7 +55,7 @@ public class CustomerController {
 		return isLoggedIn;
 	}
 	
-	 //Update JSON product object with new Values.
+	 //Update customer detailswith new Values.
 		@PutMapping("/{id}")
 		public ResponseEntity<String> updateCustomer(@PathVariable(value="id")Long userId,
 				@Validated @RequestBody Customer c) throws
@@ -82,23 +78,11 @@ public class CustomerController {
 		
 		//transaction
 		@PostMapping("/transact")
-		public String Transact(@RequestBody @Validated Transaction transaction) {
-			String result = "";
+		public String Transact(@RequestBody @Validated Transaction transDetails) {
 			
-			System.out.println(transaction.getSenderAccNo());
-			System.out.println(transaction.getSenderAccNo());
-			Transaction trans = transservice.fundTransfer(transaction);
+			if(transservice.fundTransfer(transDetails)) {return "Transaction Successfull!";}
+			return "Transaction Failed";
 			
-			
-			
-			if(trans == null || "fail".equals(trans.getStatus())) {
-				result = "Transaction failed!";
-			}
-			else {
-				result = "Transaction Success!";
-			}
-			
-			return result;
 		}
 
 		
