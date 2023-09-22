@@ -1,5 +1,6 @@
 package com.wellsfargo.training.ppb.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
@@ -9,8 +10,10 @@ import org.springframework.stereotype.Service;
 
 import com.wellsfargo.training.ppb.model.Account;
 import com.wellsfargo.training.ppb.model.Customer;
+import com.wellsfargo.training.ppb.model.Transaction;
 import com.wellsfargo.training.ppb.repository.AccountRepository;
 import com.wellsfargo.training.ppb.repository.CustomerRepository;
+import com.wellsfargo.training.ppb.repository.TransactionRepository;
 
 import jakarta.transaction.Transactional;
 
@@ -21,7 +24,7 @@ public class AccountService {
 	private AccountRepository accrepo;
 	
 	@Autowired
-	private CustomerRepository custrepo;
+    private TransactionRepository transrepo;
 	
 	
 	public List<Account> listAll(){
@@ -54,4 +57,9 @@ public class AccountService {
 		accrepo.save(acc);
 		return "Money added!";
 	}
+	
+	public List<Transaction> getTransactionsBetweenDates(Long accountNo, Date startDate, Date endDate) {
+        return transrepo.findTransactionsBetweenDates(accountNo, startDate, endDate);
+    }
+	
 }

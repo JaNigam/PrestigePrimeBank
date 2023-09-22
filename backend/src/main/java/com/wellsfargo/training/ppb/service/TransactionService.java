@@ -1,6 +1,7 @@
 package com.wellsfargo.training.ppb.service;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,9 +50,10 @@ public class TransactionService {
 		newTrans.setTransactionType(trans.getTransactionType());
 		
 		//create a time stamp
-		String timeStamp = new SimpleDateFormat("yyyy.mm.dd.HH.mm.ss").format(new java.util.Date());
-		
-		newTrans.setTimeStamp(timeStamp);
+//		String timeStamp = new SimpleDateFormat("yyyy.mm.dd.HH.mm.ss").format(new java.util.Date());
+		Date transTime= new Date();
+		newTrans.setTimeStamp(transTime);
+		Account a=accrepo.findByAccountNo(senderAccNo);
 		if(senderBal>=transferAmt)
 		{
 						
@@ -64,7 +66,7 @@ public class TransactionService {
 			senderAcc.get().setBalance(senderBal);
 				
 			newTrans.setStatus("pass");
-			
+			newTrans.setAccount(a);
 			//once all the fields are set save the object
 			transrepo.save(newTrans);
 			return true;

@@ -1,6 +1,8 @@
 package com.wellsfargo.training.ppb.model;
 
 
+import java.util.Date;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.Entity;
@@ -32,7 +34,7 @@ public class Transaction {
 	private Double amount;
 	private Long senderAccNo;
 	private Long receiverAccNo;
-	private String timeStamp;
+	private Date timeStamp;
 	private String status;
 	
 	@ManyToOne
