@@ -1,132 +1,137 @@
-import { createContext, useState, useEffect } from "react"
-import AuthenticationService from "../services/AuthenticationService"
-const FormContext = createContext({})
+import { createContext, useState, useEffect } from "react";
+import AuthenticationService from "../services/AuthenticationService";
+const FormContext = createContext({});
 
 export const FormProvider = ({ children }) => {
+  console.log("form context");
 
-    console.log("form context")
+  const title = {
+    0: "Billing Info",
+    1: "Shipping Info",
+    2: "Opt-In",
+  };
 
-    const title = {
-        0: 'Billing Info',
-        1: 'Shipping Info',
-        2: 'Opt-In'
-    }
+  const [page, setPage] = useState(0);
 
-    const [page, setPage] = useState(0)
+  const [data, setData] = useState({
+    name: "",
+    // LastName: "",
+    user_id: "",
+    currentAddress1: "",
+    currentAddress2: "",
+    currentCity: "",
+    currentState: "",
+    currentZipCode: "",
+    sameAsCurrent: false,
+    permanentAddress1: "",
+    permanentAddress2: "",
+    permamentCity: "",
+    permanentState: "",
+    permanentZipCode: "",
+    mothername: "",
+    fathername: "",
+    optForNetbanking: false,
+    occType: "",
+    incomeSource: "",
+    grossAnnualIncome: "",
+    agreeToTerms: false,
+    dob: "",
+    password: "",
+    aadhar: "",
+    email: "",
+    mobile: "",
+  });
 
-    const [data, setData] = useState({
-        name: "",
-        // LastName: "",
-        user_id: "",
-        currentAddress1: "",
-        currentAddress2: "",
-        currentCity: "",
-        currentState: "",
-        currentZipCode: "",
-        sameAsCurrent: false,
+  useEffect(() => {
+    if (data.sameAsCurrent) {
+      setData((prevData) => ({
+        ...prevData,
+        permanentAddress1: prevData.currentAddress1,
+        permanentAddress2: prevData.currentAddress2,
+        permamentCity: prevData.currentCity,
+        permanentState: prevData.currentState,
+        permanentZipCode: prevData.currentZipCode,
+      }));
+    } else {
+      setData((prevData) => ({
+        ...prevData,
         permanentAddress1: "",
         permanentAddress2: "",
         permamentCity: "",
         permanentState: "",
         permanentZipCode: "",
-        mothername: "",
-        fathername: "",
-        optForNetbanking: false,
-        occType: "",
-        incomeSource: '',
-        grossAnnualIncome: '',
-        agreeToTerms: false,
-        dob: "",
-        password: "",
-        aadhar: "",
-        email: "",
-        mobile: "",
-    })
-
-
-    useEffect(() => {
-        if (data.sameAsCurrent) {
-            setData(prevData => ({
-                ...prevData,
-                permanentAddress1: prevData.currentAddress1,
-                permanentAddress2: prevData.currentAddress2,
-                permamentCity: prevData.currentCity,
-                permanentState: prevData.currentState,
-                permanentZipCode: prevData.currentZipCode
-            }))
-        } else {
-            setData(prevData => ({
-                ...prevData,
-                permanentAddress1: "",
-                permanentAddress2: "",
-                permamentCity: "",
-                permanentState: "",
-                permanentZipCode: ""
-            }))
-        }
-    }, [data.sameAsCurrent])
-
-
-    const handleChange = e => {
-        const type = e.target.type
-
-        const name = e.target.name
-
-        const value = type === "checkbox"
-            ? e.target.checked
-            : e.target.value
-
-        setData(prevData => ({
-            ...prevData,
-            [name]: value
-        }))
+      }));
     }
+  }, [data.sameAsCurrent]);
 
-    const {
-        currentAddress2,
-        sameAsCurrent,
-        permanentAddress2,
-        optInNews,
-        ...requiredInputs } = data
+  const handleChange = (e) => {
+    const type = e.target.type;
 
-    // const canSubmit = [...Object.values(requiredInputs)].every(Boolean) && page === Object.keys(title).length - 1
+    const name = e.target.name;
 
-        const canSubmit = true;
+    const value = type === "checkbox" ? e.target.checked : e.target.value;
 
-        
-    
+    setData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
 
+  const {
+    currentAddress2,
+    sameAsCurrent,
+    permanentAddress2,
+    optInNews,
+    ...requiredInputs
+  } = data;
 
+  // const canSubmit = [...Object.values(requiredInputs)].every(Boolean) && page === Object.keys(title).length - 1
 
+  const canSubmit = true;
 
-    const canNextPage1 = Object.keys(data)
-        .filter(key => key.startsWith('current') && key !== 'currentAddress2')
-        .map(key => data[key])
-        .every(Boolean)
+  const canNextPage1 = Object.keys(data)
+    .filter((key) => key.startsWith("current") && key !== "currentAddress2")
+    .map((key) => data[key])
+    .every(Boolean);
 
-    const canNextPage2 = Object.keys(data)
-        .filter(key => key.startsWith('permanent') && key !== 'permanentAddress2')
-        .map(key => data[key])
-        .every(Boolean)
+  const canNextPage2 = Object.keys(data)
+    .filter((key) => key.startsWith("permanent") && key !== "permanentAddress2")
+    .map((key) => data[key])
+    .every(Boolean);
 
-    const disablePrev = page === 0
+  const disablePrev = page === 0;
 
-    const disableNext =
-        (page === Object.keys(title).length - 1)
-        || (page === 0 && !canNextPage1)
-        || (page === 1 && !canNextPage2)
+  const disableNext =
+    page === Object.keys(title).length - 1 ||
+    (page === 0 && !canNextPage1) ||
+    (page === 1 && !canNextPage2);
 
-    const prevHide = page === 0 && "remove-button"
+  const prevHide = page === 0 && "remove-button";
 
-    const nextHide = page === Object.keys(title).length - 1 && "remove-button"
+  const nextHide = page === Object.keys(title).length - 1 && "remove-button";
 
-    const submitHide = page !== Object.keys(title).length - 1 && "remove-button"
+  const submitHide = page !== Object.keys(title).length - 1 && "remove-button";
 
-    return (
-        <FormContext.Provider value={{ title, page, setPage, data, setData, canSubmit, handleChange, disablePrev, disableNext, prevHide, nextHide, submitHide }}>
-            {children}
-        </FormContext.Provider>
-    )
-}
+  return (
+    <FormContext.Provider
+      value={{
+        title,
+        page,
+        setPage,
+        data,
+        setData,
+        canSubmit,
+        handleChange,
+        disablePrev,
+        disableNext,
+        prevHide,
+        nextHide,
+        submitHide,
+      }}
+    >
+      {children}
+    </FormContext.Provider>
+  );
+};
 
-export default FormContext 
+export default FormContext;

@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap");
+
 .App {
   text-align: center;
   min-height: 100vh;
@@ -9,8 +11,9 @@
   padding: 0;
 }
 
-body{
+body {
   overflow-x: hidden;
+  font-family: "Poppins", sans-serif;
 }
 
 .App-logo {
@@ -48,8 +51,8 @@ body{
   bottom: 0;
   height: 5vh;
   position: fixed;
-    /* margin-bottom: 0%; */
-    /* width: 50vw; */
+  /* margin-bottom: 0%; */
+  /* width: 50vw; */
   /* font-weight: bold; */
   /* border-top: 2px solid; */
   margin: 0;

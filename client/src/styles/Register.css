@@ -53,8 +53,7 @@
   }
    */
 
-
-@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");
 
 * {
   margin: 0;
@@ -92,24 +91,36 @@ input:invalid {
   background-color: rgb(255, 255, 139);
 }
 
-
 /* || GENERAL STYLES */
 
 body {
-  font-family: 'Nunito', sans-serif;
+  font-family: "Nunito", sans-serif;
   /* min-height: 100vh; */
   /* background: radial-gradient(skyblue, darkblue); */
   /* padding: 1rem; */
-  background-image: url("../../public/images/background-img.jpg") ;
+  background-image: url("../../public/images/background-img.jpg");
   /* background-blend-mode:hue; */
   background-size: 100%;
 }
+
+/* input,
+button,
+textarea,
+select {
+  font: inherit;
+} */
 
 input,
 button,
 textarea,
 select {
-  font: inherit;
+  width: 80%;
+  display: flex;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+  margin: auto;
 }
 
 #root {
