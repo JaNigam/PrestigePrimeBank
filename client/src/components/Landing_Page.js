@@ -19,17 +19,17 @@ export default function Landing_Page() {
           <div className='content'>
             <h1 style={{ color: "white" }}>Prestige Prime Bank</h1>
             <h3 style={{ color: "#ff7a01" }}> Elevating Excellence in Banking</h3>
-            {/* <div className="cta-buttons" > */}
-            <Link to="/login" className="btn primary-btn" style={{ color: "beige" }}>
+            {/* <div className="cta-buttons"> */}
+            <Link to="/login" className="btn btn-primary" style={{ color: "beige" }}>
               Log In
             </Link>
-            <Link to="/register" className="btn secondary-btn">
+            <Link to="/register" className="btn btn-secondary">
               Sign Up
             </Link>
 
             {/* </div> */}
 
-          </div>`
+          </div>
         </Col>
         <Col className='image-wrapper'>
           <img className="landing-image" src='../images/content-img.png' style={{ "visibility": "visible", "animation-duration": "1500ms", "animation-delay": "0ms", "animation-name": "float-bob" }}></img>

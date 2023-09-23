@@ -29,7 +29,9 @@
     flex-direction: column;
     background-image: url("../../public/images/background-img.jpg") ;
     /* background-blend-mode:hue; */
-    background-size: 100%;
+    background-size: cover;
+    /* min-width: 90vw; */
+    min-height: 100vh;
 
     transition: background 700ms ease-in 200ms;
 

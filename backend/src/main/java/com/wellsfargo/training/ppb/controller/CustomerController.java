@@ -25,11 +25,8 @@ import com.wellsfargo.training.ppb.model.Beneficiary;
 import com.wellsfargo.training.ppb.model.Customer;
 import com.wellsfargo.training.ppb.model.PasswordChangeBody;
 import com.wellsfargo.training.ppb.model.Transaction;
-<<<<<<< Updated upstream
 import com.wellsfargo.training.ppb.service.BeneficiaryService;
-=======
 import com.wellsfargo.training.ppb.repository.CustomerRepository;
->>>>>>> Stashed changes
 import com.wellsfargo.training.ppb.service.CustomerService;
 import com.wellsfargo.training.ppb.service.TransactionService;
 
@@ -45,11 +42,8 @@ public class CustomerController {
 	TransactionService transservice;
 	
 	@Autowired
-<<<<<<< Updated upstream
 	BeneficiaryService bservice;
-=======
 	CustomerRepository custrepo;
->>>>>>> Stashed changes
 	
 	@PostMapping("/create-customer")
 	public String createCustomer(@RequestBody @Validated Customer cust) {
