@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom'; // If you're using React Router
 import '.././styles/Logout.css'
 import NavBar from './NavBar';
+import Footer from "./Footer";
 
 const Logout = () => {
   const history = useNavigate();
@@ -9,13 +10,15 @@ const Logout = () => {
 
   const handleLogout = () => {
     // Redirect to the login page (or any other page as needed)
-    history('/login'); // Make sure to adjust the route accordingly
+    history('/sessionExpired'); // Make sure to adjust the route accordingly
   };
   const handleLogoutBack = () => {
     // Redirect to the login page (or any other page as needed)
-    history('/about'); // Make sure to adjust the route accordingly
+    history('/admin'); // Make sure to adjust the route accordingly
   };
   return (
+    <>
+    <NavBar/>
     <div className="logout-container">
         {/* <NavBar/> */}
         {/* <br/> */}
@@ -30,6 +33,10 @@ const Logout = () => {
         </button>
       </div>
     </div>
+    <div>
+        <Footer/>
+    </div>
+    </>
   );
 };
 

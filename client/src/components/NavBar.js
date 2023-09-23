@@ -15,6 +15,9 @@ const NavBar = () =>{
                 <li className='nav-item'>
                     <Link to="/about" className="nav-link">About Us</Link>
                 </li>
+                <li className='nav-item'>
+                    <Link to="/addBeneficiary" className="nav-link">Beneficiary</Link>
+                </li>
             </ul>
         </nav>
     );

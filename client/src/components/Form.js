@@ -2,6 +2,8 @@ import FormInputs from './FormInputs'
 import useFormContext from "./useFormContext"
 import {useNavigate} from 'react-router-dom'
 import AuthenticationService from '../services/AuthenticationService'
+import NavBar from './NavBar'
+import Footer from './Footer'
 const Form = () => {
     const history=useNavigate();
     const {
@@ -63,6 +65,8 @@ const Form = () => {
 
 
     const content = (
+      <>
+      <NavBar/>
         <form className="form flex-col" onSubmit={handleSubmit}>
 
             <header className="form-header">
@@ -82,6 +86,8 @@ const Form = () => {
             <FormInputs />
 
         </form>
+        <Footer/>
+        </>
     )
 
     return content

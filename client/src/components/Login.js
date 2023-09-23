@@ -6,6 +6,7 @@ import '.././styles/Login.css'
 import NavBar from "./NavBar";
 import AuthenticationService from '../services/AuthenticationService'
 import {Link} from 'react-router-dom'
+import Footer from "./Footer";
 
 function Login() {
   // React States
@@ -87,6 +88,7 @@ function Login() {
             <Link to="/register">Forgot Password?</Link>
           </div>
       </div>
+      <Footer/>
     </div>
   );
 }
