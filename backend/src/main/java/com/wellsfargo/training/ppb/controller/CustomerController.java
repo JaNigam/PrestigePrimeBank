@@ -81,7 +81,7 @@ public class CustomerController {
 		return isLoggedIn;
 	}
 	
-	 //Update customer detailswith new Values.
+	 //Update customer details with new Values.
 		@PutMapping("/{id}")
 		public ResponseEntity<String> updateCustomer(@PathVariable(value="id")Long userId,
 				@Validated @RequestBody Customer c) throws

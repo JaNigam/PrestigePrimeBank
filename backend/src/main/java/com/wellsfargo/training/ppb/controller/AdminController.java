@@ -1,6 +1,8 @@
 package com.wellsfargo.training.ppb.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -179,6 +181,26 @@ public class AdminController {
 			}
 			
 			
+		}
+		
+		//delete account with the given userid
+		@DeleteMapping("{aid}/accounts/{id}")
+		public ResponseEntity<Map<String,Boolean>> deleteAcount(@PathVariable(value="aid")Long adminId, @PathVariable(value="id")Long accountNo) throws
+		ResourceNotFoundException {
+			if(adminservice.getLoginStatus(adminId)) {
+			accservice.getSingleAccount(accountNo).orElseThrow(()-> new 
+					ResourceNotFoundException("Account not Found for this User : " + accountNo));
+			
+			accservice.deleteAccount(accountNo);
+			Map<String, Boolean> response=new HashMap<String, Boolean>();
+			response.put("deleted", Boolean.TRUE);
+			
+			return ResponseEntity.ok().body(response);
+			} else {
+				Map<String, Boolean> response=new HashMap<String, Boolean>();
+				response.put("Admin not authenticated", Boolean.FALSE);
+				return ResponseEntity.badRequest().body(response);
+			}
 		}
 	
 	
