@@ -1,9 +1,17 @@
+<<<<<<< Updated upstream
 import useFormContext from "./useFormContext";
 import AuthenticationService from "../services/AuthenticationService";
 import NavBar from "./NavBar";
 import ".././styles/Register.css";
 
 const Address = () => {
+=======
+import useFormContext from "./useFormContext"
+import AuthenticationService from "../services/AuthenticationService"
+import NavBar from "./NavBar"
+import '.././styles/Register.css'
+const Billing = () => {
+>>>>>>> Stashed changes
   const { data, handleChange } = useFormContext();
 
   const content = (

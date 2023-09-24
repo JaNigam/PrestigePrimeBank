@@ -3,16 +3,8 @@ import { useNavigate } from 'react-router-dom';
 
 import AdminService from '../services/AdminService';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
-/*
-    The useNavigate() hook is introduced in the React Router v6 
-    to replace the useHistory() hook.
-    the React Router’s new navigation API provides a useNavigate() 
-    hook which is an imperative version to perform the navigation actions 
-    with better compatibility. 
-
-    The useNavigate hook lets you navigate programmatically within your React code.
-*/
+import '.././styles/Admin_Dashboard.css'
+import NavBar from './NavBar';
 
 function Admin() {
 
@@ -42,11 +34,14 @@ function Admin() {
     const viewCust = (id) =>{
         history(`/viewCust/${id}`);  //use back quote operator -  evaluate jsx operation
     }
+    const [value, setValue] = useState(0);
     const validateCust = (id) =>{
-        AdminService.validateCust(id).then(() => {
+        
+        AdminService.validateCustomer(id).then(() => {
             // setProducts(products.filter(product => product.id !== id));
-            fetchProducts(); // Refresh products list
-             setMessage('Customer validated successfully.'); 
+            
+            setValue(1);
+            setMessage('Customer validated successfully.'); 
               // Clear the message after 2 seconds
               setTimeout(() => {
                  setMessage('');
@@ -54,7 +49,7 @@ function Admin() {
          });
     }
     const deleteCust = (id) => {
-        AdminService.deleteProduct(id).then(() => {
+        AdminService.deleteCustomer(id).then(() => {
            // setProducts(products.filter(product => product.id !== id));
            fetchProducts(); // Refresh products list
             setMessage('Customer deleted successfully.'); 
@@ -67,9 +62,10 @@ function Admin() {
     
     return (
         <div>
+            <NavBar/>
             <br />
             {/* <div className="container">Welcome {user}</div> */}
-            <h1 className="text-warning">Customer List</h1>
+            <h1 className="text-warning">Accounts List</h1>
             <br />
             {/* <div className="row justify-content-center">
                 <button className='btn btn-info w-auto' onClick={addCust}>Add Customer</button>
@@ -79,7 +75,7 @@ function Admin() {
                 <table className="table table-success w-50">
                     <thead>
                         <tr className="table-danger">
-                            <th> User Id</th>
+                            {/* <th> User Id</th> */}
                             <th> Account Number</th>
                             <th> Account Type</th>
                             <th> Balance</th>
@@ -89,30 +85,32 @@ function Admin() {
                     <tbody>
                         {customers.map(
                             cust =>
-                                <tr key={cust.id}>
-                                    <td> {cust.cid} </td>
-                                    <td> {cust.accno} </td>
-                                    <td> {cust.accType} </td>
+                                <tr key={cust.Id}>
+                                    {/* <td> {cust.cId} </td> */}
+                                    <td> {cust.accountNo} </td>
+                                    <td> {cust.accountType} </td>
                                     <td> {cust.balance} </td>
                                     <td>
-                                        <button className='btn btn-success' onClick={() => editCust(cust.cid)}>
+                                        
+                                        <button className='btn btn-success button-css' onClick={() => editCust(cust.accountNo)}>
                                             <span>
                                                 <FontAwesomeIcon icon="edit"></FontAwesomeIcon>
                                             </span>
                                         </button> &nbsp;
-                                        <button className='btn btn-danger' onClick={() =>deleteCust(cust.cid)}>
+                                        <button className='btn btn-danger button-css' onClick={() =>deleteCust(cust.accountNo
+                                            )}>
                                             <span>
                                                 <FontAwesomeIcon icon="trash"></FontAwesomeIcon>
                                             </span>
                                         </button> 
-                                        <button className='btn btn-primary' onClick={() =>viewCust(cust.cid)}>
+                                        <button className='btn btn-primary button-css' onClick={() =>viewCust(cust.accountNo)}>
                                             <span>
                                                 <FontAwesomeIcon icon="list"></FontAwesomeIcon>
                                             </span>
                                         </button>
-                                        <button className='btn btn-primary' onClick={() =>validateCust(cust.cid)}>
+                                        <button className='btn btn-primary button-css' onClick={() =>validateCust(cust.accountNo)}>
                                             <span>
-                                                <FontAwesomeIcon icon="list"></FontAwesomeIcon>
+                                                <FontAwesomeIcon icon="check"></FontAwesomeIcon>
                                             </span>
                                         </button>
                                     </td>

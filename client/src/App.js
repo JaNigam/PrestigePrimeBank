@@ -8,7 +8,7 @@ import AdminView from './components/AdminView';
 import AddBeneficiary from './components/AddBeneficiary';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faSignIn, faCameraRetro, faCoffee } from '@fortawesome/free-solid-svg-icons';
+import { faSignIn, faCameraRetro, faCoffee, faBomb, faEdit,faTrash,faList,faPeopleGroup,faSearch,faCheck } from '@fortawesome/free-solid-svg-icons';
 import Register from './components/Register';
 import Login from './components/Login';
 import About from './components/About';
@@ -20,7 +20,9 @@ import Footer from './components/Footer';
 import ImpsPayment from './components/ImpsPayment';
 import RtgsPayment from './components/RtgsPayment';
 import NeftPayment from './components/NeftPayment';
-library.add(faSignIn,faCameraRetro,faCoffee);
+import AccountDetails from './components/AccountDetails';
+import EditAccount from './components/EditAccount';
+library.add(faSignIn, faCameraRetro, faCoffee, faBomb, faEdit,faTrash,faList,faPeopleGroup,faSearch,faCheck);
 
 
 
@@ -41,7 +43,8 @@ function App() {
         <Route path='/imps' element={<ImpsPayment/>}></Route>
         <Route path='/rtgs' element={<RtgsPayment/>}></Route>
         <Route path='/neft' element={<NeftPayment/>}></Route>
-        {/* <Route path='/addCust/:id' element={<CreateProduct/>}></Route> */}
+        <Route path='/accountDetails' element={<AccountDetails/>}></Route>
+        <Route path='/addCust/:id' element={<EditAccount/>}></Route>
         <Route path='/viewCust/:id' element={<AdminView />}></Route>
       </Routes>
 

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const CUSTOMERS_REST_API_URL='http://localhost:8083/ppb/api/admin';
+const CUSTOMERS_REST_API_URL='http://localhost:8083/ppb/customer/accounts';
 
 //service class to manage REST API
 class AdminService{
@@ -25,8 +25,8 @@ class AdminService{
     static deleteCustomer(custId){
         return axios.delete(CUSTOMERS_REST_API_URL+'/'+custId);
     }
-    static validateCustomer(custId){
-        return axios.delete(CUSTOMERS_REST_API_URL+'/'+custId);
+    static validateCustomer(customer, custId){
+        return axios.put(CUSTOMERS_REST_API_URL+'/'+custId,customer);
     }
 }
 export default AdminService;

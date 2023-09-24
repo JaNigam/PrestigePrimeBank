@@ -3,9 +3,9 @@ import ReactDOM from "react-dom";
 import { useNavigate } from "react-router-dom";
 import '.././styles/Login.css';
 import NavBar from "./NavBar";
-import AuthenticationService from '../services/AuthenticationService'
+import AdminLoginService from "../services/AdminLoginService";
 
-function Login() {
+function AdminLogin() {
     // React States
 
     const history = useNavigate();   //PROGRAMMATICALLY NAVIGATE TI ANOTHER COMPONENT
@@ -25,7 +25,7 @@ function Login() {
 
         try {
             console.log('before login const')
-            const loginSuccess = await AuthenticationService.login(dealer);    //invoke service method
+            const loginSuccess = await AdminLoginService.login(dealer);    //invoke service method
             console.log('API response: ', loginSuccess);
             if (loginSuccess) {
                 setSuccessMessage('Login Successful. Redirecting.....');
@@ -67,4 +67,4 @@ function Login() {
     );
 }
 
-export default Login;
+export default AdminLogin;

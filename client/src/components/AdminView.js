@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams,useNavigate } from 'react-router-dom';
 
 import AdminService from '../services/AdminService';
+import NavBar from './NavBar';
 
 const AdminView = () => {
 
@@ -23,21 +24,20 @@ const AdminView = () => {
     };
     return (
         <div>
+            <NavBar/>
             <br />
             <div className="card col-md-6 offset-md-3">
-                <h3 className="text-center">View customer Details</h3><hr/>
+                <br></br>
+                <h3 className="text-center">View Account Details</h3><hr/>
                 <div className="card-body">
-                    <div className="row">
-                        <label>User Id:</label>
-                        <div class="text-success fw-bolder">{customers.id}</div><hr/>
-                    </div>
+                    
                     <div className="row">
                         <label>Account Number:</label>
-                        <div class="text-success fw-bolder">{customers.accno}</div><hr/>
+                        <div class="text-success fw-bolder">{customers.accountNo}</div><hr/>
                     </div>
                     <div className="row">
                         <label>Account Type:</label>
-                        <div class="text-success fw-bolder">{customers.accType}</div><hr/>
+                        <div class="text-success fw-bolder">{customers.accountType}</div><hr/>
                     </div>
                     <div className="row">
                         <label>Account Balance:</label>
