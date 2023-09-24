@@ -30,6 +30,7 @@ import com.wellsfargo.training.ppb.service.BeneficiaryService;
 import com.wellsfargo.training.ppb.repository.CustomerRepository;
 
 import com.wellsfargo.training.ppb.service.CustomerService;
+import com.wellsfargo.training.ppb.service.EmailSenderService;
 import com.wellsfargo.training.ppb.service.TransactionService;
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -45,6 +46,9 @@ public class CustomerController {
 
 	@Autowired
 	BeneficiaryService bservice;
+	
+	@Autowired
+	EmailSenderService eservice;
 
 	CustomerRepository custrepo;
 
@@ -145,5 +149,31 @@ public class CustomerController {
 		return bservice.addBeneficiary(beneficiaryDetails, userId);
 
 	}
+	
+	
+	
+	
+	
+	
+	
+	//testing the emails service
+	@GetMapping("/send-email")
+	public String sendEmail() {
+		return eservice.sendSimpleEmail("jayantnigam9@gmail.com", "hello testing", "testing email");
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }
