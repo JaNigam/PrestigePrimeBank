@@ -1,6 +1,12 @@
+<<<<<<< Updated upstream
 import NavBar from "./NavBar";
 import useFormContext from "./useFormContext";
 
+=======
+import NavBar from "./NavBar"
+import useFormContext from "./useFormContext"
+import '.././styles/Register.css'
+>>>>>>> Stashed changes
 const OptIn = () => {
   const { data, handleChange } = useFormContext();
 

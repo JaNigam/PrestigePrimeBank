@@ -69,7 +69,7 @@ function Admin() {
         <div>
             <br />
             {/* <div className="container">Welcome {user}</div> */}
-            <h1 className="text-warning">Products List</h1>
+            <h1 className="text-warning">Customer List</h1>
             <br />
             {/* <div className="row justify-content-center">
                 <button className='btn btn-info w-auto' onClick={addCust}>Add Customer</button>

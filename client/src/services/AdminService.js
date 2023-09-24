@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const CUSTOMERS_REST_API_URL='http://localhost:8085/ppb/api/admin';
+const CUSTOMERS_REST_API_URL='http://localhost:8083/ppb/api/admin';
 
 //service class to manage REST API
 class AdminService{

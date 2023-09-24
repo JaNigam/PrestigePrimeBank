@@ -1,7 +1,14 @@
+<<<<<<< Updated upstream
 import useFormContext from "./useFormContext";
 import AuthenticationService from "../services/AuthenticationService";
 import NavBar from "./NavBar";
 import "../styles/Register.css";
+=======
+import useFormContext from "./useFormContext"
+import AuthenticationService from "../services/AuthenticationService"
+import NavBar from "./NavBar"
+import '.././styles/Register.css'
+>>>>>>> Stashed changes
 const Billing = () => {
   const { data, handleChange } = useFormContext();
 
