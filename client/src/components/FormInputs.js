@@ -1,4 +1,4 @@
-import Billing from "./Address"
+import Address from "./Address"
 import OptIn from "./OptIn"
 import Shipping from "./Shipping"
 import useFormContext from "./useFormContext"
@@ -8,7 +8,7 @@ const FormInputs = () => {
     const { page } = useFormContext()
 
     const display = {
-        0: <Billing />,
+        0: <Address />,
         1: <Shipping />,
         2: <OptIn />
     }

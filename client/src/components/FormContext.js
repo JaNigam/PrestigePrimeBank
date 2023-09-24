@@ -92,7 +92,7 @@ export const FormProvider = ({ children }) => {
   const canNextPage1 = Object.keys(data)
     .filter((key) => key.startsWith("current") && key !== "currentAddress2")
     .map((key) => data[key])
-    .every(Boolean);
+    .every((value) => typeof value !== "undefined" && value !== null && value !== "");
 
   const canNextPage2 = Object.keys(data)
     .filter((key) => key.startsWith("permanent") && key !== "permanentAddress2")

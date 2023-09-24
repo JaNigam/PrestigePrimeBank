@@ -6,7 +6,7 @@ import Address from "./Address";
 import {Row,Col} from "react-bootstrap"
 import AuthenticationService from '../services/AuthenticationService'
 // import '.././styles/Login.css'
-import '.././styles/Register.css'
+
 
 
 
