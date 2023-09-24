@@ -49,9 +49,13 @@ public class CustomerController {
 	
 	@Autowired
 	EmailSenderService eservice;
-
+	
+	@Autowired
 	CustomerRepository custrepo;
-
+	
+	@Autowired
+	EmailSenderService mailservice;
+	
 	@PostMapping("/create-customer")
 	public String createCustomer(@RequestBody @Validated Customer cust) {
 		return custservice.saveCustomer(cust);
@@ -108,6 +112,7 @@ public class CustomerController {
 	public ResponseEntity<String> RequestChangePassword(
 			@RequestBody @Validated com.wellsfargo.training.ppb.model.RequestChangePassword repss) {
 		String email = repss.getEmail();
+		System.out.print(email);
 		Optional<Customer> cust = custrepo.findByEmail(email);
 		if (!cust.isPresent()) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Email not found!");
@@ -131,6 +136,14 @@ public class CustomerController {
 			if (custservice.verifyOtp(email, inputotp)) {
 				cust.setPassword(newPassword);
 				custrepo.save(cust);
+				
+				String toEmail = email;
+				String body = "Hi, "+cust.getName()+
+						"\nYour Password has been updated successfully!"+
+						"\n\n\nWarm Regards\nPrestige Prime Bank\nElevating Excellence In Banking.";
+				String subject = "Password Updated Sucessfully!";
+				mailservice.sendSimpleEmail(toEmail, body, subject);
+				
 				return ResponseEntity.ok("Password updated Successfully!");
 
 			} else {
@@ -151,29 +164,6 @@ public class CustomerController {
 	}
 	
 	
-	
-	
-	
-	
-	
-	//testing the emails service
-	@GetMapping("/send-email")
-	public String sendEmail() {
-		return eservice.sendSimpleEmail("jayantnigam9@gmail.com", "hello testing", "testing email");
-		
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 
 }

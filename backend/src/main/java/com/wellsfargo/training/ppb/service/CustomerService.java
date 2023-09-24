@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.wellsfargo.training.ppb.model.Customer;
 import com.wellsfargo.training.ppb.repository.AccountRepository;
 import com.wellsfargo.training.ppb.repository.CustomerRepository;
+import com.wellsfargo.training.ppb.service.EmailSenderService;
 
 import jakarta.transaction.Transactional;
 
@@ -23,6 +24,9 @@ public class CustomerService {
 	
 	@Autowired
 	private AccountRepository accrepo;
+	
+	@Autowired
+	private EmailSenderService mailservice;
 	
 	public String saveCustomer(Customer cust) {
 		
@@ -37,6 +41,14 @@ public class CustomerService {
 			
 			Long userId = generateUniqueCustId();
 			cust.setUserId(userId);
+			
+			
+			//sending email to the newly registered customer
+			String toMail = cust.getEmail();
+			String subject = "Welcome to Prestige Prime Bank "+cust.getName();
+			String body = "Hi, "+cust.getName()+"\n\nWe Welcome you to Prestige Prime Bank.\nYour User Id is: "+userId+"\n\n\nWarm Regards\nPrestige Prime Bank\nElevating Excellence In Banking.";
+			mailservice.sendSimpleEmail(toMail, body, subject);
+			
 			custrepo.save(cust);
 			result = "New Customer Created Successfully";
 		}
@@ -69,14 +81,7 @@ public String updateCustomer(Customer cust) {
 		return custrepo.findById(id); // invokes predefined method of JPA Repository
 	}
 	
-	
-//	public void deleteCustomerAndAccountByUserId(Long id) {
-//		Customer cust = custrepo.findById(id).orElse(null);
-//		if(cust != null) {
-//			accrepo.deleteByUserId(id);
-//			custrepo.delete(cust);
-//		}
-//	}
+
 	
 	 public Boolean deleteCustomer(Long id) {
 	        Customer customer = custrepo.findById(id).orElse(null);
@@ -97,15 +102,22 @@ public String updateCustomer(Customer cust) {
 	     Long otp = (long)(Math.random() * 900000 + 1000000);
 	     String finalOtp = otp.toString();
 	     
-	     System.out.println("otp: " + finalOtp);
+
+	     
+	     String toMail = email;
+			String subject = "OTP for Password Change";
+			String body = "Hi,\n Your One-Time-Password is:\t"+finalOtp
+			+"\nthis OTP is valid for 5mins."
+			+"\n\n\nWarm Regards\nPrestige Prime Bank\nElevating Excellence In Banking.";
+			mailservice.sendSimpleEmail(toMail, body, subject);
 	     
 	     // Trim and store the email
 	     String trimmedEmail = email.trim();
 	     otpMap.put(trimmedEmail, finalOtp);
 	     
 	     String testotp = otpMap.get(trimmedEmail);
-	     System.out.println("test email: " + trimmedEmail);
-	     System.out.println("testotp: " + testotp);
+	     System.out.println(testotp);
+	     
 	     
 	     return finalOtp;
 	 }

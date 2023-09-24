@@ -27,6 +27,9 @@ public class AdminService {
 	@Autowired
 	private AdminRepository adminrepo;
 	
+	@Autowired
+	private EmailSenderService mailservice;
+	
 	public String saveAdmin(Admin admin) {
 		
 		String result = "";
@@ -69,6 +72,19 @@ public class AdminService {
       		account.setIfsc(newifsc);
       		account.setCustomer(c);
       				
+      		
+      		//sending account details to the customer through email
+      		String toMail = c.getEmail();
+			String subject = "Account Creation Successfull!";
+			String body = "Hi, "+c.getName()+"\n\nWe would like to inform you that your account has been successfully created at our bank."
+			+"\n\nYour Account Details are:"
+			+"\nAccount No.:\t"+ newaccountNo
+			+"\nIFSC code:\t\t" + newifsc
+			+"\nBranch:\t\t\t\t"+ branch
+			+"\n\n\nWarm Regards\nPrestige Prime Bank\nElevating Excellence In Banking.";
+			mailservice.sendSimpleEmail(toMail, body, subject);
+			
+			
       		Account savedAccount= accrepo.save(account);
       		return Optional.ofNullable(savedAccount);
           }

@@ -14,7 +14,7 @@ public class Admin {
 		return isLoggedIn;
 	}
 	public void setIsLoggedIn(Boolean isLoggedIn) {
-		this.isLoggedIn = true;
+		this.isLoggedIn = isLoggedIn;
 	}
 	public Long getUserId() {
 		return userId;
