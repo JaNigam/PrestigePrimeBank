@@ -92,14 +92,18 @@ public class AccountController {
         return ResponseEntity.ok(transactions);
     }
 	
-//	@PostMapping("/transactions-between-dates")
-//    public ResponseEntity<List<Transaction>> getTransactionsBetweenDates(@RequestBody AccountStatement accountStatement) {
-//        Date startDate = accountStatement.getStartDate();
-//        Date endDate = accountStatement.getEndDate();
-//
-//        List<Transaction> transactions = accservice.getTransactionsBetweenDates(startDate, endDate);
-//        return ResponseEntity.ok(transactions);
-//    }
+	
+	@GetMapping("/accounts/{acid}/alltransactions")
+	public ResponseEntity<List<Transaction>> getAllTransactions(@PathVariable(value="acid")Long accountNo){
+		List<Transaction> trans = accservice.getAllTransactions(accountNo);
+		
+		return ResponseEntity.ok(trans);
+		
+	
+		
+	}
+	
+   
 	
 	
 

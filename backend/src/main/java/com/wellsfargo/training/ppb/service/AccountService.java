@@ -62,4 +62,8 @@ public class AccountService {
         return transrepo.findTransactionsBetweenDates(accountNo, startDate, endDate);
     }
 	
+	public List<Transaction> getAllTransactions(Long accountNo){
+		return transrepo.findAllTransactions(accountNo);
+	}
+	
 }
