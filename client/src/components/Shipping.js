@@ -1,12 +1,6 @@
-<<<<<<< Updated upstream
-import NavBar from "./NavBar";
 import useFormContext from "./useFormContext";
-
-=======
 import NavBar from "./NavBar"
-import useFormContext from "./useFormContext"
 import '.././styles/Register.css'
->>>>>>> Stashed changes
 const Shipping = () => {
   const { data, handleChange } = useFormContext();
 
@@ -43,6 +37,25 @@ const Shipping = () => {
       </div> */}
 
       <div className="container">
+        <div className="row my-5">
+          <div className="d-flex justify-content-around col md-12">
+            <div>
+              <label htmlFor="sameAsCurrent">
+                <input
+                  type="checkbox"
+                  id="sameAsCurrent"
+                  name="sameAsCurrent"
+                  checked={data.sameAsCurrent}
+                  onChange={handleChange}
+                />
+              </label>
+            </div>
+            <label htmlFor="permanentAddress1">Permanent Address Same as Current Address</label>
+          </div>
+        </div>
+        <div>
+
+        </div>
         <div className="row">
           <div className="col md-6">
             <p>Current Address</p>
@@ -50,13 +63,12 @@ const Shipping = () => {
               <div className="col md-12">
                 <input
                   type="text"
-                  id="permanentAddress1"
-                  name="permanentAddress1"
+                  id="currentAddress1"
+                  name="currentAddress1"
                   // placeholder="555 Wallaby Way"
-                  pattern="[\w\d\s.#]{2,}"
+                  pattern="([A-Z])[\w\s.]{1,}"
                   value={data.currentAddress1}
                   onChange={handleChange}
-                  disabled={data.sameAsCurrent}
                 />
               </div>
             </div>
@@ -67,10 +79,9 @@ const Shipping = () => {
                   type="text"
                   id="currentAddress2"
                   name="currentAddress2"
-                  pattern="[\w\d\s.#]{2,}"
+                  pattern="([A-Z])[\w\s.]{1,}"
                   value={data.currentAddress2}
                   onChange={handleChange}
-                  disabled={data.sameAsCurrent}
                 />
               </div>
             </div>
@@ -80,12 +91,11 @@ const Shipping = () => {
                 <input
                   type="text"
                   id="currentCity"
-                  name="ship-city"
+                  name="currentCity"
                   placeholder="New York"
                   pattern="([A-Z])[\w\s.]{1,}"
                   value={data.currentCity}
                   onChange={handleChange}
-                  disabled={data.sameAsCurrent}
                 />
               </div>
             </div>
@@ -198,7 +208,7 @@ const Shipping = () => {
                 <input
                   type="text"
                   id="permanentCity"
-                  name="ship-city"
+                  name="permanentCity"
                   placeholder="New York"
                   pattern="([A-Z])[\w\s.]{1,}"
                   value={data.permanentCity}
@@ -281,17 +291,7 @@ const Shipping = () => {
         </div>
       </div>
 
-      <label htmlFor="permanentAddress1">Permanent Address</label>
-      <label htmlFor="sameAsCurrent">
-        <input
-          type="checkbox"
-          id="sameAsCurrent"
-          name="sameAsCurrent"
-          checked={data.sameAsCurrent}
-          onChange={handleChange}
-        />
-        Same as Current Address
-      </label>
+
     </>
   );
 

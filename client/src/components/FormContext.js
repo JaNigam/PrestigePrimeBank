@@ -17,20 +17,34 @@ export const FormProvider = ({ children }) => {
     name: "",
     // LastName: "",
     user_id: "",
+    // currentAddress: {
+    //   currentAddress1: "",
+    //   currentAddress2: "",
+    //   currentCity: "",
+    //   currentState: "",
+    //   currentZipCode: "",
+    // },
     currentAddress1: "",
     currentAddress2: "",
     currentCity: "",
     currentState: "",
     currentZipCode: "",
     sameAsCurrent: false,
+    // permanentAddress: {
+    //   permanentAddress1: "",
+    //   permanentAddress2: "",
+    //   permamentCity: "",
+    //   permanentState: "",
+    //   permanentZipCode: "",
+    // },
     permanentAddress1: "",
     permanentAddress2: "",
-    permamentCity: "",
+    permanentCity: "",
     permanentState: "",
     permanentZipCode: "",
     mothername: "",
     fathername: "",
-    optForNetbanking: false,
+    optForNetBanking: false,
     occType: "",
     incomeSource: "",
     grossAnnualIncome: "",
@@ -48,7 +62,7 @@ export const FormProvider = ({ children }) => {
         ...prevData,
         permanentAddress1: prevData.currentAddress1,
         permanentAddress2: prevData.currentAddress2,
-        permamentCity: prevData.currentCity,
+        permanentCity: prevData.currentCity,
         permanentState: prevData.currentState,
         permanentZipCode: prevData.currentZipCode,
       }));
@@ -57,7 +71,7 @@ export const FormProvider = ({ children }) => {
         ...prevData,
         permanentAddress1: "",
         permanentAddress2: "",
-        permamentCity: "",
+        permanentCity: "",
         permanentState: "",
         permanentZipCode: "",
       }));
@@ -90,14 +104,14 @@ export const FormProvider = ({ children }) => {
   const canSubmit = true;
 
   const canNextPage1 = Object.keys(data)
-    .filter((key) => key.startsWith("current") && key !== "currentAddress2")
+    .filter((key) => key.startsWith("password"))
     .map((key) => data[key])
     .every((value) => typeof value !== "undefined" && value !== null && value !== "");
 
   const canNextPage2 = Object.keys(data)
-    .filter((key) => key.startsWith("permanent") && key !== "permanentAddress2")
+    .filter((key) => key.startsWith("Zip"))
     .map((key) => data[key])
-    .every(Boolean);
+    .every((value) => typeof value !== "undefined" && value !== null && value !== "");
 
   const disablePrev = page === 0;
 

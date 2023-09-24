@@ -6,7 +6,7 @@ import { Switch, Route, Routes } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import AdminView from './components/AdminView';
 import AddBeneficiary from './components/AddBeneficiary';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faSignIn, faCameraRetro, faCoffee, faBomb, faEdit,faTrash,faList,faPeopleGroup,faSearch,faCheck } from '@fortawesome/free-solid-svg-icons';
 import Register from './components/Register';

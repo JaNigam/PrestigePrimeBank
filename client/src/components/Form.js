@@ -4,6 +4,10 @@ import { useNavigate } from "react-router-dom";
 import AuthenticationService from "../services/AuthenticationService";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {faChevronCircleLeft,faChevronCircleRight } from '@fortawesome/free-solid-svg-icons';
+
+
 const Form = () => {
   const history = useNavigate();
   const {
@@ -67,7 +71,9 @@ const Form = () => {
               onClick={handlePrev}
               disabled={disablePrev}
             >
-              Prev
+              <span>
+              <FontAwesomeIcon icon={faChevronCircleLeft} className="fa-icon">Prev</FontAwesomeIcon>
+              </span>
             </button>
 
             <button
@@ -76,7 +82,9 @@ const Form = () => {
               onClick={handleNext}
               disabled={disableNext}
             >
-              Next
+              <span>
+              <FontAwesomeIcon icon={faChevronCircleRight} className="fa-icon">Next</FontAwesomeIcon>
+              </span>
             </button>
 
             <button

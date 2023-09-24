@@ -1,23 +1,15 @@
-<<<<<<< Updated upstream
 import useFormContext from "./useFormContext";
 import AuthenticationService from "../services/AuthenticationService";
 import NavBar from "./NavBar";
 import ".././styles/Register.css";
 
 const Address = () => {
-=======
-import useFormContext from "./useFormContext"
-import AuthenticationService from "../services/AuthenticationService"
-import NavBar from "./NavBar"
-import '.././styles/Register.css'
-const Billing = () => {
->>>>>>> Stashed changes
   const { data, handleChange } = useFormContext();
 
   const content = (
     <>
       {/* <NavBar/> */}
-
+    <div className="container">
       <div className="row">
         <div className="col md-6">
           <label htmlFor="name">Name</label>
@@ -25,19 +17,19 @@ const Billing = () => {
             type="text"
             id="name"
             name="name"
-            placeholder="Jane"
+            placeholder="Enter Your Name"
             pattern="([A-Z])[\w+.]{1,}"
             value={data.name}
             onChange={handleChange}
           />
         </div>
         <div className="col md-6">
-          <label htmlFor="email"> email</label>
+          <label htmlFor="email">Email</label>
           <input
             type="email"
             id="email"
             name="email"
-            placeholder="John@example.com"
+            placeholder="email@example.com"
             pattern="([A-Z])[\w+.]{1,}"
             value={data.email}
             onChange={handleChange}
@@ -53,7 +45,7 @@ const Billing = () => {
             type="text"
             id="mothername"
             name="mothername"
-            placeholder="Jane"
+            placeholder="Mother's Name"
             pattern="([A-Z])[\w+.]{1,}"
             value={data.mothername}
             onChange={handleChange}
@@ -66,7 +58,7 @@ const Billing = () => {
             type="text"
             id="fathername"
             name="fathername"
-            placeholder="Jane father"
+            placeholder="Father's Name"
             pattern="([A-Z])[\w+.]{1,}"
             value={data.fathername}
             onChange={handleChange}
@@ -78,12 +70,12 @@ const Billing = () => {
       {/* for aadhar and mobile number */}
       <div className="row">
         <div className="col md-6">
-          <label htmlFor="mobile">mobile </label>
+          <label htmlFor="mobile">Mobile </label>
           <input
             type="number"
             id="mobile"
             name="mobile"
-            placeholder=""
+            placeholder="+91-XXXXXXXXXX"
             pattern="([A-Z])[\w+.]{1,}"
             value={data.mobile}
             onChange={handleChange}
@@ -96,7 +88,7 @@ const Billing = () => {
             type="number"
             id="aadhar"
             name="aadhar"
-            placeholder=""
+            placeholder="XXXXXXXXXXXX"
             pattern="([A-Z])[\w+.]{1,}"
             value={data.aadhar}
             onChange={handleChange}
@@ -113,24 +105,25 @@ const Billing = () => {
             type="date"
             id="dob"
             name="dob"
-            placeholder=""
+            placeholder="DD-MM-YYYY"
             pattern="([A-Z])[\w+.]{1,}"
             value={data.dob}
             onChange={handleChange}
           />
         </div>
         <div className="col md-6">
-          <label htmlFor="password">password</label>
+          <label htmlFor="password">Password</label>
           <input
             type="password"
             id="password"
             name="password"
-            placeholder="Jane"
+            placeholder=""
             pattern="([A-Z])[\w+.]{1,}"
             value={data.password}
             onChange={handleChange}
           />
         </div>
+      </div>
       </div>
     </>
   );

@@ -7,6 +7,8 @@ import NavBar from "./NavBar";
 import AuthenticationService from "../services/AuthenticationService";
 import { Link } from "react-router-dom";
 import Footer from "./Footer";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser, faLock } from '@fortawesome/free-solid-svg-icons';
 
 function Login() {
   // React States
@@ -60,7 +62,7 @@ function Login() {
       <div className="login-form form">
         <h2 className="title">Login to your Account</h2>
         <div className="input-container">
-          <label>User Id</label>
+          <label><FontAwesomeIcon icon={faUser} />&nbsp; User Id</label>
 
           <input
             type="number"
@@ -69,7 +71,7 @@ function Login() {
           />
         </div>
         <div className="input-container">
-          <label>Password</label>
+          <label><FontAwesomeIcon icon={faLock} />&nbsp; Password</label>
           <input
             type="password"
             value={password}
