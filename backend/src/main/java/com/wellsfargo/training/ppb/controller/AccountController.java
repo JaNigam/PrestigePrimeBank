@@ -62,7 +62,7 @@ public class AccountController {
 	public ResponseEntity<Account> getAccountById(@PathVariable(value="id")Long accountNo) throws
 	ResourceNotFoundException {
 		Account a=accservice.getSingleAccount(accountNo).orElseThrow(()-> new 
-				ResourceNotFoundException("Product not Found for this ID : " + accountNo));
+				ResourceNotFoundException("Account not Found for this ID : " + accountNo));
 		return ResponseEntity.ok().body(a);
 	}
 	

@@ -21,12 +21,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.wellsfargo.training.ppb.exception.ResourceNotFoundException;
+import com.wellsfargo.training.ppb.model.Account;
 import com.wellsfargo.training.ppb.model.Beneficiary;
 import com.wellsfargo.training.ppb.model.Customer;
 import com.wellsfargo.training.ppb.model.PasswordChangeBody;
 import com.wellsfargo.training.ppb.model.Transaction;
-
+import com.wellsfargo.training.ppb.service.AccountService;
 import com.wellsfargo.training.ppb.service.BeneficiaryService;
+import com.wellsfargo.training.ppb.repository.AccountRepository;
 import com.wellsfargo.training.ppb.repository.CustomerRepository;
 
 import com.wellsfargo.training.ppb.service.CustomerService;
@@ -55,6 +57,12 @@ public class CustomerController {
 	
 	@Autowired
 	EmailSenderService mailservice;
+	
+	@Autowired
+	AccountService accservice;
+	
+	@Autowired
+	AccountRepository accrepo;
 	
 	@PostMapping("/create-customer")
 	public String createCustomer(@RequestBody @Validated Customer cust) {
@@ -164,6 +172,18 @@ public class CustomerController {
 	}
 	
 	
+	
+	@GetMapping("/{cid}")
+	public ResponseEntity<Account> getCustomerAccountById(@PathVariable(value="cid")Long userId) throws
+	ResourceNotFoundException {
+		
+		
+		Customer c = custservice.getSingleCustomer(userId).orElseThrow(()-> new 
+				ResourceNotFoundException("User not Found for this ID : " + userId));
+		
+		Account a = accrepo.findByCustomer(c);
+		return ResponseEntity.ok().body(a);
+	}
 
 
 }
