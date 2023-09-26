@@ -184,6 +184,7 @@ public class Customer {
 	public String getEmail() {
 		return email;
 	}
+	
 
 	public void setEmail(String email) {
 		this.email = email;
@@ -269,6 +270,7 @@ public class Customer {
 		this.optForNetBanking = optForNetBanking;
 	}
 
+	
 	public boolean isValidCustomer() {
 		return validCustomer;
 	}

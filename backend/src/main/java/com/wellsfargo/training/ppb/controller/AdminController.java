@@ -19,6 +19,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wellsfargo.training.ppb.exception.ResourceNotFoundException;
 import com.wellsfargo.training.ppb.model.Account;
 import com.wellsfargo.training.ppb.model.Admin;
@@ -222,21 +226,34 @@ public class AdminController {
 		
 			/*
 			 * Modify the is_valid column of the customer
+			 * JSON structure:
+			 * {
+				    "custId":<customer-id>,
+				    "setValidate":<true/false>
+				}
+}
 			 * */
-			@GetMapping("{aid}/customer/{cid}")
-			public ResponseEntity<Boolean> validateCustomer(@PathVariable(value="aid") Long adminId, @PathVariable("cid")Long custId)throws
-			ResourceNotFoundException{
+			@PutMapping("{aid}/validate-customer")
+			public ResponseEntity<Customer> validateCustomer(@PathVariable(value="aid") Long adminId, @RequestBody String validationData)throws
+			ResourceNotFoundException, JsonMappingException, JsonProcessingException{
 			
 				if(adminservice.getLoginStatus(adminId)) {
+					
+					//fetch and pasrse the JSON object
+					ObjectMapper objectMapper = new ObjectMapper();
+		            JsonNode jsonNode = objectMapper.readTree(validationData);
+					
+		            Long custId = jsonNode.get("custId").asLong();
+		            Boolean validation = jsonNode.get("setValidate").asBoolean();
 					
 					custservice.getSingleCustomer(custId).orElseThrow(()-> new ResourceNotFoundException("customer account does not exist"+custId));
 					
 					Optional<Customer> isValidatedCustomer = custservice.getSingleCustomer(custId);
-					isValidatedCustomer.get().setValidCustomer(true);
+					isValidatedCustomer.get().setValidCustomer(validation);
 					custrepo.save(isValidatedCustomer.get());
 					
-					return ResponseEntity.ok().body(true);
-				}else {return ResponseEntity.badRequest().body(false);}
+					return ResponseEntity.ok().body(isValidatedCustomer.get());
+				}else {return ResponseEntity.badRequest().body(null);}
 				
 				
 			}
