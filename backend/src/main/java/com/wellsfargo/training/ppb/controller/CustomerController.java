@@ -181,7 +181,6 @@ public class CustomerController {
 	public ResponseEntity<Account> getCustomerAccountById(@PathVariable(value="cid")Long userId) throws
 	ResourceNotFoundException {
 		
-		
 		Customer c = custservice.getSingleCustomer(userId).orElseThrow(()-> new 
 				ResourceNotFoundException("User not Found for this ID : " + userId));
 		
