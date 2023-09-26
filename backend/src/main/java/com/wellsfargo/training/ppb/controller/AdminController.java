@@ -3,6 +3,7 @@ package com.wellsfargo.training.ppb.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,6 +23,7 @@ import com.wellsfargo.training.ppb.exception.ResourceNotFoundException;
 import com.wellsfargo.training.ppb.model.Account;
 import com.wellsfargo.training.ppb.model.Admin;
 import com.wellsfargo.training.ppb.model.Customer;
+import com.wellsfargo.training.ppb.repository.CustomerRepository;
 import com.wellsfargo.training.ppb.service.AccountService;
 import com.wellsfargo.training.ppb.service.AdminService;
 import com.wellsfargo.training.ppb.service.CustomerService;
@@ -40,11 +42,24 @@ public class AdminController {
 	@Autowired
 	private AccountService accservice;
 	
+	@Autowired
+	private CustomerRepository custrepo;
+
+	
+	
+	//create a new admin
 	@PostMapping("/create-admin")
 	public String createAdmin(@RequestBody Admin admin) {
 		return adminservice.saveAdmin(admin);
 	}
 	
+	
+	//admin login
+	/*
+	 * get admin user id and password
+	 * check wheather the admin exists in the table
+	 * if exists return true else false 
+	 * */
 	@PostMapping("/login")
 	public Boolean loginAdmin(@Validated @RequestBody Admin admin)throws ResourceNotFoundException{
 		Long userId = admin.getUserId();
@@ -60,12 +75,9 @@ public class AdminController {
 		return adminservice.getLoginStatus(userId);
 	}
 	
-//	@PostMapping("{aid}/approve-customer/{cid}")
-//    public ResponseEntity<Customer> approveCustomer(@PathVariable(value = "aid") Long adminId, @PathVariable(value="cid") Long custId) {
-//        Customer approvedCustomer = custservice.approveCustomer(custId);
-//        return new ResponseEntity<>(approvedCustomer, HttpStatus.OK);
-//    }
-	
+	/*
+	 * API to fetch all the registered accounts in the bank
+	 * requires adminId in the URL*/
 	@GetMapping("{id}/accounts")
 	public ResponseEntity<List<Account>> getAllAccounts(@PathVariable(value="id") Long adminId){
 		try {
@@ -87,6 +99,9 @@ public class AdminController {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
 		}
 	}
+	
+	/*
+	 * */
 	
 	@PostMapping("{id}/logout")
 	public Boolean logoutAdmin(@PathVariable(value="id") Long adminId){
@@ -202,6 +217,29 @@ public class AdminController {
 				return ResponseEntity.badRequest().body(response);
 			}
 		}
+		
+		
+		
+			/*
+			 * Modify the is_valid column of the customer
+			 * */
+			@GetMapping("{aid}/customer/{cid}")
+			public ResponseEntity<Boolean> validateCustomer(@PathVariable(value="aid") Long adminId, @PathVariable("cid")Long custId)throws
+			ResourceNotFoundException{
+			
+				if(adminservice.getLoginStatus(adminId)) {
+					
+					custservice.getSingleCustomer(custId).orElseThrow(()-> new ResourceNotFoundException("customer account does not exist"+custId));
+					
+					Optional<Customer> isValidatedCustomer = custservice.getSingleCustomer(custId);
+					isValidatedCustomer.get().setValidCustomer(true);
+					custrepo.save(isValidatedCustomer.get());
+					
+					return ResponseEntity.ok().body(true);
+				}else {return ResponseEntity.badRequest().body(false);}
+				
+				
+			}
 	
 	
 	
