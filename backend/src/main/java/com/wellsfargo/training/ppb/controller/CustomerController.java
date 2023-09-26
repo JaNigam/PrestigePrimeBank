@@ -65,12 +65,17 @@ public class CustomerController {
 	AccountRepository accrepo;
 	
 	@PostMapping("/create-customer")
-	public String createCustomer(@RequestBody @Validated Customer cust) {
-		return custservice.saveCustomer(cust);
+	public ResponseEntity<String> createCustomer(@RequestBody @Validated Customer cust) {
+		String createCust=custservice.saveCustomer(cust);
+		if(createCust!=null) {
+			return ResponseEntity.ok("Registration Successfull");
+		}
+		else
+			return ResponseEntity.badRequest().body("Registration Failed");
 	}
 
 	@PostMapping("/login")
-	public Boolean loginCustomer(@Validated @RequestBody Customer customer) throws ResourceNotFoundException {
+	public ResponseEntity<Boolean> loginCustomer(@Validated @RequestBody Customer customer) throws ResourceNotFoundException {
 		Boolean isLoggedIn = false;
 		Long userId = customer.getUserId();
 		String password = customer.getPassword();
@@ -82,7 +87,7 @@ public class CustomerController {
 			isLoggedIn = true;
 		}
 
-		return isLoggedIn;
+		return ResponseEntity.ok(isLoggedIn);
 	}
 
 	// Update customer details with new Values.
@@ -105,12 +110,12 @@ public class CustomerController {
 
 	// transaction
 	@PostMapping("/transact")
-	public String Transact(@RequestBody @Validated Transaction transDetails) {
+	public ResponseEntity<String> Transact(@RequestBody @Validated Transaction transDetails) {
 
 		if (transservice.fundTransfer(transDetails)) {
-			return "Transaction Successfull!";
+			return ResponseEntity.ok("Transaction Successfull!");
 		}
-		return "Transaction Failed";
+		return ResponseEntity.badRequest().body("Transaction Failed");
 
 	}
 
@@ -164,11 +169,15 @@ public class CustomerController {
 
 	// add beneficiary or payee
 	@PostMapping("/add-beneficiary/{id}")
-	public String addBeneficiary(@PathVariable(value = "id") Long userId,
+	public ResponseEntity<String> addBeneficiary(@PathVariable(value = "id") Long userId,
 			@RequestBody @Validated Beneficiary beneficiaryDetails) {
 
-		return bservice.addBeneficiary(beneficiaryDetails, userId);
-
+		String addingBeneficiary=bservice.addBeneficiary(beneficiaryDetails, userId);
+		if(addingBeneficiary!=null) {
+			return ResponseEntity.ok("Beneficiary added Successfully!");
+		}
+		else
+		return ResponseEntity.badRequest().body("Beneficiary adding Failed");
 	}
 	
 	
