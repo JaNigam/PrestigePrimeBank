@@ -7,7 +7,7 @@ import AdminService from '../services/AdminService';
 
 //Component to create or update a product
 
-function EditAccount() {
+function AddMoney() {
     const navigate = useNavigate();
 
     /*
@@ -20,7 +20,7 @@ function EditAccount() {
 
     //state mgmt
    
-    const [branch, setbranch] = useState('');
+    const [balance, setBalance] = useState('');
     
     
 
@@ -32,7 +32,7 @@ function EditAccount() {
             AdminService.getCustomerById(id).then((response) => {
                 const product = response.data;
                
-                setbranch(product.branch);
+                setBalance(product.balance);
             });
         }
 
@@ -42,7 +42,7 @@ function EditAccount() {
 
     const saveOrUpdateProduct = (event) => {
         event.preventDefault();
-        const product = {branch };
+        const product = {balance };
 
         if (id === '_add') {
             AdminService.createProduct(product).then(() => {
@@ -52,9 +52,9 @@ function EditAccount() {
             AdminService.getCustomerById(id).then((response) => {
                 const product = response.data;
                
-                setbranch(product.branch);
+                setBalance(product.balance);
             });
-            AdminService.updateCustomer(product, id,branch).then(() => {
+            AdminService.addMoneyCustomer(product, id).then(() => {
                 navigate('/admin');
             });
         }
@@ -62,7 +62,7 @@ function EditAccount() {
 
     // methods to set value of state
     const changeNameHandler = (event) => {
-        setbranch(event.target.value);
+        setBalance(event.target.value);
     };
 
     
@@ -90,9 +90,9 @@ function EditAccount() {
                         <div className="card-body">
                             <form>
                                 <div className="form-group flex-row">
-                                    <label> Branch </label>
+                                    <label> Balance</label>
                                     <input placeholder="Product Name" name="name" className="form-control"
-                                        value={branch} onChange={changeNameHandler} />
+                                        value={balance} onChange={changeNameHandler} />
                                
                                 </div>
 
@@ -108,4 +108,4 @@ function EditAccount() {
     )
 }
 
-export default EditAccount
+export default AddMoney;

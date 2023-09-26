@@ -41,6 +41,7 @@ function Login() {
       if (loginSuccess) {
         setMessage("Login Successful. Redirecting.....");
         setmsgCondition(true);
+        AuthenticationService.registerSuccessfullLogin(userId);
         setTimeout(() => {
           history("/about");
         }, 3000);

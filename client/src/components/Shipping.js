@@ -1,4 +1,5 @@
 import NavBar from "./NavBar"
+import useFormContext from "./useFormContext"
 import '.././styles/Register.css'
 const Shipping = () => {
   const { data, handleChange } = useFormContext();

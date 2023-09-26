@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import { useNavigate } from "react-router-dom";
 import '.././styles/Login.css';
-import NavBar from "./NavBar";
 import AdminLoginService from "../services/AdminLoginService";
 
 function AdminLogin() {
@@ -45,8 +44,7 @@ function AdminLogin() {
 
 
     return (
-        <div className="app"   >
-            <NavBar></NavBar>
+        <div className="app">
             <br></br>
 
             <div className='login-form form'>

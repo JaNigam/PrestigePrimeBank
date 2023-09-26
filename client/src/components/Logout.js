@@ -10,7 +10,7 @@ const Logout = () => {
 
   const handleLogout = () => {
     // Redirect to the login page (or any other page as needed)
-    history('/sessionExpired'); // Make sure to adjust the route accordingly
+    history('/'); // Make sure to adjust the route accordingly
   };
   const handleLogoutBack = () => {
     // Redirect to the login page (or any other page as needed)

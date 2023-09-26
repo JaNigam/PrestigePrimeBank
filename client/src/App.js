@@ -8,7 +8,7 @@ import AdminView from './components/AdminView';
 import AddBeneficiary from './components/AddBeneficiary';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faSignIn, faCameraRetro, faCoffee, faBomb, faEdit,faTrash,faList,faPeopleGroup,faSearch,faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faSignIn, faCameraRetro, faCoffee, faBomb, faEdit,faTrash,faList,faPeopleGroup,faSearch,faCheck, faMoneyBillTransfer,faSignOut } from '@fortawesome/free-solid-svg-icons';
 import Register from './components/Register';
 import Login from './components/Login';
 import About from './components/About';
@@ -22,7 +22,8 @@ import RtgsPayment from './components/RtgsPayment';
 import NeftPayment from './components/NeftPayment';
 import AccountDetails from './components/AccountDetails';
 import EditAccount from './components/EditAccount';
-library.add(faSignIn, faCameraRetro, faCoffee, faBomb, faEdit,faTrash,faList,faPeopleGroup,faSearch,faCheck);
+import AddMoney from './components/AddMoney';
+library.add(faSignIn, faCameraRetro, faCoffee, faBomb, faEdit,faTrash,faList,faPeopleGroup,faSearch,faCheck,faMoneyBillTransfer,faSignOut);
 
 
 
@@ -31,20 +32,25 @@ function App() {
     <div className="App">
     
     <Routes>
+
         <Route path="/" element={<Landing_Page/>}></Route>
         <Route path="/login" element={<Login/>}></Route>
-        <Route path="/logout" element={<Logout/>}></Route>
         <Route path="/register" element={<Register/>}></Route>
-        <Route path="/about" element={<About/>}></Route>
         <Route path='/admin' element={<Admin/>}></Route>
+        <Route path='/adminlogin' element={<AdminLogin/>}></Route>
+
+        <Route path="/about" element={<About/>}></Route>
+        
         <Route path='/sessionExpired' element={<SessionExpired/>}></Route>
         <Route path='/addBeneficiary' element={<AddBeneficiary/>}></Route>
-        <Route path='/adminlogin' element={<AdminLogin/>}></Route>
+        
         <Route path='/imps' element={<ImpsPayment/>}></Route>
         <Route path='/rtgs' element={<RtgsPayment/>}></Route>
         <Route path='/neft' element={<NeftPayment/>}></Route>
         <Route path='/accountDetails' element={<AccountDetails/>}></Route>
+        <Route path="/logout" element={<Logout/>}></Route>
         <Route path='/addCust/:id' element={<EditAccount/>}></Route>
+        <Route path='/addBalCust/:id' element={<AddMoney/>}></Route>
         <Route path='/viewCust/:id' element={<AdminView />}></Route>
       </Routes>
 
