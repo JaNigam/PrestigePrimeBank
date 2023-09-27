@@ -31,6 +31,10 @@ const NavBar = () => {
                             Beneficiary</Link>
                     </li>
                     <li className='nav-item'>
+                            <Link to= {`/dashboard/${userName}`} className="nav-link">Dashboard</Link>
+                    </li>
+                    
+                    <li className='nav-item'>
                         <Link to="/" className="nav-link" onClick={handleLogout}>
                             <span><FontAwesomeIcon icon="sign-out"></FontAwesomeIcon></span> &nbsp;
                             Logout</Link>
@@ -53,6 +57,7 @@ const NavBar = () => {
                                 <span><FontAwesomeIcon icon="bomb"></FontAwesomeIcon></span> &nbsp;
                                 About Us</Link>
                         </li>
+                        
 
                     </>
                 )}

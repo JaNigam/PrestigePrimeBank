@@ -26,7 +26,7 @@ class AdminService {
     }
     static updateCustomer(customer, custId) {
         console.log("UPDATE CUSTOMER", customer);
-        return axios.put(ACCOUNTS_REST_API_URL + '/1234' + '/accounts/' + custId, customer);
+        return axios.put(ACCOUNTS_REST_API_URL + '/123' + '/accounts/' + custId, customer);
     }
     static deleteCustomer(custId) {
         return axios.delete(CUSTOMERS_REST_API_URL + '/' + custId);
@@ -43,7 +43,7 @@ class AdminService {
         customer = parseFloat(customer.balance);
         console.log("PARSED VALUE", customer);
 
-        return axios.put(`${ACCOUNTS_REST_API_URL}/1234/addmoney/${custId}`, customer, {
+        return axios.put(`${ACCOUNTS_REST_API_URL}/123/addmoney/${custId}`, customer, {
             headers: {
                 'Content-Type': 'application/json', // Set the Content-Type to indicate JSON data
             },

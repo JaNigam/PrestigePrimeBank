@@ -93,12 +93,12 @@ input:invalid {
 
 /* || GENERAL STYLES */
 
-body {
+.app {
   font-family: "Nunito", sans-serif;
   /* min-height: 100vh; */
   /* background: radial-gradient(skyblue, darkblue); */
   /* padding: 1rem; */
-  background-image: url("../../public/images/background-img.jpg");
+  /* background-image: url("../../public/images/background-img.jpg"); */
   /* background-blend-mode:hue; */
   background-size: 100%;
 }

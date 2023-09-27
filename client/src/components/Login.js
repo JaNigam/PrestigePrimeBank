@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
 import ReactDOM from "react-dom";
 import { useNavigate } from "react-router-dom";
 import ".././styles/Login.css";
@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import Footer from "./Footer";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faLock } from '@fortawesome/free-solid-svg-icons';
+import CustomerService from "../services/CustomerService";
 
 function Login() {
   // React States
@@ -20,6 +21,7 @@ function Login() {
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
   const [msgCondition, setmsgCondition] = useState(null);
+  const [customer,setCustomer] =useState({})
 
   const divStyles = {
     color: msgCondition ? "green" : "red",
@@ -43,7 +45,8 @@ function Login() {
         setmsgCondition(true);
         AuthenticationService.registerSuccessfullLogin(userId);
         setTimeout(() => {
-          history("/about");
+          history(`../dashboard/${userId}`)
+          // history("/about");
         }, 3000);
       } else {
         setMessage("Invalid Email or password");
@@ -55,6 +58,16 @@ function Login() {
       setMessage("Error occurred while login");
     }
   };
+
+//   useEffect(() => 
+//     {
+//        CustomerService.getAccountById(userId).then((res)=> {
+//         setCustomer(res.data);
+//         console.log("customer", res.data);
+//        })
+        
+//     },[customer.accountNo]
+// )
 
   return (
     <div className="app">
@@ -68,7 +81,11 @@ function Login() {
           <input
             type="number"
             value={userId}
-            onChange={(e) => setUserId(e.target.value)}
+            onChange={(e) => 
+              {
+                console.log(1)
+                setUserId(e.target.value)}
+              }
           />
         </div>
         <div className="input-container">

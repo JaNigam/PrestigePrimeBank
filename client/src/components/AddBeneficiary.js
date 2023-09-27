@@ -2,8 +2,14 @@ import React, { useState } from 'react';
 import '.././styles/AddBeneficiary.css'
 import NavBar from './NavBar';
 import Footer from './Footer';
+import CustomerService from "../services/CustomerService";
+import { useParams,useNavigate } from 'react-router-dom';
+import AuthenticationService from "../services/AuthenticationService";
 
 const AddBeneficiary = () => {
+
+  const userId = AuthenticationService.getLoggedInUserName();
+  console.log(userId)
   const [formData, setFormData] = useState({
     name: '',
     accountNumber: '',
@@ -22,8 +28,9 @@ const AddBeneficiary = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    CustomerService.addBeneficiary(formData,userId)
     // Handle form submission, e.g., send data to the server or perform validation
-    console.log(formData);
+
   };
 
   return (
@@ -34,57 +41,39 @@ const AddBeneficiary = () => {
       <h2>Add Beneficiary</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="name">Name:</label>
+          <label htmlFor="beneficiaryName">Name:</label>
           <input
             type="text"
-            id="name"
-            name="name"
-            value={formData.name}
+            id="beneficiaryName"
+            name="beneficiaryName"
+            value={formData.beneficiaryName}
             onChange={handleChange}
           />
         </div>
+
         <div className="form-group">
-          <label htmlFor="accountNumber">Account Number:</label>
+          <label htmlFor="beneficiaryNickName;">Nick Name:</label>
           <input
             type="text"
-            id="accountNumber"
-            name="accountNumber"
-            value={formData.accountNumber}
+            id="beneficiaryNickName;"
+            name="beneficiaryNickName;"
+            value={formData.beneficiaryNickName}
             onChange={handleChange}
           />
         </div>
+        
         <div className="form-group">
-          <label htmlFor="address">Address:</label>
+          <label htmlFor="beneficiaryAccNo">Account Number:</label>
           <input
             type="text"
-            id="address"
-            name="address"
-            value={formData.address}
+            id="beneficiaryAccNo"
+            name="beneficiaryAccNo"
+            value={formData.beneficiaryAccNo}
             onChange={handleChange}
           />
         </div>
         <div className="form-group">
-          <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="phone">Phone:</label>
-          <input
-            type="tel"
-            id="phone"
-            name="phone"
-            value={formData.phone}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="form-group">
-          <button type="submit">Add Beneficiary</button>
+          <button type="submit" style ={{"margin-left":"100px"}}>Add Beneficiary</button>
         </div>
       </form>
     </div>

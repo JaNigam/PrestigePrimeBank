@@ -73,9 +73,9 @@ function EditAccount() {
 
     const getTitle = () => {
         if (id === '_add') {
-            return <h1 className="text-center">Add Product</h1>;
+            return <h1 className="text-center">Add Details</h1>;
         } else {
-            return <h1 className="text-center">Update Product</h1>;
+            return <h1 className="text-center">Update Details</h1>;
         }
     };
 
@@ -91,7 +91,7 @@ function EditAccount() {
                             <form>
                                 <div className="form-group flex-row">
                                     <label> Branch </label>
-                                    <input placeholder="Product Name" name="name" className="form-control"
+                                    <input placeholder="Branch Name" name="name" className="form-control"
                                         value={branch} onChange={changeNameHandler} />
                                
                                 </div>

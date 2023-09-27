@@ -9,7 +9,7 @@ import AddBeneficiary from './components/AddBeneficiary';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faSignIn, faCameraRetro, faCoffee, faBomb, faEdit,faTrash,faList,faPeopleGroup,faSearch,faCheck, faMoneyBillTransfer,faSignOut } from '@fortawesome/free-solid-svg-icons';
-import Register from './components/Register';
+import Register from './components/Register/Register';
 import Login from './components/Login';
 import About from './components/About';
 import Admin from './components/Admin';
@@ -18,10 +18,10 @@ import Logout from './components/Logout';
 import SessionExpired from './components/SessionExpired';
 import Footer from './components/Footer';
 import ImpsPayment from './components/ImpsPayment';
-import RtgsPayment from './components/RtgsPayment';
-import NeftPayment from './components/NeftPayment';
-import AccountDetails from './components/AccountDetails';
+import AccountDetails from './components/Register/PersonalDetails';
 import EditAccount from './components/EditAccount';
+import Dashboard from './components/Dashboard';
+import TransactionHistory from './components/TransactionsHistory';
 import AddMoney from './components/AddMoney';
 library.add(faSignIn, faCameraRetro, faCoffee, faBomb, faEdit,faTrash,faList,faPeopleGroup,faSearch,faCheck,faMoneyBillTransfer,faSignOut);
 
@@ -45,13 +45,14 @@ function App() {
         <Route path='/addBeneficiary' element={<AddBeneficiary/>}></Route>
         
         <Route path='/imps' element={<ImpsPayment/>}></Route>
-        <Route path='/rtgs' element={<RtgsPayment/>}></Route>
-        <Route path='/neft' element={<NeftPayment/>}></Route>
-        <Route path='/accountDetails' element={<AccountDetails/>}></Route>
+        <Route path='/user' element={<AccountDetails/>}></Route>
+        {/* <Route path='/accountDetails' element={<AccountDetails/>}></Route> */}
         <Route path="/logout" element={<Logout/>}></Route>
         <Route path='/addCust/:id' element={<EditAccount/>}></Route>
         <Route path='/addBalCust/:id' element={<AddMoney/>}></Route>
         <Route path='/viewCust/:id' element={<AdminView />}></Route>
+        <Route path='/dashboard/:userId' element={<Dashboard />}></Route>
+
       </Routes>
 
       <Footer />

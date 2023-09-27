@@ -1,9 +1,9 @@
 import FormInputs from "./FormInputs";
 import useFormContext from "./useFormContext";
 import { useNavigate } from "react-router-dom";
-import AuthenticationService from "../services/AuthenticationService";
-import NavBar from "./NavBar";
-import Footer from "./Footer";
+import AuthenticationService from "../../services/AuthenticationService";
+import NavBar from "../NavBar";
+import Footer from "../Footer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faChevronCircleLeft,faChevronCircleRight } from '@fortawesome/free-solid-svg-icons';
 

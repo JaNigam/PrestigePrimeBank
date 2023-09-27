@@ -1,23 +1,22 @@
 import React, { useState } from 'react';
-import './../styles/AccountDetails.css'
-import NavBar from './NavBar';
+import '.././../styles/AccountDetails.css'
+import NavBar from '../NavBar';
 
 const AccountDetails = () => {
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    fathersName: '',
-    mobileNumber: '',
-    email: '',
-    aadharCardNumber: '',
-    dateOfBirth: '',
-    addressLine1: '',
-    addressLine2: '',
-    landmark: '',
+    name: '',
+    fathername: '',
+    mothername:'',
+    mobile:'',
+    email:'',
+    aadhar:'',
+    dob:'',
+    occType:'',
+    incomeSource:'',
+    grossAnnualIncome:'',
+    currentAddress: '',
     permanentAddress: '',
-    occupation: '',
-    occupationType: '',
-    debitCard: false,
+  
   });
 
   const handleChange = (e) => {
@@ -43,44 +42,44 @@ const AccountDetails = () => {
       <form onSubmit={handleSubmit}>
         <div className="form-row">
           <div className="form-field form-column">
-            <label htmlFor="firstName">First Name:</label>
+            <label htmlFor="firstName">Name:</label>
             <input
               type="text"
-              id="firstName"
-              name="firstName"
-              value={formData.firstName}
+              id="name"
+              name="name"
+              value={formData.name}
               onChange={handleChange}
             />
           </div>
           <div className="form-field">
-            <label htmlFor="lastName">Last Name:</label>
+            <label htmlFor="fathername">Father's Name:</label>
             <input
               type="text"
-              id="lastName"
-              name="lastName"
-              value={formData.lastName}
+              id="fathername"
+              name="fathername"
+              value={formData.fathername}
               onChange={handleChange}
             />
           </div>
           <div className="form-field">
-            <label htmlFor="fathersName">Father's Name:</label>
+            <label htmlFor="mothername">Mother's Name:</label>
             <input
               type="text"
-              id="fathersName"
-              name="fathersName"
-              value={formData.fathersName}
+              id="mothername"
+              name="mothername"
+              value={formData.mothername}
               onChange={handleChange}
             />
           </div>
         </div>
         <div className="form-row">
           <div className="form-field">
-            <label htmlFor="mobileNumber">Mobile Number:</label>
+            <label htmlFor="mobile">Mobile Number:</label>
             <input
               type="text"
-              id="mobileNumber"
-              name="mobileNumber"
-              value={formData.mobileNumber}
+              id="mobile"
+              name="mobile"
+              value={formData.mobile}
               onChange={handleChange}
             />
           </div>
@@ -95,24 +94,54 @@ const AccountDetails = () => {
             />
           </div>
           <div className="form-field">
-            <label htmlFor="aadharCardNumber">Aadhar Card Number:</label>
+            <label htmlFor="aadhar">Aadhar Card Number:</label>
             <input
               type="text"
-              id="aadharCardNumber"
-              name="aadharCardNumber"
-              value={formData.aadharCardNumber}
+              id="aadhar"
+              name="aadhar"
+              value={formData.aadhar}
               onChange={handleChange}
             />
           </div>
         </div>
         <div className="form-row">
           <div className="form-field">
-            <label htmlFor="dateOfBirth">Date of Birth:</label>
+            <label htmlFor="dob">Date of Birth:</label>
             <input
               type="date"
-              id="dateOfBirth"
-              name="dateOfBirth"
-              value={formData.dateOfBirth}
+              id="dob"
+              name="dob"
+              value={formData.dob}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="form-field">
+            <label htmlFor="occType">Occupation Type:</label>
+            <input
+              type="date"
+              id="occType"
+              name="occType"
+              value={formData.occType}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="form-field">
+            <label htmlFor="incomeSource">Income Source:</label>
+            <input
+              type="date"
+              id="incomeSource"
+              name="incomeSource"
+              value={formData.incomeSource}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="form-field">
+            <label htmlFor="grossAnnualIncome">Gross Annual Income:</label>
+            <input
+              type="text"
+              id="grossAnnualIncome"
+              name="grossAnnualIncome"
+              value={formData.grossAnnualIncome}
               onChange={handleChange}
             />
           </div>
@@ -123,28 +152,6 @@ const AccountDetails = () => {
               id="addressLine1"
               name="addressLine1"
               value={formData.addressLine1}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="form-field">
-            <label htmlFor="addressLine2">Address Line 2:</label>
-            <input
-              type="text"
-              id="addressLine2"
-              name="addressLine2"
-              value={formData.addressLine2}
-              onChange={handleChange}
-            />
-          </div>
-        </div>
-        <div className="form-row">
-          <div className="form-field">
-            <label htmlFor="landmark">Landmark:</label>
-            <input
-              type="text"
-              id="landmark"
-              name="landmark"
-              value={formData.landmark}
               onChange={handleChange}
             />
           </div>
@@ -180,16 +187,7 @@ const AccountDetails = () => {
               onChange={handleChange}
             />
           </div>
-          <div className="form-field">
-            <label htmlFor="debitCard">Debit/ATM Card:</label>
-            <input
-              type="text"
-              id="debitCard"
-              name="debitCard"
-              checked={formData.debitCard}
-              onChange={handleChange}
-            />
-          </div>
+         
         </div>
         {/* <div className="form-row">
           <button type="submit">Submit</button>

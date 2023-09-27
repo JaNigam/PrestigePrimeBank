@@ -1,6 +1,6 @@
 import Address from "./Address"
-import OptIn from "./OptIn"
-import Shipping from "./Shipping"
+import OptIn from "./OccupationForm"
+import Shipping from "./AddressForm"
 import useFormContext from "./useFormContext"
 
 const FormInputs = () => {

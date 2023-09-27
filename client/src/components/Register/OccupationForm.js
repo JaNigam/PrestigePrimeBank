@@ -1,6 +1,6 @@
-import NavBar from "./NavBar"
+import NavBar from "../NavBar"
 import useFormContext from "./useFormContext"
-import '.././styles/Register.css'
+import '../.././styles/Register.css'
 
 const OptIn = () => {
   const { data, handleChange } = useFormContext();
