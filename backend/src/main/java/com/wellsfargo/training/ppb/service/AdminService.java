@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.wellsfargo.training.ppb.model.Account;
@@ -38,12 +39,14 @@ public class AdminService {
 		if(existingAdmin.isPresent())
 		{
 			result = "Admin Already Exists";
+			return result;
 		}
 		else {
 			adminrepo.save(admin);
 			result = "New Admin Created Successfully";
+			return result;
 		}
-		return result;
+		
 	}
 	
 	

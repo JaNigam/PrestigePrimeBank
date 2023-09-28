@@ -97,7 +97,9 @@ public class CustomerController {
 		existingcust.setPermanentAddress(c.getPermanentAddress());
 		existingcust.setCurrentAddress(c.getCurrentAddress());
 		existingcust.setOptForNetBanking(c.isOptForNetBanking());
-
+		existingcust.setOccType(c.getOccType());
+		existingcust.setGrossAnnualIncome(c.getGrossAnnualIncome());
+		existingcust.setIncomeSource(c.getIncomeSource());
 		String result = custservice.updateCustomer(existingcust);
 
 		return ResponseEntity.ok().body(result);
