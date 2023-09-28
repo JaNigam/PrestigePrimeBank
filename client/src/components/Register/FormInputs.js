@@ -1,4 +1,4 @@
-import Address from "./Address"
+import Address from "./PersonalDetails"
 import OptIn from "./OccupationForm"
 import Shipping from "./AddressForm"
 import useFormContext from "./useFormContext"

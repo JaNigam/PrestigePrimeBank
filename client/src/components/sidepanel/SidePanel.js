@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {Link} from 'react-router-dom'
 import DropdownButton from 'react-bootstrap/DropdownButton';
+import AuthenticationService from "../../services/AuthenticationService";
 import Dropdown from 'react-bootstrap/Dropdown';
 
 import NavBar from "../NavBar";
@@ -22,6 +23,7 @@ import '../../styles/Sidepanel.css'
 function SidePanel() {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [isFundTransferExpanded, setIsFundTransferExpanded] = useState();
+  const id = AuthenticationService.getLoggedInUserName()
 
   const toggleCollapse = () => {
     // setIsCollapsed(!isCollapsed);
@@ -56,7 +58,11 @@ function SidePanel() {
         
         <li>
           <FontAwesomeIcon icon={faHome} style={{"margin-right": "5px"}} />
-          {!isCollapsed && <Link to="/dashboard/" style={{"fontSize": "16px"}}> {' '} Account Summary</Link> }
+          {!isCollapsed && <Link to={`/dashboard/${id}`} style={{"fontSize": "16px"}}> {' '} Transaction History</Link> }
+        </li>
+        <li>
+          <FontAwesomeIcon icon={faHome} style={{"margin-right": "5px"}} />
+          {!isCollapsed && <Link to="/account/" style={{"fontSize": "16px"}}> {' '} Account Summary</Link> }
         </li>
         <li>
           <FontAwesomeIcon icon={faUserPlus} style={{"margin-right": "5px"}} />

@@ -13,6 +13,8 @@ export default function TransactionHistory() {
     const { userId } = useParams();
     const [trxarr, setTrxarr] = useState([]);
     const [customer, setCustomer] = useState({});
+    const [startDate, setStartDate] = useState();
+    const [endDate, setEndDate] = useState();
 
     useEffect(
         () => 
@@ -42,13 +44,70 @@ export default function TransactionHistory() {
         }
     }
 
+    const handleSubmit = async (e) => {
+                e.preventDefault();
+
+
+        CustomerService.viewTransactions(customer.accountNo, startDate,endDate).then((res) => {
+            setTrxarr(res.data)
+        })
+
+    
+        // try {
+        //   // Send the transaction data to the backend for processing
+        //   const response = {
+        //     senderAccNo,
+        //     receiverAccNo,
+        //     amount,
+        //     transactionType
+        //   };
+    
+        //   // Handle the response from the backend
+        //   // setResponseMessage(response.data.message);
+    
+        //   CustomerService.transferAmount(response);
+          
+    
+        // } catch (error) {
+        //   console.error('Error:', error);
+        //   setResponseMessage('An error occurred while processing the transaction.');
+        // }
+      };
+
     return (
         <>
 
         <section className="container">
-            <h1 className="title">Dashboard {'>'} Account Summary</h1>
+            <h1 className="title">Dashboard {'>'} Transaction History</h1>
+            
             <div className="tbl-header">
-                <h4 style={{'color': 'black', 'textAlign': 'left' , 'padding' : '10px'}}> Transaction History </h4>
+                <h4 style={{'color': 'black' , 'padding' : '10px'}}> Transaction History </h4>
+
+                <form onSubmit={handleSubmit}>
+                <div className="form-row">
+                <div className="form-field form-column" style={{"marginLeft":"10px"}}>
+                    <label>Start Date:</label>
+                    <input
+                    type="date"
+                    // value={dot}
+                    onChange={(e) => setStartDate(e.target.value)}
+                    />
+                </div>
+
+                <div className="form-field form-column">
+                    <label>End Date:</label>
+                    <input
+                    type="date"
+                    // value={dot}
+                    onChange={(e) => setEndDate(e.target.value)}
+                    />
+                </div>
+                </div>
+
+                <div style={{"display": "flex" , "justifyContent": "center"}}> 
+                    <button type="submit">Submit</button>
+                </div>
+            </form>
                 {/* <hr style={{'color': 'white'}}></hr> */}
                 <hl/>
                 <table cellspacing="0" cellPadding="0" border="0">

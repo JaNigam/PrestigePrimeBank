@@ -18,11 +18,12 @@ import Logout from './components/Logout';
 import SessionExpired from './components/SessionExpired';
 import Footer from './components/Footer';
 import ImpsPayment from './components/ImpsPayment';
-import AccountDetails from './components/Register/PersonalDetails';
+import AccountDetails from './components/AccountDetails';
 import EditAccount from './components/EditAccount';
 import Dashboard from './components/Dashboard';
 import TransactionHistory from './components/TransactionsHistory';
 import AddMoney from './components/AddMoney';
+import AccountSummary from './components/AccountSummary'
 library.add(faSignIn, faCameraRetro, faCoffee, faBomb, faEdit,faTrash,faList,faPeopleGroup,faSearch,faCheck,faMoneyBillTransfer,faSignOut);
 
 
@@ -46,6 +47,7 @@ function App() {
         
         <Route path='/imps' element={<ImpsPayment/>}></Route>
         <Route path='/user' element={<AccountDetails/>}></Route>
+        <Route path='/account' element={<AccountSummary/>}></Route>
         {/* <Route path='/accountDetails' element={<AccountDetails/>}></Route> */}
         <Route path="/logout" element={<Logout/>}></Route>
         <Route path='/addCust/:id' element={<EditAccount/>}></Route>
