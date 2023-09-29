@@ -60,6 +60,19 @@ class CustomerService{
         }
     }
 
+    static async requestEmail(email) {
+        try {
+
+            // console.log(transactionDetails);
+            const resp = await axios.post(CUSTOMERS_REST_API_URL + 'requestchangepass', email);
+            console.log("response", resp)
+
+        }
+        catch (error) {
+            console.error('Error sending email: ', error);
+        }
+    }
+
 
 
     

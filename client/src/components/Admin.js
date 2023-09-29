@@ -33,18 +33,19 @@ function Admin() {
   const viewCust = (id) => {
     history(`/viewCust/${id}`); //use back quote operator -  evaluate jsx operation
   };
+  const [validCustomer, setValidCustomer] = useState(0);
   const [value, setValue] = useState(0);
   const validateCust = (id) => {
-    AdminService.validateCustomer(id).then(() => {
-      // setProducts(products.filter(product => product.id !== id));
-
-      setValue(1);
-      setMessage("Customer validated successfully.");
-      // Clear the message after 2 seconds
-      setTimeout(() => {
-        setMessage("");
-      }, 2000);
-    });
+      AdminService.getCustomerById(id).then((response) => {
+          const product = response.data;
+          const validCustomerDetails = { setValidate: 1, custId: product.customer.userId };
+          setValidCustomer(1);
+          setValue(1);
+          AdminService.validateCustomer(validCustomerDetails, id).then(() => {
+              
+              history('/admin');
+          });
+      });
   };
   const deleteCust = (id) => {
     AdminService.deleteCustomer(id).then(() => {

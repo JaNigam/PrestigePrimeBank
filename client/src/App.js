@@ -24,6 +24,8 @@ import Dashboard from './components/Dashboard';
 import TransactionHistory from './components/TransactionsHistory';
 import AddMoney from './components/AddMoney';
 import AccountSummary from './components/AccountSummary'
+import ChangePassword from './components/ChangePassword';
+import RequestEmail from './components/RequestEmail';
 library.add(faSignIn, faCameraRetro, faCoffee, faBomb, faEdit,faTrash,faList,faPeopleGroup,faSearch,faCheck,faMoneyBillTransfer,faSignOut);
 
 
@@ -54,6 +56,9 @@ function App() {
         <Route path='/addBalCust/:id' element={<AddMoney/>}></Route>
         <Route path='/viewCust/:id' element={<AdminView />}></Route>
         <Route path='/dashboard/:userId' element={<Dashboard />}></Route>
+        <Route path='/changepassword' element={<ChangePassword />}></Route>
+        <Route path='/requestemail' element={<RequestEmail />}></Route>
+
 
       </Routes>
 

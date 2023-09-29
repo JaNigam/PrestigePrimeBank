@@ -65,8 +65,8 @@ function SidePanel() {
           {!isCollapsed && <Link to="/account/" style={{"fontSize": "16px"}}> {' '} Account Summary</Link> }
         </li>
         <li>
-          <FontAwesomeIcon icon={faUserPlus} style={{"margin-right": "5px"}} />
-          {!isCollapsed && <Link to="/" style={{"fontSize": "16px"}}> {' '} Change Password</Link> }
+            <FontAwesomeIcon icon={faUserPlus} style={{ "margin-right": "5px" }} />
+            {!isCollapsed && <Link to="/requestemail" style={{ "fontSize": "16px" }}> {' '} Change Password</Link>}
         </li>
         {/* <li onClick={handleLogout}>
           <FontAwesomeIcon icon={faPowerOff} />
