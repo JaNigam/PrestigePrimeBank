@@ -31,11 +31,11 @@ class AdminService {
     static deleteCustomer(custId) {
         return axios.delete(CUSTOMERS_REST_API_URL + '/' + custId);
     }
-    static validateCustomer(customer,custId) {
-        console.log("VALIDATE CUSTOMER", custId);
-        // customer = parseFloat(customer.validCustomer);
+    static validateCustomer(customer, userId) {
+        console.log("VALIDATE CUSTOMER", userId);
+
         console.log("PARSED VALUE", customer);
-        return axios.put(CUSTOMERS_REST_API_URL +'/'+ custId, customer);
+        return axios.put(ACCOUNTS_REST_API_URL + '/123/validate-customer', customer);
     }
 
     static addMoneyCustomer(customer, custId) {

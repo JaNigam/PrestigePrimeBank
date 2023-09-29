@@ -39,6 +39,10 @@ const NavBar = () => {
                             <span><FontAwesomeIcon icon="sign-out"></FontAwesomeIcon></span> &nbsp;
                             Logout</Link>
                     </li>
+                    <span className='user-style'>Welcome: {userName}
+                        {/* <img className='avatar' src='/images/avatar.jpg' alt='avatar' /> */}
+
+                    </span>
                 </>) : (
                     <>
 

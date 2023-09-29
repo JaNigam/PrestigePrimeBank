@@ -3,6 +3,8 @@ import './../styles/AccountDetails.css'
 import NavBar from './NavBar';
 import AuthenticationService from '../services/AuthenticationService';
 import CustomerService from '../services/CustomerService';
+import { Button } from 'react-bootstrap';
+import Alert from 'react-bootstrap/Alert'
 
 const AccountDetails = () => {
 
@@ -10,6 +12,8 @@ const AccountDetails = () => {
   const [customer, setCustomer] = useState({});
   const [disabled, setDisabled] = useState(false);
   const [formData, setFormData] = useState({})
+  const [showAlert, setShowAlert] = useState(false)
+  const [alertVariant, setAlertVariant] = useState('');
   console.log(customer.grossAnnualIncome)
 
 
@@ -23,13 +27,22 @@ const AccountDetails = () => {
 
   const handleUpdate = (e) =>{
 
+    try{
     setDisabled(!disabled);
     e.preventDefault();
 
     if(disabled===true){
       console.log(formData)
       CustomerService.updateInfo(userId, formData);
+      setShowAlert(true);
+      setAlertVariant('success')
     }
+  }catch(error){
+    console.error("erro updating information", error)
+    setShowAlert(true)
+    setAlertVariant('error')
+  }
+
 
     
   }
@@ -73,6 +86,12 @@ function getData() {
   return (
     <>
     <NavBar/>
+    {/* <Alert variant="success" style={{ width: "35rem" , display: "flex" , flexDirection: "end" }}>
+        <Alert.Heading>
+          The information has been updated
+        </Alert.Heading>
+    </Alert> */}
+
     <br></br>
     <div className="personal-details-form">
       <h2>Personal Details</h2>
