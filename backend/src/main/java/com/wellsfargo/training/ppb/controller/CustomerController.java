@@ -1,5 +1,7 @@
 package com.wellsfargo.training.ppb.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -190,5 +192,24 @@ public class CustomerController {
 		return ResponseEntity.ok().body(a);
 	}
 
+	
+	//get the list of beneficiaries associated to a customer Id
+	@GetMapping("/get-beneficiary/{id}")
+	public ResponseEntity<List<Beneficiary>> getAllBeneficiaries(@PathVariable(value="id") Long userId)
+	{
+		//get beneficiary by customer id
+		List<Beneficiary> response = new ArrayList<>();
+		try {
+			
+			Optional<List<Beneficiary>> allBeneficiaries = bservice.listAllBeneficiaries(userId);
+			response.addAll(allBeneficiaries.get());
+			return ResponseEntity.ok().body(response);
+		}catch(Exception e){
+			e.printStackTrace();
+			return ResponseEntity.badRequest().body(response);
+		}
+		
+	}
+	
 
 }

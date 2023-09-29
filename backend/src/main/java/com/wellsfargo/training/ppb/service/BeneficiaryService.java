@@ -1,5 +1,6 @@
 package com.wellsfargo.training.ppb.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,6 +55,12 @@ public class BeneficiaryService {
 			return "Not a Valid Customer!";
 		}
 		
+	}
+	
+	public Optional<List<Beneficiary>> listAllBeneficiaries(Long userId){
+	
+		Optional<List<Beneficiary>> allBeneficiary = brepo.findByCustomerUserId(userId); 
+		return allBeneficiary;
 	}
 	
 
