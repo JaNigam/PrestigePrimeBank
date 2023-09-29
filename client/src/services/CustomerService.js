@@ -50,6 +50,16 @@ class CustomerService{
         }
     }
 
+    static async updateInfo(userId,customer){
+        try{
+            return axios.put(CUSTOMERS_REST_API_URL  + userId, customer);
+        }
+        catch(error)
+        {
+            console.error("error updating information: ",error);
+        }
+    }
+
 
 
     
