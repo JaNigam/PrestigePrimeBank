@@ -5,6 +5,7 @@ import AuthenticationService from '../services/AuthenticationService';
 import CustomerService from '../services/CustomerService';
 import { Button } from 'react-bootstrap';
 import Alert from 'react-bootstrap/Alert'
+import { useNavigate } from 'react-router-dom';
 
 const AccountDetails = () => {
 
@@ -15,7 +16,7 @@ const AccountDetails = () => {
   const [showAlert, setShowAlert] = useState(false)
   const [alertVariant, setAlertVariant] = useState('');
   console.log(customer.grossAnnualIncome)
-
+  const history = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -51,6 +52,11 @@ const AccountDetails = () => {
   useEffect(
     () => 
     {
+      if (!AuthenticationService.isUserLoggedIn()) {
+        history('/login');
+      }
+      else{
+      
         getData()
         setFormData(
           {
@@ -66,7 +72,7 @@ const AccountDetails = () => {
             
           }
         )
-        
+      }
     },[customer.name]
 )
 

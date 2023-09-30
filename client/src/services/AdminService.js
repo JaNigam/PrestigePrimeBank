@@ -1,4 +1,5 @@
 import axios from "axios";
+import AdminLoginService from "./AdminLoginService";
 
 const CUSTOMERS_REST_API_URL = 'http://localhost:8083/ppb/customer/accounts';
 // const CUSTOMERS_USERS_REST_API_URL='http://localhost:8083/ppb/customer/accounts/{accId}';
@@ -26,7 +27,9 @@ class AdminService {
     }
     static updateCustomer(customer, custId) {
         console.log("UPDATE CUSTOMER", customer);
-        return axios.put(ACCOUNTS_REST_API_URL + '/123' + '/accounts/' + custId, customer);
+        const aid=AdminLoginService.getLoggedInUserName();
+        console.log("aid: ",aid);
+        return axios.put(ACCOUNTS_REST_API_URL + '/'+aid + '/accounts/' + custId, customer);
     }
     static deleteCustomer(custId) {
         return axios.delete(CUSTOMERS_REST_API_URL + '/' + custId);
@@ -35,15 +38,18 @@ class AdminService {
         console.log("VALIDATE CUSTOMER", userId);
 
         console.log("PARSED VALUE", customer);
-        return axios.put(ACCOUNTS_REST_API_URL + '/123/validate-customer', customer);
+        const aid=AdminLoginService.getLoggedInUserName();
+        console.log("aid: ",aid);
+        return axios.put(ACCOUNTS_REST_API_URL + '/'+aid+'/validate-customer', customer);
     }
 
     static addMoneyCustomer(customer, custId) {
         console.log("ADDMONEY CUSTOMER", customer);
         customer = parseFloat(customer.balance);
         console.log("PARSED VALUE", customer);
-
-        return axios.put(`${ACCOUNTS_REST_API_URL}/123/addmoney/${custId}`, customer, {
+        const aid=AdminLoginService.getLoggedInUserName();
+        console.log("aid: ",aid);
+        return axios.put(ACCOUNTS_REST_API_URL+'/'+aid+'/addmoney/'+custId, customer, {
             headers: {
                 'Content-Type': 'application/json', // Set the Content-Type to indicate JSON data
             },

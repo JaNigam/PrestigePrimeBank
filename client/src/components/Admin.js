@@ -5,6 +5,7 @@ import AdminService from "../services/AdminService";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ".././styles/Admin_Dashboard.css";
 import NavBar from "./NavBar";
+import AdminLoginService from "../services/AdminLoginService";
 
 function Admin() {
   const history = useNavigate();
@@ -15,7 +16,13 @@ function Admin() {
   const [message, setMessage] = useState("");
   //React Hook to manage lifecycle of a component -  useEffect
   useEffect(() => {
-    fetchProducts(); //invokes fetchPoducts() when component is rendered
+      if (!AdminLoginService.isUserLoggedIn()) {
+        history('/login');
+      }
+      else{
+        fetchProducts(); //invokes fetchPoducts() when component is rendered
+      }
+    
   }, []);
 
   const fetchProducts = () => {
@@ -36,16 +43,16 @@ function Admin() {
   const [validCustomer, setValidCustomer] = useState(0);
   const [value, setValue] = useState(0);
   const validateCust = (id) => {
-      AdminService.getCustomerById(id).then((response) => {
-          const product = response.data;
-          const validCustomerDetails = { setValidate: 1, custId: product.customer.userId };
-          setValidCustomer(1);
-          setValue(1);
-          AdminService.validateCustomer(validCustomerDetails, id).then(() => {
-              
-              history('/admin');
-          });
+    AdminService.getCustomerById(id).then((response) => {
+      const product = response.data;
+      const validCustomerDetails = { setValidate: 1, custId: product.customer.userId };
+      setValidCustomer(1);
+      setValue(1);
+      AdminService.validateCustomer(validCustomerDetails, id).then(() => {
+
+        history('/admin');
       });
+    });
   };
   const deleteCust = (id) => {
     AdminService.deleteCustomer(id).then(() => {
@@ -59,38 +66,35 @@ function Admin() {
     });
   };
 
+  const handleLogout = () => {
+    AdminLoginService.logout();
+    history('/adminlogin')
+};
   return (
-    <div>
-      <NavBar />
+    <div className="app-admin">
+      {/* <NavBar /> */}
       <br />
-      {/* <div className="container">Welcome {user}</div> */}
       <h1 className="text-warning">Accounts List</h1>
       <br />
-      {/* <div className="row justify-content-center">
-                <button className='btn btn-info w-auto' onClick={addCust}>Add Customer</button>
-            </div>
-            <br /> */}
       <div className="row justify-content-center">
-        <table className="table table-success w-50">
+        <table className="table-admin table-success-admin w-50">
           <thead>
             <tr className="table-danger">
-              {/* <th> User Id</th> */}
-              <th> Account Number</th>
-              <th> Account Type</th>
-              <th> Balance</th>
-              <th> Actions</th>
+              <th className="td-admin"> Account Number</th>
+              <th className="td-admin"> Account Type</th>
+              <th className="td-admin"> Balance</th>
+              <th className="td-admin"> Actions</th>
             </tr>
           </thead>
           <tbody>
             {customers.map((cust) => (
               <tr key={cust.Id}>
-                {/* <td> {cust.cId} </td> */}
-                <td> {cust.accountNo} </td>
-                <td> {cust.accountType} </td>
-                <td> {cust.balance} </td>
-                <td>
+                <td className="td-admin"> {cust.accountNo} </td>
+                <td className="td-admin"> {cust.accountType} </td>
+                <td className="td-admin"> {cust.balance} </td>
+                <td className="td-admin1">
                   <button
-                    className="btn btn-success button-css"
+                    className="btn btn-admin btn-success button-css"
                     onClick={() => editCust(cust.accountNo)}
                   >
                     <span>
@@ -99,7 +103,7 @@ function Admin() {
                   </button>{" "}
                   &nbsp;
                   <button
-                    className="btn btn-danger button-css"
+                    className="btn btn-admin btn-danger button-css"
                     onClick={() => deleteCust(cust.accountNo)}
                   >
                     <span>
@@ -107,7 +111,7 @@ function Admin() {
                     </span>
                   </button>
                   <button
-                    className="btn btn-primary button-css"
+                    className="btn btn-admin btn-primary button-css"
                     onClick={() => viewCust(cust.accountNo)}
                   >
                     <span>
@@ -115,8 +119,11 @@ function Admin() {
                     </span>
                   </button>
                   <button
-                    className="btn btn-primary button-css"
-                    onClick={() => validateCust(cust.accountNo)}
+                    className="btn btn-admin btn-secondary button-css"
+                    onClick={() => {
+                      validateCust(cust.accountNo);
+                      alert('Customer validated');
+                    }}
                   >
                     <span>
                       <FontAwesomeIcon icon="check"></FontAwesomeIcon>
@@ -128,8 +135,16 @@ function Admin() {
           </tbody>
         </table>
       </div>
-      {message && <div className="alert alert-success">{message}</div>}
-    </div>
+
+                        {/* <Link to="/" className="nav-link" onClick={handleLogout}>
+                            <span><FontAwesomeIcon icon="sign-out"></FontAwesomeIcon></span> &nbsp;
+                            Logout</Link> */}
+
+      {/* {message && <div className="alert alert-success">{message}</div>} */}
+      <button className="btn btn-danger" style={{ color: 'white' }} onClick={handleLogout}>
+      LOGOUT
+    </button>  </div>
+
   );
 }
 

@@ -1,0 +1,77 @@
+.app-adminView{
+   
+    min-height: 100vh; 
+ background: radial-gradient(skyblue, darkblue);
+ /* /* padding: 1rem; */
+ background-image: url("../../public/images/background-img.jpg");
+ background-blend-mode:hue;
+ background-size: 100%;
+}
+
+
+
+
+.card {
+  --bs-card-spacer-y: 1rem;
+  --bs-card-spacer-x: 1rem;
+  --bs-card-title-spacer-y: 0.5rem;
+  --bs-card-title-color: ;
+  --bs-card-subtitle-color: ;
+  --bs-card-border-width: var(--bs-border-width);
+  --bs-card-border-color: var(--bs-border-color-translucent);
+  --bs-card-border-radius: var(--bs-border-radius);
+  --bs-card-box-shadow: ;
+  --bs-card-inner-border-radius: calc(var(--bs-border-radius) - (var(--bs-border-width)));
+  --bs-card-cap-padding-y: 0.5rem;
+  --bs-card-cap-padding-x: 1rem;
+  --bs-card-cap-bg: rgba(var(--bs-body-color-rgb), 0.03);
+  --bs-card-cap-color: ;
+  --bs-card-height: ;
+  --bs-card-color: ;
+  --bs-card-bg: var(--bs-body-bg);
+  --bs-card-img-overlay-padding: 1rem;
+  --bs-card-group-margin: 0.75rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+
+  height: var(--bs-card-height);
+  color: var(--bs-body-color);
+  word-wrap: break-word;
+  background-color: var(--bs-card-bg);
+  background-clip: border-box;
+  border: var(--bs-card-border-width) solid var(--bs-card-border-color);
+  border-radius: var(--bs-card-border-radius);
+}
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0,0,0,.125);
+  border-radius: .25rem;
+}
+/* Reduce font size of table content */
+.table {
+    font-size: 14px;
+  }
+  
+  /* Reduce padding for table cells */
+  .table td, .table th {
+    padding: 0.5rem;
+  }
+  
+  /* Reduce overall width of the table */
+  .table {
+    width: 60% !important; /* Adjust this value as needed */
+  }
+  
+  /* Optionally, set a max-width to prevent the table from expanding too much */
+  .table-container {
+    max-width: 200px !important; /* Adjust this value as needed */
+    margin: auto;
+  }
+  

@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect} from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import AuthenticationService from "../../services/AuthenticationService";
 import Dropdown from 'react-bootstrap/Dropdown';
@@ -22,8 +22,16 @@ import '../../styles/Sidepanel.css'
 
 function SidePanel() {
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const history = useNavigate();
   const [isFundTransferExpanded, setIsFundTransferExpanded] = useState();
   const id = AuthenticationService.getLoggedInUserName()
+
+
+  useEffect(() => {
+    if (!AuthenticationService.isUserLoggedIn()) {
+      history('/login');
+    }
+  }, []);
 
   const toggleCollapse = () => {
     // setIsCollapsed(!isCollapsed);
@@ -68,34 +76,14 @@ function SidePanel() {
             <FontAwesomeIcon icon={faUserPlus} style={{ "margin-right": "5px" }} />
             {!isCollapsed && <Link to="/requestemail" style={{ "fontSize": "16px" }}> {' '} Change Password</Link>}
         </li>
-        {/* <li onClick={handleLogout}>
-          <FontAwesomeIcon icon={faPowerOff} />
-          {!isCollapsed && <span>Logout</span>}
-        </li> */}
-        {/* <li
-          onMouseEnter={handleFundTransferHover}
-          onMouseLeave={handleFundTransferLeave}
-        >
-          <FontAwesomeIcon icon={faExchangeAlt} />
-          {!isCollapsed && (
-            <span className={`submenu ${isFundTransferExpanded ? "expanded" : ""}`}>
-              Fund Transfer
-              <ul>
-                <li>
-                  <FontAwesomeIcon icon={faUserPlus} />
-                  <span>Add Account</span>
-                </li>
-              </ul>
-            </span>
-          )}
-        </li> */}
-
+        
         <li>
           <FontAwesomeIcon icon={faMoneyBill} />
           {!isCollapsed && <DropdownButton style={{"margin": "0"}} variant="link" id="dropdown-basic-button" title="Money Transfer">
             <Dropdown.Item ><Link to ="/addBeneficiary">Add Beneficiary </Link> </Dropdown.Item> 
             <Dropdown.Item ><Link to ="/imps">Fund Transfer </Link> </Dropdown.Item> 
-            {/* <Dropdown.Item href="#/action-1">Fund Transfers</Dropdown.Item>  */}
+            <Dropdown.Item ><Link to ="/viewBeneficiary">Beneficiary Accounts</Link> </Dropdown.Item> 
+           
             </DropdownButton>}
             
         </li>

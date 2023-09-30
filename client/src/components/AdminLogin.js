@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import { useNavigate } from "react-router-dom";
-import '.././styles/Login.css';
+import '.././styles/AdminLogin.css';
 import AdminLoginService from "../services/AdminLoginService";
 
 function AdminLogin() {
@@ -25,9 +25,12 @@ function AdminLogin() {
         try {
             console.log('before login const')
             const loginSuccess = await AdminLoginService.login(dealer);    //invoke service method
-            console.log('API response: ', loginSuccess);
+            // console.log('API response: ', loginSuccess);
             if (loginSuccess) {
                 setSuccessMessage('Login Successful. Redirecting.....');
+                // console.log("hhhhhhhhhh ",userId)
+
+                AdminLoginService.registerSuccessfullLogin(userId);
                 setTimeout(() => {
                     history('/admin');
                 }, 3000);
@@ -48,9 +51,9 @@ function AdminLogin() {
             <br></br>
 
             <div className='login-form form'>
-                <h2 className="title">Login to your Account</h2>
+                <h2 className="title-adminLogin">Login to your Account</h2>
                 <div className='input-container'>
-                    <label>user id:</label>
+                    <label>User Id:</label>
                     <input type='number' value={userId} onChange={(e) => setUserId(e.target.value)} />
                 </div>
                 <div className='input-container'>

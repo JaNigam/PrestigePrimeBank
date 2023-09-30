@@ -1,14 +1,16 @@
 
 import React, { useState, useEffect } from 'react'               //rfce
 import { useNavigate, useParams } from 'react-router-dom'
-
+import '.././styles/EditAccount.css';
 
 import AdminService from '../services/AdminService';
+import AdminLoginService from '../services/AdminLoginService';
 
 //Component to create or update a product
 
 function EditAccount() {
     const navigate = useNavigate();
+    const history = useNavigate();
 
     /*
     The useParams hook returns an object of key/value pairs of the dynamic params 
@@ -27,14 +29,23 @@ function EditAccount() {
 
     //component lifecycle Management - ComponentUpdate
     useEffect(() => {
-        if (id !== 'add') {
-            // update product 
-            AdminService.getCustomerById(id).then((response) => {
-                const product = response.data;
-               
-                setbranch(product.branch);
-            });
-        }
+
+
+            if (!AdminLoginService.isUserLoggedIn()) {
+              history('/adminlogin');
+            }
+            else{
+                if (id !== 'add') {
+                    // update product 
+                    AdminService.getCustomerById(id).then((response) => {
+                        const product = response.data;
+                       
+                        setbranch(product.branch);
+                    });
+                }
+            }
+          
+        
 
 
     }, [id]);           //values -id triggers re render whenever they are updated in your program,
@@ -75,29 +86,30 @@ function EditAccount() {
         if (id === '_add') {
             return <h1 className="text-center">Add Details</h1>;
         } else {
-            return <h1 className="text-center">Update Details</h1>;
+            return<h1 className="text-center" style={{ color: 'black' }}>Update Branch</h1>
         }
     };
 
 
     return (
-        <div>
+        <div className='app-editAccount'>
             <br></br>
-            <div className="container">
+            <div className="container-editAccount">
                 <div className="row">
                     <div className="form-outline col-12 mb-4">
                         {getTitle()}
                         <div className="card-body">
                             <form>
                                 <div className="form-group flex-row">
-                                    <label> Branch </label>
+                                    <label> Branch: </label>
                                     <input placeholder="Branch Name" name="name" className="form-control"
                                         value={branch} onChange={changeNameHandler} />
                                
                                 </div>
-
+                                <div className='button-editAccount'>
                                 <button className="btn btn-success" onClick={saveOrUpdateProduct}>Save</button>
                                 <button className="btn btn-danger" onClick={cancel.bind(this)} style={{ marginLeft: "10px" }}>Cancel</button>
+                                </div>
                             </form>
                         </div>
                     </div>

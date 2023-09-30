@@ -8,14 +8,14 @@ import AdminView from './components/AdminView';
 import AddBeneficiary from './components/AddBeneficiary';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faSignIn, faCameraRetro, faCoffee, faBomb, faEdit,faTrash,faList,faPeopleGroup,faSearch,faCheck, faMoneyBillTransfer,faSignOut } from '@fortawesome/free-solid-svg-icons';
+import { faSignIn, faCameraRetro, faCoffee, faBomb, faEdit,faTrash,faList,faPeopleGroup,faSearch,faCheck, faMoneyBillTransfer,faSignOut, faAddressBook, faUser, faDashboard, faSign } from '@fortawesome/free-solid-svg-icons';
 import Register from './components/Register/Register';
 import Login from './components/Login';
 import About from './components/About';
 import Admin from './components/Admin';
 import AdminLogin from './components/AdminLogin';
 import Logout from './components/Logout';
-import SessionExpired from './components/SessionExpired';
+// import SessionExpired from './components/SessionExpired';
 import Footer from './components/Footer';
 import ImpsPayment from './components/ImpsPayment';
 import AccountDetails from './components/AccountDetails';
@@ -26,7 +26,9 @@ import AddMoney from './components/AddMoney';
 import AccountSummary from './components/AccountSummary'
 import ChangePassword from './components/ChangePassword';
 import RequestEmail from './components/RequestEmail';
-library.add(faSignIn, faCameraRetro, faCoffee, faBomb, faEdit,faTrash,faList,faPeopleGroup,faSearch,faCheck,faMoneyBillTransfer,faSignOut);
+import ViewBeneficiary from './components/ViewBeneficiary';
+
+library.add(faSignIn, faCameraRetro, faCoffee, faBomb, faEdit,faTrash,faList,faPeopleGroup,faSearch,faCheck,faMoneyBillTransfer,faSignOut, faAddressBook, faUser, faDashboard, faSign,faSignIn);
 
 
 
@@ -44,9 +46,10 @@ function App() {
 
         <Route path="/about" element={<About/>}></Route>
         
-        <Route path='/sessionExpired' element={<SessionExpired/>}></Route>
+        {/* <Route path='/sessionExpired' element={<SessionExpired/>}></Route> */}
         <Route path='/addBeneficiary' element={<AddBeneficiary/>}></Route>
-        
+        <Route path='/viewBeneficiary' element={<ViewBeneficiary/>}></Route>
+
         <Route path='/imps' element={<ImpsPayment/>}></Route>
         <Route path='/user' element={<AccountDetails/>}></Route>
         <Route path='/account' element={<AccountSummary/>}></Route>

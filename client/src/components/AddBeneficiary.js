@@ -5,11 +5,21 @@ import Footer from './Footer';
 import CustomerService from "../services/CustomerService";
 import { useParams,useNavigate } from 'react-router-dom';
 import AuthenticationService from "../services/AuthenticationService";
+import { useEffect } from 'react';
+
 
 const AddBeneficiary = () => {
-
+  const history = useNavigate();
   const userId = AuthenticationService.getLoggedInUserName();
-  console.log(userId)
+  console.log('pp',userId)
+
+
+  useEffect(() => {
+    if (!AuthenticationService.isUserLoggedIn()) {
+      history('/login');
+    }
+  }, []);
+
   const [formData, setFormData] = useState({
     name: '',
     accountNumber: '',
@@ -29,6 +39,8 @@ const AddBeneficiary = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     CustomerService.addBeneficiary(formData,userId)
+    alert('Action processed successfully!')
+    history('/viewBeneficiary')
     // Handle form submission, e.g., send data to the server or perform validation
 
   };
@@ -73,8 +85,15 @@ const AddBeneficiary = () => {
           />
         </div>
         <div className="form-group">
-          <button type="submit" style ={{"margin-left":"100px"}}>Add Beneficiary</button>
-        </div>
+        {/* Define an inline arrow function in the onClick event */}
+        <button
+          type="submit"
+          style={{ marginLeft: "50px" }}
+          
+        >
+          Add Beneficiary
+        </button>
+      </div>
       </form>
     </div>
     <Footer/>

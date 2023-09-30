@@ -27,11 +27,13 @@ const NavBar = () => {
                     </li>
                     <li className='nav-item'>
                         <Link to="/addBeneficiary" className="nav-link">
-                            <span><FontAwesomeIcon icon="bomb"></FontAwesomeIcon></span> &nbsp;
+                            <span><FontAwesomeIcon icon="address-book"></FontAwesomeIcon></span> &nbsp;
                             Beneficiary</Link>
                     </li>
                     <li className='nav-item'>
-                            <Link to= {`/dashboard/${userName}`} className="nav-link">Dashboard</Link>
+                            <Link to= {`/dashboard/${userName}`} className="nav-link">
+                            <span><FontAwesomeIcon icon="dashboard"></FontAwesomeIcon></span> &nbsp;
+                                Dashboard</Link>
                     </li>
                     
                     <li className='nav-item'>
@@ -39,21 +41,22 @@ const NavBar = () => {
                             <span><FontAwesomeIcon icon="sign-out"></FontAwesomeIcon></span> &nbsp;
                             Logout</Link>
                     </li>
-                    <span className='user-style'>Welcome: {userName}
-                        {/* <img className='avatar' src='/images/avatar.jpg' alt='avatar' /> */}
+                    <li className='nav-item'>
+                    <span className='user-style'><FontAwesomeIcon icon="user"></FontAwesomeIcon> &nbsp; Welcome User: {userName}
 
                     </span>
+                    </li>
                 </>) : (
                     <>
 
                         <li className='nav-item'>
                             <Link to="/register" className="nav-link">
-                                <span><FontAwesomeIcon icon="bomb"></FontAwesomeIcon></span> &nbsp;
+                                <span><FontAwesomeIcon icon="sign"></FontAwesomeIcon></span> &nbsp;
                                 Register</Link>
                         </li>
                         <li className='nav-item'>
                             <Link to="/login" className="nav-link">
-                                <span><FontAwesomeIcon icon="bomb"></FontAwesomeIcon></span> &nbsp;
+                                <span><FontAwesomeIcon icon="sign-in"></FontAwesomeIcon></span> &nbsp;
                                 Login</Link>
                         </li>
                         <li className='nav-item'>

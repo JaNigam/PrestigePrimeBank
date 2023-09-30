@@ -16,6 +16,7 @@ class CustomerService{
 
     static getAccountById(userId){
         try{
+            console.log(CUSTOMERS_REST_API_URL + userId);
             return axios.get(CUSTOMERS_REST_API_URL + userId);
 
         }
@@ -34,6 +35,19 @@ class CustomerService{
         }
         catch (error) {
             console.error('Error adding beneficiary: ', error);
+        }
+    }
+
+    static async getBeneficiary(userId) {
+        try {
+
+            const resp = await axios.get( CUSTOMERS_REST_API_URL+ 'get-beneficiary/' + userId);
+            console.log("response:::::::", resp)
+            return resp;
+            
+        }
+        catch (error) {
+            console.error('Error getting beneficiary: ', error);
         }
     }
 

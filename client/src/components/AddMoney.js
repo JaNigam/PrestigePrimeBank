@@ -4,12 +4,13 @@ import { useNavigate, useParams } from 'react-router-dom'
 
 
 import AdminService from '../services/AdminService';
+import AdminLoginService from '../services/AdminLoginService';
 
 //Component to create or update a product
 
 function AddMoney() {
     const navigate = useNavigate();
-
+    const history = useNavigate();
     /*
     The useParams hook returns an object of key/value pairs of the dynamic params 
     from the current URL that were matched by the <Route path>. Child routes inherit 
@@ -27,14 +28,22 @@ function AddMoney() {
 
     //component lifecycle Management - ComponentUpdate
     useEffect(() => {
-        if (id !== 'add') {
-            // update product 
-            AdminService.getCustomerById(id).then((response) => {
-                const product = response.data;
-               
-                setBalance(product.balance);
-            });
-        }
+            if (!AdminLoginService.isUserLoggedIn()) {
+              history('/adminlogin');
+            }
+            else{
+                if (id !== 'add') {
+                    // update product 
+                    AdminService.getCustomerById(id).then((response) => {
+                        const product = response.data;
+                       
+                        setBalance(product.balance);
+                    });
+                }
+            }
+
+        
+        
 
 
     }, [id]);           //values -id triggers re render whenever they are updated in your program,

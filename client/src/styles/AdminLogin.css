@@ -1,0 +1,18 @@
+.title-adminLogin {
+    color: black;
+    font-size: 24px; /* Default font size for larger screens */
+}
+
+/* Media Query for screens smaller than 768px */
+@media (max-width: 768px) {
+    .title-adminLogin {
+        font-size: 20px; /* Adjusted font size for smaller screens */
+    }
+}
+
+/* Media Query for screens smaller than 480px (mobile devices) */
+@media (max-width: 480px) {
+    .title-adminLogin {
+        font-size: 18px; /* Adjusted font size for even smaller screens */
+    }
+}

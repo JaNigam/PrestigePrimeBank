@@ -1,39 +1,20 @@
 .app {
   display: flex;
-
   justify-content: center;
-  /* flex-direction: column; */
-  /* gap: 100px; */
   height: 100vh;
-  /* font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif; */
-  /* background-color: #f8f9fd; */
   background-color: lightblue;
-  /* width: 50%; */
-  /* float: left; */
 }
-/* .app2{
-    margin-top: 20%;
-    justify-content: center;
-    width: 50%;
-    float: right;
-  } */
 
 .splitScreen {
-  /* font-family: sans-serif; */
   justify-content: center;
-  /* gap: 100px; */
   height: 100vh;
-  /* font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif; */
   background-color: lightblue;
 
   display: flex;
   flex-direction: row;
 }
-/* .topPane{
-    width: '50%',
-} */
+
 .bottomPane {
-  /* margin-top: 20%; */
   justify-content: center;
   float: right;
   width: 50%;
@@ -48,7 +29,6 @@
 .image-login {
   justify-content: center;
   background-image: url("../../public/images/background-img.jpg");
-  /* background-blend-mode:hue; */
   background-size: 100%;
 }
 input[type="text"],
@@ -92,11 +72,9 @@ input[type="submit"]:hover {
   margin-left: 10%;
   width: 30vw;
   justify-content: center;
-  /* align-items: center; */
 }
 .abc {
   width: 100%;
-  /* background-color: black; */
 }
 .list-container {
   display: flex;
@@ -120,22 +98,15 @@ input[type="submit"]:hover {
 }
 
 .app {
-  /* font-family: sans-serif; */
   display: flex;
 
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  /* gap: 20px; */
-  /* height: 200% !important; */
-  /* font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif; */
   background-color: #f8f9fd;
   background-image: url("../../public/images/background-img.jpg");
-  /* background-blend-mode:hue; */
   background-size: 100%;
-  /* min-height: 30vh !important; */
   background-color: rgba(255, 255, 255, 0.5);
-  /* opacity: 0.5 !important; */
 }
 
 .registration-container {

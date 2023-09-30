@@ -24,11 +24,7 @@ const ChangePassword
         },
         body: JSON.stringify({ email, otp, password: newPassword }),
       });
-      console.log(2);
-      // const data = await response.json();
-      console.log(3);
       history('/login');
-      console.log(4);
     } catch (error) {
       console.error('Error:');
     }
@@ -72,7 +68,9 @@ const ChangePassword
             required
           />
         </div>
-        <button type="submit" className="submit-button-changePassword">Change Password</button>
+        <button type="submit" className="submit-button-changePassword"  onClick={() => {
+                     alert('Password Changed!');
+                    }}>Change Password</button>
       </form>
     </div>
     <div className='footer-changePassword'>

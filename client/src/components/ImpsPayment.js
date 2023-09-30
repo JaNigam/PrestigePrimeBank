@@ -1,17 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState ,useEffect} from 'react';
 import axios from 'axios'; // You may need to install this library
 import '.././styles/ImpsPayment.css'
 import NavBar from './NavBar';
 import Footer from './Footer';
 import CustomerService from '../services/CustomerService';
-
+import { useNavigate } from 'react-router-dom';
+import AuthenticationService from '../services/AuthenticationService';
 
 const ImpsPayment = () => {
+  const history = useNavigate();
   const [receiverAccNo, setRecieverAccNo] = useState('');
   const [senderAccNo, setSenderAccNo] = useState('');
   const [amount, setAmount] = useState('');
   const [remarks, setRemarks] = useState('');
   const [responseMessage, setResponseMessage] = useState('');
+
+  useEffect(() => {
+    if (!AuthenticationService.isUserLoggedIn()) {
+      history('/login');
+    }
+  }, []);
 
   const [transactionType, setTransactionType] = useState("option1");
 
@@ -36,8 +44,9 @@ const ImpsPayment = () => {
       // setResponseMessage(response.data.message);
 
       CustomerService.transferAmount(response);
+      history('/account/')
       
-
+      
     } catch (error) {
       console.error('Error:', error);
       setResponseMessage('An error occurred while processing the transaction.');
@@ -52,7 +61,7 @@ const ImpsPayment = () => {
         <h2>Fund Transfer</h2>
         <form onSubmit={handleSubmit}>
           <div>
-            <label>senderAccNo:</label>
+            <label>Sender Account Number:</label>
             <input
               type="text"
               value={senderAccNo}
@@ -60,7 +69,7 @@ const ImpsPayment = () => {
             />
           </div>
           <div>
-            <label>receiverAccNo:</label>
+            <label>Receiver Account Number:</label>
             <input
               type="text"
               value={receiverAccNo}
@@ -70,7 +79,7 @@ const ImpsPayment = () => {
 
               <div>
         <label>
-          Select a payment method
+          Select a Payment Method
             <select  value={transactionType} onChange={handleSelectedOption}>
             <option  value="option1">IMPS</option>
             <option  value="option2"> NEFT</option>

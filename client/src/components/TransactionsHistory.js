@@ -6,9 +6,9 @@ import SidePanel from "./sidepanel/SidePanel";
 import "../styles/Dashboard.css"
 // import { useAuth } from "./security/AuthContext"
 // import HeaderComponent from "./HeaderComponent"
-
+import AuthenticationService from "../services/AuthenticationService";
 export default function TransactionHistory() {
-
+    const history= useNavigate();
     // const AuthContext = useAuth()
     const { userId } = useParams();
     const [trxarr, setTrxarr] = useState([]);
@@ -19,7 +19,12 @@ export default function TransactionHistory() {
     useEffect(
         () => 
         {
-            getData()
+            if (!AuthenticationService.isUserLoggedIn()) {
+                history('/login');
+              }
+              else{
+                getData();
+              }
             
         },[customer.accountNo]
     )

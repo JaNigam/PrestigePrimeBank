@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams,useNavigate } from 'react-router-dom';
+import '.././styles/AdminView.css';
+import AdminLoginService from '../services/AdminLoginService';
+
 
 import AdminService from '../services/AdminService';
 import NavBar from './NavBar';
@@ -13,9 +16,17 @@ const AdminView = () => {
 
      // componentDidUpdate usage
     useEffect(() => {
-        AdminService.getCustomerById(id).then((res) => {
-            SetCustomers(res.data);
-        });
+
+        if (!AdminLoginService.isUserLoggedIn()) {
+              history('/adminlogin');
+            }
+            else{
+                AdminService.getCustomerById(id).then((res) => {
+                    SetCustomers(res.data);
+                });
+            }
+
+        
     }, [id]);  // //values -id triggers re render whenever they are updated in your program,
                 //you can add multiple values by separating them by commas
 
@@ -23,8 +34,8 @@ const AdminView = () => {
         history('/admin');
     };
     return (
-        <div>
-            <NavBar/>
+        <div className='app-adminView'>
+            {/* <NavBar/> */}
             <br />
             <div className="card col-md-6 offset-md-3">
                 <br></br>

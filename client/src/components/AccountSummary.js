@@ -13,11 +13,17 @@ export default function TransactionHistory() {
     // const { userId } = useParams()
     const [customer, setCustomer] = useState({});
     const userId = AuthenticationService.getLoggedInUserName();
-
+    const history = useNavigate();
     useEffect(
         () => 
         {
-            getData()
+                if (!AuthenticationService.isUserLoggedIn()) {
+                  history('/login');
+                }
+                else{
+                    getData()
+                }
+            
             
         },[customer.accountNo]
     )

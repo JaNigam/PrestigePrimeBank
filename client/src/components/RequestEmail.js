@@ -9,6 +9,7 @@ const RequestEmail = () => {
     const [email, setEmail] = useState('');
 
 
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -32,23 +33,39 @@ const RequestEmail = () => {
     };
 
     return (
-        <>
-        <NavBar/>
         <div className='app-requestEmail'>
-            <h2>Enter Email</h2>
-            <form onSubmit={handleSubmit}>
-                <input
-                className='input-requestEmail'
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                />
-                <button className='buttoninput-requestEmail' type="submit">Send OTP</button>
-            </form>
+            <NavBar />
+            <div className="form-container-requestEmail">
+                <h2>Enter Email </h2>
+                <form onSubmit={handleSubmit}>
+                    <div className="form-group-requestEmail" style={{ "width": "330px" }}
+                    >
+
+                        <label className='label-requestEmail'>Email:</label>
+                        <input
+                            type="email"
+                            value={email}
+                            className="input-field-requestEmail"
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                        />
+                    </div>
+
+                    <button type="submit" className="submit-button-requestEmail" onClick={() => {
+                     alert('Check you email for OTP');
+                    }}>Send OTP</button>
+                </form>
+            </div>
+            <div className='footer-requestEmail'>
+                <Footer />
+            </div>
+
         </div>
-        <Footer/>
-        </>
+
+
+
+
+
     );
 };
 
