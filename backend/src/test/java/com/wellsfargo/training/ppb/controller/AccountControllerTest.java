@@ -3,6 +3,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 
 
@@ -11,6 +12,8 @@ import com.wellsfargo.training.ppb.model.Account;
 import com.wellsfargo.training.ppb.model.Transaction;
 import com.wellsfargo.training.ppb.service.AccountService;
 import com.wellsfargo.training.ppb.service.TransactionService;
+
+import io.micrometer.common.lang.Nullable;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.doNothing;
@@ -28,6 +31,7 @@ import java.util.Optional;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.internal.matchers.Null;
 
 
 @SpringBootTest
@@ -57,7 +61,7 @@ class AccountControllerTest {
 	}
 
 	@Test
-	void testGetAllAccounts() {
+	void testGetAllAccounts_Success() {
 		
 		List<Account> sampleAccount = new ArrayList<>();
 
@@ -92,6 +96,18 @@ class AccountControllerTest {
 		
 		verify(aservice,times(1)).listAll();
 	}
+	
+	 @Test
+	    public void testGetAllAccounts_Error() {
+	        
+	        when(aservice.listAll()).thenThrow(new RuntimeException("An error occurred"));
+	        ResponseEntity<List<Account>> responseEntity = acontroller.getAllAccounts();
+	        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, responseEntity.getStatusCode());
+	        assertNull(responseEntity.getBody());
+	        verify(aservice, times(1)).listAll();
+	    }
+	
+	
 
 	@Test
 	void testGetAccountById() throws ResourceNotFoundException {
