@@ -1,5 +1,7 @@
 package com.wellsfargo.training.ppb.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,6 +29,7 @@ public class CurrentAddress {
 	//foreign key
 	@OneToOne
 	@JoinColumn(name="userId")
+	@JsonBackReference
 	private Customer userId;
 
 	public CurrentAddress(Long addressId, @NonNull String addressLine1, @NonNull String addressLine2, String landmark,

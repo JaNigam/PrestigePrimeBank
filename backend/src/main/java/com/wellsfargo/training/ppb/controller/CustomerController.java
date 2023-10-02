@@ -20,14 +20,16 @@ import org.springframework.web.bind.annotation.RestController;
 import com.wellsfargo.training.ppb.exception.ResourceNotFoundException;
 import com.wellsfargo.training.ppb.model.Account;
 import com.wellsfargo.training.ppb.model.Beneficiary;
+import com.wellsfargo.training.ppb.model.CurrentAddress;
 import com.wellsfargo.training.ppb.model.Customer;
 import com.wellsfargo.training.ppb.model.PasswordChangeBody;
 import com.wellsfargo.training.ppb.model.Transaction;
 import com.wellsfargo.training.ppb.service.AccountService;
 import com.wellsfargo.training.ppb.service.BeneficiaryService;
 import com.wellsfargo.training.ppb.repository.AccountRepository;
+import com.wellsfargo.training.ppb.repository.CurrentAddressRepository;
 import com.wellsfargo.training.ppb.repository.CustomerRepository;
-
+import com.wellsfargo.training.ppb.repository.PermanentAddressRepository;
 import com.wellsfargo.training.ppb.service.CustomerService;
 import com.wellsfargo.training.ppb.service.EmailSenderService;
 import com.wellsfargo.training.ppb.service.TransactionService;
@@ -61,10 +63,17 @@ public class CustomerController {
 	@Autowired
 	AccountRepository accrepo;
 	
+	@Autowired
+	CurrentAddressRepository curraddrepo;
+	
+	@Autowired
+	PermanentAddressRepository permaddrepo;
+	
 	@PostMapping("/create-customer")
 	public ResponseEntity<String> createCustomer(@RequestBody @Validated Customer cust) {
 		String createCust=custservice.saveCustomer(cust);
 		if(createCust!=null) {
+			
 			return ResponseEntity.ok("Registration Successfull");
 		}
 		else
@@ -232,6 +241,14 @@ public class CustomerController {
 		}
 		
 	}
+	
+//	@GetMapping("/get-address/{uid}")
+//	public ResponseEntity<CurrentAddress> getCurrentAddress(@PathVariable(value="uid") Long userId)
+//	{
+//		Optional<CurrentAddress> currAdd = curraddrepo.findByUserIdUserId(userId);
+//		return ResponseEntity.ok().body(currAdd.get());
+//		
+//	}
 	
 
 }

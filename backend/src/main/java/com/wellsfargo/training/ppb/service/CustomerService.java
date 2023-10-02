@@ -44,6 +44,16 @@ public class CustomerService {
 			Long userId = generateUniqueCustId();
 			cust.setUserId(userId);
 			
+			 // Set the customer for current address
+	        if (cust.getCurrentAddress() != null) {
+	            cust.getCurrentAddress().setUserId(cust);
+	        }
+
+	        // Set the customer for permanent address
+	        if (cust.getPermanentAddress() != null) {
+	            cust.getPermanentAddress().setUserId(cust);
+	        }
+			
 			
 			//sending email to the newly registered customer
 			String toMail = cust.getEmail();

@@ -1,5 +1,7 @@
 package com.wellsfargo.training.ppb.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,6 +30,7 @@ public class PermanentAddress {
 	//foreign key
 	@OneToOne
 	@JoinColumn(name="user_id")
+	@JsonBackReference
 	private Customer userId;
 
 
