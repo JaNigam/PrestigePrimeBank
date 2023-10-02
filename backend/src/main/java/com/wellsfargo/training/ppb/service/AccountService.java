@@ -54,6 +54,7 @@ public class AccountService {
 		Double currentBalance = acc.getBalance();
 		Double newBalance = currentBalance+moneyToAdd;
 		acc.setBalance(newBalance);
+		
 		accrepo.save(acc);
 		return "Money added!";
 	}

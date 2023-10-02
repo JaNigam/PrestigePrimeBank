@@ -1,6 +1,7 @@
 package com.wellsfargo.training.ppb.service;
 
 import java.security.SecureRandom;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
@@ -8,6 +9,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.wellsfargo.training.ppb.model.Account;
 import com.wellsfargo.training.ppb.model.Customer;
 import com.wellsfargo.training.ppb.repository.AccountRepository;
 import com.wellsfargo.training.ppb.repository.CustomerRepository;
@@ -137,6 +139,10 @@ public String updateCustomer(Customer cust) {
 	         return false;
 	     }
 	 }
+	 
+	 public List<Customer> listAllCustomers(){
+			return custrepo.findAll();
+		}
 
 
 }

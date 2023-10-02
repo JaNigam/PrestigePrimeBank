@@ -73,10 +73,12 @@ public class AdminController {
 		new ResourceNotFoundException("Admin Doesn't Exist!"));
 		
 		if(userId.equals(a.getUserId()) && password.equals(a.getPassword())) {
-			adminservice.setLoginStatus(userId, true);
+			a.setIsLoggedIn(true);
+			adminservice.saveAdmin(a);
+			return true;
 		}
 		
-		return adminservice.getLoginStatus(userId);
+		return false;
 	}
 	
 	/*
@@ -88,7 +90,7 @@ public class AdminController {
 			
 			adminservice.loginAdmin(adminId).orElseThrow(() -> new 
 					ResourceNotFoundException("Admin Does Not Exist For the Given Id: "+adminId));
-			
+			 
 			if(adminservice.getLoginStatus(adminId))
 			{
 				List<Account> accounts = adminservice.listAllAccounts();
@@ -133,7 +135,7 @@ public class AdminController {
 			}
 		}
 		else {
-			return ResponseEntity.badRequest().body("Admin not authenticated");
+			return ResponseEntity.badRequest().body("Authentication Failed!");
 		}
 	}
 	
@@ -149,7 +151,7 @@ public class AdminController {
 			return ResponseEntity.ok().body("Account Created Successfully!");
 			}
 			else {
-				return ResponseEntity.badRequest().body("Admin not authenticated");
+				return ResponseEntity.badRequest().body("Authentication Failed!");
 			}
 		}
 	
@@ -175,7 +177,7 @@ public class AdminController {
 				return ResponseEntity.ok().body(result);
 			}else
 			{
-				return ResponseEntity.badRequest().body("Admin not authenticated");
+				return ResponseEntity.badRequest().body("Authentication Failed!");
 			}
 				
 		}
@@ -187,7 +189,7 @@ public class AdminController {
 			if(adminservice.getLoginStatus(adminId))
 			{
 				
-				System.out.println(moneyToAdd);
+//				System.out.println(moneyToAdd);
 				Account account = accservice.getSingleAccount(accountNo).orElseThrow(()-> new 
 						ResourceNotFoundException("Account not Found for this ID : " +accountNo));
 				
@@ -196,7 +198,7 @@ public class AdminController {
 				return ResponseEntity.ok().body(status);
 			}else
 			{
-				return ResponseEntity.badRequest().body("error occured");
+				return ResponseEntity.badRequest().body("Authentication Failed!");
 			}
 			
 			
@@ -209,7 +211,7 @@ public class AdminController {
 			if(adminservice.getLoginStatus(adminId)) {
 			accservice.getSingleAccount(accountNo).orElseThrow(()-> new 
 					ResourceNotFoundException("Account not Found for this User : " + accountNo));
-			
+			 
 			accservice.deleteAccount(accountNo);
 			Map<String, Boolean> response=new HashMap<String, Boolean>();
 			response.put("deleted", Boolean.TRUE);
@@ -239,20 +241,20 @@ public class AdminController {
 			
 				if(adminservice.getLoginStatus(adminId)) {
 					
-					//fetch and pasrse the JSON object
+					//fetch and parse the JSON object
 					ObjectMapper objectMapper = new ObjectMapper();
 		            JsonNode jsonNode = objectMapper.readTree(validationData);
 					
 		            Long custId = jsonNode.get("custId").asLong();
 		            Boolean validation = jsonNode.get("setValidate").asBoolean();
 					
-					custservice.getSingleCustomer(custId).orElseThrow(()-> new ResourceNotFoundException("customer account does not exist"+custId));
+					Customer existingCustomer = custservice.getSingleCustomer(custId).orElseThrow(()-> new ResourceNotFoundException("customer account does not exist "+custId));
 					
-					Optional<Customer> isValidatedCustomer = custservice.getSingleCustomer(custId);
-					isValidatedCustomer.get().setValidCustomer(validation);
-					custrepo.save(isValidatedCustomer.get());
 					
-					return ResponseEntity.ok().body(isValidatedCustomer.get());
+					existingCustomer.setValidCustomer(validation);
+					custrepo.save(existingCustomer);
+					
+					return ResponseEntity.ok().body(existingCustomer);
 				}else {return ResponseEntity.badRequest().body(null);}
 				
 				

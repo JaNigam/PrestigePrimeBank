@@ -77,7 +77,7 @@ public class AdminService {
       				
       		
       		//sending account details to the customer through email
-      		String toMail = c.getEmail();
+      		String toMail = c.getEmail(); 
 			String subject = "Account Creation Successfull!";
 			String body = "Hi, "+c.getName()+"\n\nWe would like to inform you that your account has been successfully created at our bank."
 			+"\n\nYour Account Details are:"
@@ -87,7 +87,7 @@ public class AdminService {
 			+"\n\n\nWarm Regards\nPrestige Prime Bank\nElevating Excellence In Banking.";
 			mailservice.sendSimpleEmail(toMail, body, subject);
 			
-			
+			 
       		Account savedAccount= accrepo.save(account);
       		return Optional.ofNullable(savedAccount);
           }

@@ -179,7 +179,7 @@ class CustomerControllerTest {
 		existingcust.setMobile(1234567890);
 		existingcust.setEmail("kapil@example.com");
 		existingcust.setOptForNetBanking(false);
-		
+		 
 		currentAddress.setAddressId(1L);
         currentAddress.setAddressLine1("Malviya Nagar");
         currentAddress.setAddressLine2("Jaipur");

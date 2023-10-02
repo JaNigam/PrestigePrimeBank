@@ -191,6 +191,28 @@ public class CustomerController {
 		Account a = accrepo.findByCustomer(c);
 		return ResponseEntity.ok().body(a);
 	}
+	
+	//get details of a single customer
+	@GetMapping("/get-customer/{customerid}")
+	public ResponseEntity<Customer> getCustomerById(@PathVariable(value="customerid")Long userId) throws
+	ResourceNotFoundException {
+		
+		Customer c = custservice.getSingleCustomer(userId).orElseThrow(()-> new 
+				ResourceNotFoundException("User not Found for this ID : " + userId));
+		
+		return ResponseEntity.ok().body(c);
+	}
+	
+	//fetch all the customers
+	@GetMapping("/get-all-customers")
+	public ResponseEntity<List<Customer>> fetchAllCustomers(Long userId) throws
+	ResourceNotFoundException {
+		
+		List<Customer> allCustomers = custservice.listAllCustomers();
+		
+		return ResponseEntity.ok().body(allCustomers);
+	}
+	
 
 	
 	//get the list of beneficiaries associated to a customer Id
