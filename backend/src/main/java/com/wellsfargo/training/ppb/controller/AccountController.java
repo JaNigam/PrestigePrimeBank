@@ -62,7 +62,7 @@ public class AccountController {
 	public ResponseEntity<Account> getAccountById(@PathVariable(value="id")Long accountNo) throws
 	ResourceNotFoundException {
 		Account a=accservice.getSingleAccount(accountNo).orElseThrow(()-> new 
-				ResourceNotFoundException("Account not Found for this ID : " + accountNo));
+				ResourceNotFoundException("Product not Found for this ID : " + accountNo));
 		return ResponseEntity.ok().body(a);
 	}
 	
@@ -82,7 +82,7 @@ public class AccountController {
 		return ResponseEntity.ok().body(response);
 	}
 	   
-	// GET http://localhost:8083/ppb/customer/accounts/123456/transactions-between-dates?startDate=2021-01-01&endDate=2021-12-31
+	// GET http://localhost:8083/ppb/customer/transactions-between-dates?startDate=2021-01-01&endDate=2021-12-31
 	@GetMapping("/accounts/{id}/transactions-between-dates")
     public ResponseEntity<List<Transaction>> getTransactionsBetweenDates(
     		@PathVariable(value="id")Long accountNo,
