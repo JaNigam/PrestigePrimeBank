@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom'
 import '../styles/NavBar.css'
+import Navbar from 'react-bootstrap/Navbar'
 import AuthenticationService from '../services/AuthenticationService';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -15,7 +16,7 @@ const NavBar = () => {
 
 
     return (
-        <nav className='navbar'>
+        <Navbar className='navbar'>
 
             <ul className='nav-list'>
 
@@ -69,7 +70,7 @@ const NavBar = () => {
                     </>
                 )}
             </ul>
-        </nav>
+        </Navbar>
     );
 }
 

@@ -74,8 +74,7 @@ function Login() {
       <NavBar></NavBar>
 
       <div className="login-form form">
-      <h2 className="title" style={{ color: 'black' }}>Login to your Account</h2>
-
+        <h2 className="login-title">Login to your Account</h2>
         <div className="input-container">
           <label><FontAwesomeIcon icon={faUser} />&nbsp; User Id:</label>
 
@@ -110,6 +109,9 @@ function Login() {
           <div className="button-container1">
             <Link to="/register">New User?</Link>
           </div>
+          {/* <div className="button-container1">
+            <Link to="/register">Forget UserID?</Link>
+          </div> */}
           <div >
             <Link to="/requestemail">Forgot Password?</Link>
           </div>

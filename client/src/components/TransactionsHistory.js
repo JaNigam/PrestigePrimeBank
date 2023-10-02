@@ -50,9 +50,7 @@ export default function TransactionHistory() {
     }
 
     const handleSubmit = async (e) => {
-                e.preventDefault();
-
-
+        e.preventDefault();
         CustomerService.viewTransactions(customer.accountNo, startDate,endDate).then((res) => {
             setTrxarr(res.data)
         })
@@ -127,10 +125,6 @@ export default function TransactionHistory() {
                             <th scope="col">Status</th>
                         </tr>
                     </thead>
-                    {/* </table> */}
-                    {/* </div> */}
-                    {/* <div className="tbl-content"> */}
-                        {/* <table  cellspacing="0" cellPadding="0" border="0"> */}
                             <tbody>
                             {
                                 trxarr.map(

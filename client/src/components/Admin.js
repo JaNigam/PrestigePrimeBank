@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
 import AdminService from "../services/AdminService";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ".././styles/Admin_Dashboard.css";
-import NavBar from "./NavBar";
 import AdminLoginService from "../services/AdminLoginService";
 
 function Admin() {
@@ -12,7 +10,6 @@ function Admin() {
 
   //state management using useState() react Hooks
   const [customers, SetCustomers] = useState([]);
-
   const [message, setMessage] = useState("");
   //React Hook to manage lifecycle of a component -  useEffect
   useEffect(() => {
@@ -23,7 +20,7 @@ function Admin() {
         fetchProducts(); //invokes fetchPoducts() when component is rendered
       }
     
-  }, []);
+  }, [customers]);
 
   const fetchProducts = () => {
     AdminService.getCustomers().then((response) => {
@@ -44,6 +41,7 @@ function Admin() {
   const [value, setValue] = useState(0);
   const validateCust = (id) => {
     AdminService.getCustomerById(id).then((response) => {
+      console.log("hi" , response.data);
       const product = response.data;
       const validCustomerDetails = { setValidate: 1, custId: product.customer.userId };
       setValidCustomer(1);
@@ -88,10 +86,12 @@ function Admin() {
           </thead>
           <tbody>
             {customers.map((cust) => (
-              <tr key={cust.Id}>
-                <td className="td-admin"> {cust.accountNo} </td>
+              
+              <tr key={cust.Id} style={cust.customer.validCustomer===true ? {backgroundColor:"#dbf4d8"} : {backgroundColor:"#bb1133"} }  >
+                <td className="td-admin" > {cust.accountNo} </td>
                 <td className="td-admin"> {cust.accountType} </td>
                 <td className="td-admin"> {cust.balance} </td>
+
                 <td className="td-admin1">
                   <button
                     className="btn btn-admin btn-success button-css"
@@ -118,6 +118,7 @@ function Admin() {
                       <FontAwesomeIcon icon="list"></FontAwesomeIcon>
                     </span>
                   </button>
+                  {cust.customer.validCustomer===false &&
                   <button
                     className="btn btn-admin btn-secondary button-css"
                     onClick={() => {
@@ -128,7 +129,7 @@ function Admin() {
                     <span>
                       <FontAwesomeIcon icon="check"></FontAwesomeIcon>
                     </span>
-                  </button>
+                  </button>}
                 </td>
               </tr>
             ))}

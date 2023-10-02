@@ -3,6 +3,8 @@ import './../styles/AccountDetails.css'
 import NavBar from './NavBar';
 import AuthenticationService from '../services/AuthenticationService';
 import CustomerService from '../services/CustomerService';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {fasolid , faxmark} from  "@fortawesome/free-solid-svg-icons"
 import { Button } from 'react-bootstrap';
 import Alert from 'react-bootstrap/Alert'
 import { useNavigate } from 'react-router-dom';
@@ -92,15 +94,25 @@ function getData() {
   return (
     <>
     <NavBar/>
-    {/* <Alert variant="success" style={{ width: "35rem" , display: "flex" , flexDirection: "end" }}>
-        <Alert.Heading>
-          The information has been updated
-        </Alert.Heading>
-    </Alert> */}
+    
 
     <br></br>
+    <div  style={{ marginTop: "5px", marginBottom: "0"}}>
+    <Alert className="d-flex justify-content-center" show={showAlert} variant={alertVariant} style={{ padding: "10px" , size: "1px" , width: "auto" ,height: "50px", display: "flex" , flexDirection: "end" }}>
+        {/* <p> */}
+          Information updated
+        {/* </p> */}
+        <hr/>
+        <div className="d-flex justify-content-end">
+          <Button onClick={() => setShowAlert(false)} variant={alertVariant}>
+          <FontAwesomeIcon icon="fasolid faxmark" />
+          </Button>
+        </div>
+    </Alert>
     <div className="personal-details-form">
       <h2>Personal Details</h2>
+
+      
       
       {/* <div >  */}
           {/* </div> */}
@@ -234,29 +246,17 @@ function getData() {
 
             />
           </div>
-          <div className="form-field">
-            <label htmlFor="occupation">Occupation:</label>
-            <input
-              type="text"
-              id="occupation"
-              name="occupation"
-              defaultValue={customer.occupation}
-              onChange={handleChange}
-              disabled={!disabled}
-
-            />
-          </div>
+          
         <div className="form-row">
           <div className="form-field">
-            <label htmlFor="occupationType">Occupation Type:</label>
+            <label htmlFor="occType">Occupation Type:</label>
             <input
               type="text"
-              id="occupationType"
-              name="occupationType"
-              defaultValue={customer.occupationType}
+              id="occType"
+              name="occType"
+              defaultValue={customer.occType}
               onChange={handleChange} 
               disabled={!disabled}
-
             />
           </div>
           </div>
@@ -295,6 +295,8 @@ function getData() {
       </form>
       <button type="submit"  style={{ "marginLeft": "270px"}} onClick={handleUpdate}>Update Information</button>
     </div>
+    </div>
+
     
     </>
   );

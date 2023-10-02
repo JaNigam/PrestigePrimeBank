@@ -14,6 +14,11 @@
 body {
   overflow-x: hidden;
   font-family: "Poppins", sans-serif;
+  background-image: url("../public/images/background-img.jpg");
+  background-size: 100%;
+  background-attachment: fixed;
+
+
 }
 
 .App-logo {

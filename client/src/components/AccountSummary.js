@@ -45,9 +45,10 @@ export default function TransactionHistory() {
     return (
         <>
         <NavBar/>
+        <div className='dashboard'>
         <SidePanel/>
 
-        <section className="container" style={{"marginLeft":"250px"}}>
+        <section className="container" >
             <h1 className="title">Dashboard {'>'} Account Summary</h1>
             <div className="tbl-header">
                 <h4 style={{'color': 'black', 'textAlign': 'left' , 'padding' : '10px'}}> Account Summary </h4>
@@ -90,6 +91,7 @@ export default function TransactionHistory() {
         {/* </div> */}
         {/* <div className="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div className="ps__rail-y" style="top: 0px; height: 410px; right: 0px;"><div className="ps__thumb-y" tabindex="0" style="top: 0px; height: 296px;"></div></div></div></div></div> */}
         </section>
+        </div>
         </>
     )
 }

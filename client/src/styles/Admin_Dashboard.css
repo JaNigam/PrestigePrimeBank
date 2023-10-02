@@ -95,3 +95,12 @@
       font-size: 16px; /* Adjust the font size for smaller screens */
   }
 }
+
+.valid-customer{
+  background-color: green;
+}
+
+.customer{
+  background-color: red;
+
+}

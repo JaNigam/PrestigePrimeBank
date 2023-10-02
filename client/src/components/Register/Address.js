@@ -8,8 +8,10 @@ const Address = () => {
 
   const content = (
     <>
+    
       {/* <NavBar/> */}
     <div className="container">
+      
       <div className="row">
         <div className="col md-6">
           <label htmlFor="name">Name</label>

@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '.././styles/AddBeneficiary.css'
 import NavBar from './NavBar';
 import Footer from './Footer';
 import CustomerService from "../services/CustomerService";
-import { useParams,useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import AuthenticationService from "../services/AuthenticationService";
-import { useEffect } from 'react';
 
 
 const AddBeneficiary = () => {
   const history = useNavigate();
   const userId = AuthenticationService.getLoggedInUserName();
-  console.log('pp',userId)
+  const [msgCondition, setmsgCondition] = useState(null);
+  const [message, setMessage] = useState("");
 
 
   useEffect(() => {
@@ -28,6 +28,10 @@ const AddBeneficiary = () => {
     phone: '',
   });
 
+  const divStyles = {
+    color: msgCondition ? "green" : "red",
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -37,11 +41,17 @@ const AddBeneficiary = () => {
   };
 
   const handleSubmit = (e) => {
+    try{
     e.preventDefault();
     CustomerService.addBeneficiary(formData,userId)
     alert('Action processed successfully!')
     history('/viewBeneficiary')
     // Handle form submission, e.g., send data to the server or perform validation
+    }
+    catch(error){
+      console.log("error adding beneficiary" , error )
+    
+    }
 
   };
 
@@ -100,5 +110,6 @@ const AddBeneficiary = () => {
     </>
   );
 };
+
 
 export default AddBeneficiary;

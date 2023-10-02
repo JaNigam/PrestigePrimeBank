@@ -1,10 +1,9 @@
 import React, { useState ,useEffect} from 'react';
-import axios from 'axios'; // You may need to install this library
+import { useNavigate } from 'react-router-dom';
 import '.././styles/ImpsPayment.css'
 import NavBar from './NavBar';
 import Footer from './Footer';
 import CustomerService from '../services/CustomerService';
-import { useNavigate } from 'react-router-dom';
 import AuthenticationService from '../services/AuthenticationService';
 
 const ImpsPayment = () => {
@@ -14,14 +13,25 @@ const ImpsPayment = () => {
   const [amount, setAmount] = useState('');
   const [remarks, setRemarks] = useState('');
   const [responseMessage, setResponseMessage] = useState('');
+  const [msgCondition, setmsgCondition] = useState(null);
+  const [transactionType, setTransactionType] = useState('');
+  const [customer, setCustomer] = useState({});
 
+  const [message, setMessage] = useState("");
+  
+  const userId= AuthenticationService.getLoggedInUserName()
   useEffect(() => {
     if (!AuthenticationService.isUserLoggedIn()) {
       history('/login');
     }
+    CustomerService.getAccountById(userId).then((res)=> {
+    setCustomer(res.data);
+  })
   }, []);
 
-  const [transactionType, setTransactionType] = useState("option1");
+  const divStyles = {
+    color: msgCondition ? "green" : "red",
+  };
 
 	const  handleSelectedOption = (event) => {
 		setTransactionType(event.target.value);
@@ -32,7 +42,11 @@ const ImpsPayment = () => {
     e.preventDefault();
 
     try {
+
       // Send the transaction data to the backend for processing
+      if(amount>customer.balance)
+      {
+      
       const response = {
         senderAccNo,
         receiverAccNo,
@@ -42,14 +56,25 @@ const ImpsPayment = () => {
 
       // Handle the response from the backend
       // setResponseMessage(response.data.message);
+      console.log(response)
 
       CustomerService.transferAmount(response);
       history('/account/')
-      
-      
+      setmsgCondition(true);
+      alert("Fund successfully transferred! Redirecting...");
+        // AuthenticationService.registerSuccessfullLogin(userId);
+        setTimeout(() => {
+          history("/account")
+        }, 3000);   
+      }
+      else{
+        alert("insufficient balance")
+      }  
+       
     } catch (error) {
       console.error('Error:', error);
       setResponseMessage('An error occurred while processing the transaction.');
+      setMessage("An error occurred while processing the transaction");
     }
   };
 
@@ -59,7 +84,9 @@ const ImpsPayment = () => {
       <br />
       <div className="transaction-container">
         <h2>Fund Transfer</h2>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={
+          handleSubmit
+          }>
           <div>
             <label>Sender Account Number:</label>
             <input
@@ -80,13 +107,13 @@ const ImpsPayment = () => {
               <div>
         <label>
           Select a Payment Method
-            <select  value={transactionType} onChange={handleSelectedOption}>
-            <option  value="option1">IMPS</option>
-            <option  value="option2"> NEFT</option>
-            <option  value="option3"> RTGS</option>
+            <select  value={transactionType} onChange={ (e)=> { setTransactionType(e.target.value) }}>
+            <option  value=""> Select</option>
+            <option  value="IMPS"> IMPS</option>
+            <option  value="NEFT"> NEFT</option>
+            <option  value="RTGS"> RTGS</option>
           </select>
         </label>
-        {/* <p>Selected option: {selectedOption}</p> */}
       </div>
 
           <div>
@@ -107,8 +134,11 @@ const ImpsPayment = () => {
           </div>
         
           <div > 
-            <button type="submit" style ={{"margin-left":"100px"}}>Initiate Transaction</button>
+            <button type="submit" style ={{display: "flex",  "justifyContent": "center" , marginTop: "10px"}}>Initiate Transaction</button>
           </div>
+          <div style={divStyles}>
+          {message && <p className="message">{message}</p>}
+        </div>
         </form>
         {responseMessage && <p>{responseMessage}</p>}
       </div>

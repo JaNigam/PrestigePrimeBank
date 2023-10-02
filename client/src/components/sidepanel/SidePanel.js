@@ -61,25 +61,25 @@ function SidePanel() {
         
         <li>
           <FontAwesomeIcon icon={faUser} style={{"margin-right": "10px" }}/>
-          {!isCollapsed && <Link to = "/user" style={{"fontSize": "16px"}}> User Profile</Link>}
+          {!isCollapsed && <Link to = "/user" style={{"fontSize": "16px" , "textDecoration": "none"}}> User Profile</Link>}
         </li>
         
         <li>
           <FontAwesomeIcon icon={faHome} style={{"margin-right": "5px"}} />
-          {!isCollapsed && <Link to={`/dashboard/${id}`} style={{"fontSize": "16px"}}> {' '} Transaction History</Link> }
+          {!isCollapsed && <Link to={`/dashboard/${id}`} style={{"fontSize": "16px" , "textDecoration": "none"}}> {' '} Transaction History</Link> }
         </li>
         <li>
           <FontAwesomeIcon icon={faHome} style={{"margin-right": "5px"}} />
-          {!isCollapsed && <Link to="/account/" style={{"fontSize": "16px"}}> {' '} Account Summary</Link> }
+          {!isCollapsed && <Link to="/account/" style={{"fontSize": "16px" , "textDecoration": "none"}}> {' '} Account Summary</Link> }
         </li>
         <li>
             <FontAwesomeIcon icon={faUserPlus} style={{ "margin-right": "5px" }} />
-            {!isCollapsed && <Link to="/requestemail" style={{ "fontSize": "16px" }}> {' '} Change Password</Link>}
+            {!isCollapsed && <Link to="/requestemail" style={{ "fontSize": "16px" , "textDecoration": "none"}}> {' '} Change Password</Link>}
         </li>
         
         <li>
-          <FontAwesomeIcon icon={faMoneyBill} />
-          {!isCollapsed && <DropdownButton style={{"margin": "0"}} variant="link" id="dropdown-basic-button" title="Money Transfer">
+          <FontAwesomeIcon icon={faMoneyBill} style={{ "margin-right": "5px" }}/>
+          {!isCollapsed && <DropdownButton style={{"margin": "0" }} variant="link" id="dropdown-basic-button" title="Money Transfer">
             <Dropdown.Item ><Link to ="/addBeneficiary">Add Beneficiary </Link> </Dropdown.Item> 
             <Dropdown.Item ><Link to ="/imps">Fund Transfer </Link> </Dropdown.Item> 
             <Dropdown.Item ><Link to ="/viewBeneficiary">Beneficiary Accounts</Link> </Dropdown.Item> 

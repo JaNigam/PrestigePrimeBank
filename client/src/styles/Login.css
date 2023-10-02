@@ -177,9 +177,10 @@ input[type="submit"]:hover {
   font-size: 12px;
 }
 
-.title {
+.login-title {
   font-size: 25px;
   margin-bottom: 20px;
+  color: black
 }
 
 .input-container {
