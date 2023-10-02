@@ -336,5 +336,87 @@ class CustomerControllerTest {
 	    verify(custservice, times(1)).getSingleCustomer(userId);
 	    verify(accrepo, times(1)).findByCustomer(cust);
 	}
+	
+	@Test
+	void testGetAllBeneficiaries() {
+	    Long userId = 123L;
+
+	    // Create a list of beneficiaries for testing
+	    List<Beneficiary> beneficiaries = new ArrayList<>();
+	    Beneficiary beneficiary1 = new Beneficiary();
+	    beneficiary1.setBeneficiaryName("Beneficiary1");
+	    beneficiaries.add(beneficiary1);
+
+	    Beneficiary beneficiary2 = new Beneficiary();
+	    beneficiary2.setBeneficiaryName("Beneficiary2");
+	    beneficiaries.add(beneficiary2);
+
+	    // Mock the service method to return the list of beneficiaries
+	    when(bservice.listAllBeneficiaries(userId)).thenReturn(Optional.of(beneficiaries));
+
+	    // Call the controller method
+	    ResponseEntity<List<Beneficiary>> responseEntity = custcontroller.getAllBeneficiaries(userId);
+
+	    // Assertions
+	    assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+	    assertEquals(beneficiaries, responseEntity.getBody());
+
+	    // Verify that the service method was called
+	    verify(bservice, times(1)).listAllBeneficiaries(userId);
+	}
+	
+	@Test
+	void testGetCustomerById() throws ResourceNotFoundException {
+	    Long userId = 123L;
+
+	    // Create a sample customer for testing
+	    Customer customer = new Customer();
+	    customer.setUserId(userId);
+	    customer.setName("John");
+	    customer.setEmail("john@example.com");
+
+	    // Mock the service method to return the customer
+	    when(custservice.getSingleCustomer(userId)).thenReturn(Optional.of(customer));
+
+	    // Call the controller method
+	    ResponseEntity<Customer> responseEntity = custcontroller.getCustomerById(userId);
+
+	    // Assertions
+	    assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+	    assertEquals(customer, responseEntity.getBody());
+
+	    // Verify that the service method was called
+	    verify(custservice, times(1)).getSingleCustomer(userId);
+	}
+
+	@Test
+	void testFetchAllCustomers() throws ResourceNotFoundException {
+	    // Create a list of customers for testing
+	    List<Customer> customers = new ArrayList<>();
+	    Customer customer1 = new Customer();
+	    customer1.setUserId(1L);
+	    customer1.setName("John");
+	    customer1.setEmail("john@example.com");
+	    customers.add(customer1);
+
+	    Customer customer2 = new Customer();
+	    customer2.setUserId(2L);
+	    customer2.setName("Jane");
+	    customer2.setEmail("jane@example.com");
+	    customers.add(customer2);
+
+	    // Mock the service method to return the list of customers
+	    when(custservice.listAllCustomers()).thenReturn(customers);
+
+	    // Call the controller method
+	    ResponseEntity<List<Customer>> responseEntity = custcontroller.fetchAllCustomers(null);
+
+	    // Assertions
+	    assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+	    assertEquals(customers, responseEntity.getBody());
+
+	    // Verify that the service method was called
+	    verify(custservice, times(1)).listAllCustomers();
+	}
 
 }

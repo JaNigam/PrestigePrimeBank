@@ -242,13 +242,6 @@ public class CustomerController {
 		
 	}
 	
-//	@GetMapping("/get-address/{uid}")
-//	public ResponseEntity<CurrentAddress> getCurrentAddress(@PathVariable(value="uid") Long userId)
-//	{
-//		Optional<CurrentAddress> currAdd = curraddrepo.findByUserIdUserId(userId);
-//		return ResponseEntity.ok().body(currAdd.get());
-//		
-//	}
 	
 
 }
