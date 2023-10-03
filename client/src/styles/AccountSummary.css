@@ -1,0 +1,16 @@
+tbody{
+    max-width: 450px;
+}
+
+table-header{
+    width: 10px;
+    word-wrap: break-word;
+
+    padding: 20px 15px;
+    text-align: left;
+    font-weight: 500;
+    font-size: 12px;
+    /* color: #fff; */
+    color: black;
+    text-transform: uppercase;
+  }

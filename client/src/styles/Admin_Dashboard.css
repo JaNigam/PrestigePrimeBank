@@ -1,0 +1,109 @@
+.button-css {
+  width: auto;
+  display: flex;
+}
+
+.app-admin {
+  min-height: 100vh;
+  background: radial-gradient(skyblue, darkblue);
+  background-image: url("../../public/images/background-img.jpg");
+  background-blend-mode: hue;
+  background-size: 100%;
+}
+
+.app-admin h1 {
+  color: rgb(255, 255, 255) !important;
+}
+
+.table-admin {
+  text-color: rgb(0, 0, 0);
+  background-color: rgba(255, 254, 255, 0.945);
+  border-bottom-width: var(--bs-border-width);
+  box-shadow: inset 0 0 0 9999px var(--bs-table-bg-state, var(--bs-table-bg-type, var(--bs-table-accent-bg)));
+}
+
+.td-admin {
+  color: rgb(11, 11, 11);
+  font-size: large;
+ 
+}
+
+.btn-admin {
+  display: inline-block;
+}
+
+.table-admin {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.table-admin th,
+.table-admin td {
+  text-align: center;
+}
+
+.table-admin th {
+  background-color: #f2f2f2;
+  width: 40vh;
+}
+
+.button-css {
+  margin: 4px;
+  display: inline-block;
+}
+
+.td-admin1 {
+  display: flex;
+  align-items: center;
+  /* width: 10px; */
+  /* Align buttons vertically center */
+}
+
+.td-admin11 button {
+  margin-left: 10px !important;
+  margin-right: 0px !important;
+  /* Add some space between buttons */
+}
+
+.row {
+  --bs-gutter-x: 1.5rem;
+  --bs-gutter-y: 0;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: calc(-1 * var(--bs-gutter-y));
+  margin-left: calc(-.5 * var(--bs-gutter-x));
+}
+
+.td-admin1 button {
+  margin-right: 5px;
+  /* Add some space between buttons */
+  padding: 6px 10px;
+  /* Adjust the padding as needed */
+}
+
+.button-admin {
+  width: 9%;
+  margin: 0 auto; /* Center the button */
+  text-align: center !important;
+  border-radius: 10px;
+  color: rgb(246, 246, 249);
+  background-color: rgb(8, 103, 212);
+  font-size: larger;
+}
+
+/* Media Query for screens smaller than 768px */
+@media (max-width: 768px) {
+  .button-admin {
+      width: 100%; /* Adjust the width for smaller screens */
+      font-size: 16px; /* Adjust the font size for smaller screens */
+  }
+}
+
+.valid-customer{
+  background-color: green;
+}
+
+.customer{
+  background-color: red;
+
+}
