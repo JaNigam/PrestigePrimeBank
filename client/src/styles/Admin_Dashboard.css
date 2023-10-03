@@ -25,6 +25,7 @@
 .td-admin {
   color: rgb(11, 11, 11);
   font-size: large;
+ 
 }
 
 .btn-admin {
@@ -54,11 +55,13 @@
 .td-admin1 {
   display: flex;
   align-items: center;
+  /* width: 10px; */
   /* Align buttons vertically center */
 }
 
-.td-admin1 button {
-  margin-right: 5px;
+.td-admin11 button {
+  margin-left: 10px !important;
+  margin-right: 0px !important;
   /* Add some space between buttons */
 }
 

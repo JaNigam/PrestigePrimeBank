@@ -4,6 +4,7 @@ import AdminService from "../services/AdminService";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ".././styles/Admin_Dashboard.css";
 import AdminLoginService from "../services/AdminLoginService";
+import Admin2 from "./Admin2"
 
 function Admin() {
   const history = useNavigate();
@@ -14,7 +15,7 @@ function Admin() {
   //React Hook to manage lifecycle of a component -  useEffect
   useEffect(() => {
       if (!AdminLoginService.isUserLoggedIn()) {
-        history('/login');
+        history('/adminlogin');
       }
       else{
         fetchProducts(); //invokes fetchPoducts() when component is rendered
@@ -23,7 +24,7 @@ function Admin() {
   }, [customers]);
 
   const fetchProducts = () => {
-    AdminService.getCustomers().then((response) => {
+    AdminService.getAccount().then((response) => {
       SetCustomers(response.data);
     });
   };
@@ -37,10 +38,13 @@ function Admin() {
   const viewCust = (id) => {
     history(`/viewCust/${id}`); //use back quote operator -  evaluate jsx operation
   };
+  const addMoneyCust = (id) => {
+    history(`/addBalCust/${id}`); //use back quote operator -  evaluate jsx operation
+  };
   const [validCustomer, setValidCustomer] = useState(0);
   const [value, setValue] = useState(0);
   const validateCust = (id) => {
-    AdminService.getCustomerById(id).then((response) => {
+    AdminService.getAccountById(id).then((response) => {
       console.log("hi" , response.data);
       const product = response.data;
       const validCustomerDetails = { setValidate: 1, custId: product.customer.userId };
@@ -68,6 +72,12 @@ function Admin() {
     AdminLoginService.logout();
     history('/adminlogin')
 };
+
+const handleViewCutomers = () => {
+  history('/viewCustomer')
+};
+
+
   return (
     <div className="app-admin">
       {/* <NavBar /> */}
@@ -87,7 +97,7 @@ function Admin() {
           <tbody>
             {customers.map((cust) => (
               
-              <tr key={cust.Id} style={cust.customer.validCustomer===true ? {backgroundColor:"#dbf4d8"} : {backgroundColor:"#bb1133"} }  >
+              <tr key={cust.Id} >
                 <td className="td-admin" > {cust.accountNo} </td>
                 <td className="td-admin"> {cust.accountType} </td>
                 <td className="td-admin"> {cust.balance} </td>
@@ -99,6 +109,15 @@ function Admin() {
                   >
                     <span>
                       <FontAwesomeIcon icon="edit"></FontAwesomeIcon>
+                    </span>
+                  </button>{" "}
+                  &nbsp;
+                  <button
+                    className="btn btn-admin btn-success button-css"
+                    onClick={() => addMoneyCust(cust.accountNo)}
+                  >
+                    <span>
+                      <FontAwesomeIcon icon="dollar"></FontAwesomeIcon>
                     </span>
                   </button>{" "}
                   &nbsp;
@@ -144,7 +163,13 @@ function Admin() {
       {/* {message && <div className="alert alert-success">{message}</div>} */}
       <button className="btn btn-danger" style={{ color: 'white' }} onClick={handleLogout}>
       LOGOUT
-    </button>  </div>
+    </button>
+
+    <button className="btn btn-primary" style={{ color: 'white' , width: "150px" }} onClick={handleViewCutomers}>
+      View Customers
+    </button>
+    
+      </div>
 
   );
 }

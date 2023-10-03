@@ -21,7 +21,7 @@ const AdminView = () => {
               history('/adminlogin');
             }
             else{
-                AdminService.getCustomerById(id).then((res) => {
+                AdminService.getAccountById(id).then((res) => {
                     SetCustomers(res.data);
                 });
             }

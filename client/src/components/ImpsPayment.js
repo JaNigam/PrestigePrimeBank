@@ -44,7 +44,7 @@ const ImpsPayment = () => {
     try {
 
       // Send the transaction data to the backend for processing
-      if(amount>customer.balance)
+      if(amount<customer.balance)
       {
       
       const response = {

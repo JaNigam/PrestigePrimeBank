@@ -3,7 +3,6 @@ import AuthenticationService from "../../services/AuthenticationService";
 const FormContext = createContext({});
 
 export const FormProvider = ({ children }) => {
-  console.log("form context");
 
   const title = {
     0: "Billing Info",

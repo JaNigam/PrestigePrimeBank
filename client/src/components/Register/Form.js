@@ -28,41 +28,27 @@ const Form = () => {
 
   const handleNext = () => setPage((prev) => prev + 1);
 
-  // const handleSubmit = e => {
-
-  //     e.preventDefault()
-  //     console.log(JSON.stringify(data))
-  // }
 
   const handleSubmit = async (e) => {
     e.preventDefault(); //prevent page refresh
-    // const validationErrors = validateForm();
-    // if (Object.keys(validationErrors).length === 0) {
+
     try {
       console.log("submit");
       console.log(JSON.stringify(data));
       await AuthenticationService.registerDealer(data);
-      // setSuccessMessage('Registration successful!');
-      // alert("Registration Successfull");
       setTimeout(() => {
         history("/login"); // navigates to Login Component
       }, 3000);
     } catch (error) {
       console.error("Registration error", error);
-      // setSuccessMessage('An error occurred during registration.');
     }
   };
-  // else {
-  //   setErrors(validationErrors);
-  // }
-  //   };
 
   const content = (
     <>
       <NavBar />
       <form className="form flex-col" onSubmit={handleSubmit}>
         <header className="form-header">
-          {/* <h2>{title[page]}</h2> */}
 
           <div className="button-container">
             <button

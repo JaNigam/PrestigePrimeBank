@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react'               //rfce
 import { useNavigate, useParams } from 'react-router-dom'
 
-
+import '.././styles/EditAccount.css';
 import AdminService from '../services/AdminService';
 import AdminLoginService from '../services/AdminLoginService';
 
@@ -22,9 +22,6 @@ function AddMoney() {
     //state mgmt
    
     const [balance, setBalance] = useState('');
-    
-    
-
 
     //component lifecycle Management - ComponentUpdate
     useEffect(() => {
@@ -34,7 +31,7 @@ function AddMoney() {
             else{
                 if (id !== 'add') {
                     // update product 
-                    AdminService.getCustomerById(id).then((response) => {
+                    AdminService.getAccountById(id).then((response) => {
                         const product = response.data;
                        
                         setBalance(product.balance);
@@ -43,8 +40,6 @@ function AddMoney() {
             }
 
         
-        
-
 
     }, [id]);           //values -id triggers re render whenever they are updated in your program,
     //you can add multiple values by separating them by commas
@@ -58,9 +53,8 @@ function AddMoney() {
                 navigate('/admin');
             });
         } else {
-            AdminService.getCustomerById(id).then((response) => {
+            AdminService.getAccountById(id).then((response) => {
                 const product = response.data;
-               
                 setBalance(product.balance);
             });
             AdminService.addMoneyCustomer(product, id).then(() => {
@@ -82,31 +76,32 @@ function AddMoney() {
 
     const getTitle = () => {
         if (id === '_add') {
-            return <h1 className="text-center">Add Product</h1>;
+            return <h1 className="text-center">Add Money</h1>;
         } else {
-            return <h1 className="text-center">Update Product</h1>;
+            return <h1 className="text-center">Add/Withdraw Balance </h1>;
         }
     };
 
 
     return (
-        <div>
+        <div className='app-editAccount'>
             <br></br>
-            <div className="container">
+            <div className="container-editAccount">
                 <div className="row">
                     <div className="form-outline col-12 mb-4">
                         {getTitle()}
                         <div className="card-body">
                             <form>
                                 <div className="form-group flex-row">
-                                    <label> Balance</label>
-                                    <input placeholder="Product Name" name="name" className="form-control"
+                                    <label> Add/Withdraw Amount</label>
+                                    <input placeholder="Amount" name="amount" className="form-control"
                                         value={balance} onChange={changeNameHandler} />
                                
                                 </div>
-
+                                <div className='button-editAccount'>
                                 <button className="btn btn-success" onClick={saveOrUpdateProduct}>Save</button>
                                 <button className="btn btn-danger" onClick={cancel.bind(this)} style={{ marginLeft: "10px" }}>Cancel</button>
+                                </div>
                             </form>
                         </div>
                     </div>

@@ -6,38 +6,8 @@ const Shipping = () => {
 
   const content = (
     <>
-      {/* <NavBar/> */}
-      {/* <div className="split-container">
-        <div className="flex-col">
-          <label htmlFor="mothername">Mother Name</label>
-          <input
-            type="text"
-            id="mothername"
-            name="mothername"
-            placeholder="Jane"
-            pattern="([A-Z])[\w+.]{1,}"
-            value={data.mothername}
-            onChange={handleChange}
-            // disabled={data.sameAsCurrent}
-          />
-        </div>
-        <div className="flex-col">
-          <label htmlFor="fathername">Father Name</label>
-          <input
-            type="text"
-            id="fathername"
-            name="fathername"
-            placeholder="Jane father"
-            pattern="([A-Z])[\w+.]{1,}"
-            value={data.fathername}
-            onChange={handleChange}
-            // disabled={data.sameAsCurrent}
-          />
-        </div>
-      </div> */}
-
       <div className="container">
-        <div className="row my-5">
+        {/* <div className="row my-5"> */}
           <div className="d-flex justify-content-around col md-12">
             <div>
               <label htmlFor="sameAsCurrent">
@@ -52,7 +22,7 @@ const Shipping = () => {
             </div>
             <label htmlFor="permanentAddress1">Permanent Address Same as Current Address</label>
           </div>
-        </div>
+        {/* </div> */}
         <div>
 
         </div>
@@ -160,7 +130,7 @@ const Shipping = () => {
                   type="text"
                   id="currentZipCode"
                   name="currentZipCode"
-                  placeholder="Enter Permanent Zipcode"
+                  placeholder="Current Zipcode"
                   pattern="[0-9]{5}"
                   maxLength="5"
                   value={data.currentZipCode}
@@ -278,7 +248,7 @@ const Shipping = () => {
                   type="text"
                   id="permanentZipCode"
                   name="permanentZipCode"
-                  placeholder="Enter Permanent Zipcode"
+                  placeholder="Permanent Zipcode"
                   pattern="[0-9]{5}"
                   maxLength="5"
                   value={data.permanentZipCode}

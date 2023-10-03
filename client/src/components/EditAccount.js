@@ -37,7 +37,7 @@ function EditAccount() {
             else{
                 if (id !== 'add') {
                     // update product 
-                    AdminService.getCustomerById(id).then((response) => {
+                    AdminService.getAccountById(id).then((response) => {
                         const product = response.data;
                        
                         setbranch(product.branch);
@@ -60,9 +60,8 @@ function EditAccount() {
                 navigate('/admin');
             });
         } else {
-            AdminService.getCustomerById(id).then((response) => {
+            AdminService.getAccountById(id).then((response) => {
                 const product = response.data;
-               
                 setbranch(product.branch);
             });
             AdminService.updateCustomer(product, id,branch).then(() => {

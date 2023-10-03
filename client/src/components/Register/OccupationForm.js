@@ -14,7 +14,7 @@ const OptIn = () => {
 
             <div className="col md-12">
               {" "}
-              <label htmlFor="occType">Occupation</label>
+              <label htmlFor="occType">Occupation Type</label>
               <input
                 type="text"
                 id="occType"
